@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login - TROY Perfumes</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root{
+            --bg:#050816;
+            --bg-soft:#050b1f;
+            --bg-elevated:#070f25;
+            --primary:#22c55e;
+            --primary-soft:rgba(34,197,94,0.14);
+            --primary-strong:#16a34a;
+            --accent:#38bdf8;
+            --text-main:#e5f2ff;
+            --text-muted:#9ca3af;
+            --border-subtle:rgba(148,163,184,0.35);
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            font-family:'Poppins',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            background:radial-gradient(circle at top, #172554 0, #020617 55%, #000 100%);
+            color:var(--text-main);
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .login-container{
+            background:var(--bg-elevated);
+            border-radius:26px;
+            padding:3rem;
+            width:100%;
+            max-width:450px;
+            border:1px solid rgba(148,163,184,0.2);
+            box-shadow:0 25px65px rgba(15,23,42,0.95);
+        }
+        .logo{
+            text-align:center;
+            margin-bottom:2rem;
+        }
+        .logo-text{
+            font-weight:900;
+            letter-spacing:.15em;
+            font-size:2rem;
+            color:var(--text-main);
+        }
+        .logo-text span{
+            color:var(--primary);
+        }
+        .form-title{
+            font-size:1.5rem;
+            margin-bottom:1.5rem;
+            text-align:center;
+        }
+        .form-group{
+            margin-bottom:1.5rem;
+        }
+        .form-label{
+            display:block;
+            margin-bottom:0.5rem;
+            color:var(--text-muted);
+            font-size:0.9rem;
+        }
+        .form-input{
+            width:100%;
+            padding:0.875rem1rem;
+            border-radius:12px;
+            border:1px solid rgba(148,163,184,0.3);
+            background:rgba(15,23,42,0.8);
+            color:var(--text-main);
+            font-family:inherit;
+            font-size:1rem;
+            transition:all.3s;
+        }
+        .form-input:focus{
+            outline:none;
+            border-color:var(--primary);
+            box-shadow:0 00 3px rgba(34,197,94,0.1);
+        }
+        .btn-primary{
+            width:100%;
+            padding:1rem;
+            border-radius:12px;
+            border:none;
+            background:linear-gradient(135deg,var(--primary),var(--primary-strong));
+            color:#022c22;
+            font-family:inherit;
+            font-size:1rem;
+            font-weight:600;
+            cursor:pointer;
+            transition:all.3s;
+        }
+        .btn-primary:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px25px rgba(34,197,94,0.4);
+        }
+        .form-footer{
+            text-align:center;
+            margin-top:1.5rem;
+            color:var(--text-muted);
+        }
+        .form-footer a{
+            color:var(--accent);
+            text-decoration:none;
+        }
+        .form-footer a:hover{
+            text-decoration:underline;
+        }
+        .alert-error{
+            background:rgba(239,68,68,0.1);
+            border:1px solid rgba(239,68,68,0.3);
+            color:#ef4444;
+            padding:1rem;
+            border-radius:12px;
+            margin-bottom:1.5rem;
+        }
+        .alert-success{
+            background:rgba(34,197,94,0.1);
+            border:1px solid rgba(34,197,94,0.3);
+            color:var(--primary);
+            padding:1rem;
+            border-radius:12px;
+            margin-bottom:1.5rem;
+        }
+        .back-link{
+            display:inline-flex;
+            align-items:center;
+            gap:0.5rem;
+            color:var(--text-muted);
+            text-decoration:none;
+            margin-bottom:1.5rem;
+            transition:all.3s;
+        }
+        .back-link:hover{
+            color:var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-text">TROY<span>PERFUMES</span></div>
+        </div>
+        
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        
+        <h2 class="form-title">Welcome Back</h2>
+        
+        @if(session('error'))
+        <div class="alert-error">{{ session('error') }}</div>
+        @endif
+        
+        @if($errors->any())
+        <div class="alert-error">
+            @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+            @endforeach
+        </div>
+        @endif
+        
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-input" placeholder="Enter your email" value="{{ old('email') }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-input" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+        
+        <div class="form-footer">
+            <p>Don't have an account? <a href="{{ route('register') }}">Create one</a></p>
+        </div>
+    </div>
+</body>
+</html>
