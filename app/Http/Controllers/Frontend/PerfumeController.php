@@ -118,7 +118,9 @@ class PerfumeController extends Controller
                     'rating' => $perfume->rating,
                     'city' => $perfume->city,
                     'recommended_temperature' => $perfume->recommended_temperature,
-                    'images' => $perfume->images->pluck('image_path'),
+                    'images' => count($perfume->images) > 0
+                        ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                        : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note'),
                 ];
             })
@@ -146,7 +148,9 @@ class PerfumeController extends Controller
                     'rating' => $perfume->rating,
                     'city' => $perfume->city,
                     'recommended_temperature' => $perfume->recommended_temperature,
-                    'images' => $perfume->images->pluck('image_path'),
+                    'images' => count($perfume->images) > 0
+                        ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                        : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note'),
                 ];
             })
@@ -177,7 +181,9 @@ class PerfumeController extends Controller
                 'longevity_hours' => $perfume->longevity_hours,
                 'is_featured' => $perfume->is_featured,
                 'is_bestseller' => $perfume->is_bestseller,
-                'images' => $perfume->images->pluck('image_path'),
+                'images' => count($perfume->images) > 0
+                    ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                    : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                 'notes' => $perfume->notes->pluck('note'),
             ]
         ]);
@@ -226,7 +232,9 @@ class PerfumeController extends Controller
                     'price' => $perfume->price,
                     'rating' => $perfume->rating,
                     'recommended_temperature' => $perfume->recommended_temperature,
-                    'images' => $perfume->images->pluck('image_path'),
+                    'images' => count($perfume->images) > 0
+                        ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                        : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note'),
                 ];
             })

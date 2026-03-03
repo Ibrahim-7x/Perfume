@@ -298,7 +298,13 @@
         width:70px;
         height:70px;
         border-radius:14px;
-        transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        animation: coinFlip 6s ease-in-out infinite;
+    }
+    @keyframes coinFlip {
+        0%   { transform: rotateY(0deg); }
+        25%  { transform: rotateY(1080deg); }
+        50%  { transform: rotateY(1080deg); }
+        100% { transform: rotateY(1080deg); }
     }
     .header-scrolled .logo-img{
         width:50px;
@@ -484,7 +490,7 @@
 <!-- Header -->
 <header class="header" id="header">
 <a class="logo" href="/">
-<img alt="TROY Perfumes Logo" class="troy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDBDOC45NTQgMCAwIDguOTU0IDAgMjBTOC45NTQgNDAgMjAgNDBTNDAgMzEuMDQ2IDQwIDIwUzMxLjA0NiAwIDIwIDBaIiBmaWxsPSIjMjJjNTUiLz4KPHBhdGggZD0iTTE1IDE1SDEwVjI1SDE1VjE1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTI1IDE1SDIwVjI1SDI1VjE1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTMwIDI1SDI1VjMwSDMwVjI1WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+"/>
+<img alt="TROY Perfumes Logo" class="logo-img" src="/troy.png"/>
 <div class="logo-text">TROY</div>
 </a>
 <button class="mobile-menu-toggle" id="mobileMenuToggle">

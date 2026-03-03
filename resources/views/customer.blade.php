@@ -353,28 +353,26 @@
     /* NABI PAK SAW STAMP */
     .nabipak-stamp {
         position: fixed;
-        top: 20px;
+        top: 90px;
         right: 20px;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         z-index: 100;
         border-radius: 50%;
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-        animation: stampSpin 6s linear infinite;
+        animation: stampCoinFlip 6s ease-in-out infinite;
         cursor: pointer;
-        transition: transform 0.3s;
         border: 2px solid gold;
     }
     
     .nabipak-stamp:hover {
-        transform: scale(1.1);
-        animation-duration: 3s;
-        box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.9);
     }
     
-    @keyframes stampSpin {
-        0% { transform: rotateY(0deg); }
-        100% { transform: rotateY(360deg); }
+    @keyframes stampCoinFlip {
+        0%   { transform: rotateY(0deg); }
+        50%  { transform: rotateY(1080deg); }
+        100% { transform: rotateY(1080deg); }
     }
     
     /* CONTRIBUTION POPUP MODAL */
@@ -864,12 +862,14 @@
         overflow: hidden;
         position: relative;
     }
-    .tv-screen iframe {
+    .tv-screen iframe,
+    .tv-screen video {
         display: block;
         width: 100%;
         height: 100%;
         border: none;
         border-radius: 14px; /* inner screen curve */
+        object-fit: cover;
     }
     /* optional antenna effect (pure css) */
     .tv-screen::before {
@@ -2160,166 +2160,7 @@
         cursor:pointer;
     }
 
-    /* Cart modal + overlay */
-    .overlay{
-        position:fixed;
-        inset:0;
-        background:rgba(15,23,42,0.78);
-        opacity:0;
-        visibility:hidden;
-        transition:.3s;
-        z-index:40;
-    }
-    .overlay.active{
-        opacity:1;
-        visibility:visible;
-    }
-    .cart-modal{
-        position:fixed;
-        top:0;
-        right:-420px;
-        width:380px;
-        max-width:95vw;
-        height:100%;
-        background:#020617;
-        border-left:1px solid rgba(148,163,184,0.35);
-        box-shadow:-22px 0 55px rgba(0,0,0,0.85);
-        padding:1.6rem 1.4rem;
-        z-index:50;
-        transition:right .3s;
-        display:flex;
-        flex-direction:column;
-    }
-    .cart-modal.open{
-        right:0;
-    }
-    .cart-header{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        margin-bottom:1.1rem;
-    }
-    .cart-title{
-        font-size:1.2rem;
-    }
-    .cart-body{
-        flex:1;
-        overflow-y:auto;
-        padding-right:.2rem;
-    }
-    .cart-item{
-        display:flex;
-        gap:.8rem;
-        align-items:flex-start;
-        padding:.9rem .1rem;
-        border-bottom:1px solid rgba(31,41,55,0.8);
-    }
-    .cart-thumb{
-        width:60px;
-        height:76px;
-        border-radius:12px;
-        overflow:hidden;
-        background:#020617;
-    }
-    .cart-info{
-        flex:1;
-        font-size:.8rem;
-    }
-    .cart-name{
-        margin-bottom:.1rem;
-    }
-    .cart-meta{
-        color:var(--text-muted);
-        margin-bottom:.25rem;
-    }
-    .cart-qty{
-        display:flex;
-        align-items:center;
-        gap:.35rem;
-    }
-    .qty-btn{
-        width:22px;
-        height:22px;
-        border-radius:999px;
-        border:1px solid rgba(148,163,184,0.5);
-        background:transparent;
-        color:var(--text-main);
-        cursor:pointer;
-        font-size:.85rem;
-    }
-    .remove-item{
-        border:none;
-        background:transparent;
-        color:var(--danger);
-        cursor:pointer;
-        font-size:.8rem;
-        margin-left:auto;
-    }
-    .cart-footer{
-        border-top:1px solid rgba(31,41,55,0.9);
-        padding-top:.9rem;
-        margin-top:.4rem;
-    }
-    .cart-total-row{
-        display:flex;
-        justify-content:space-between;
-        margin-bottom:.8rem;
-        font-size:.93rem;
-    }
-    .cart-actions{
-        display:flex;
-        gap:.6rem;
-    }
-    .btn-outline{
-        flex:1;
-        padding:.65rem 1rem;
-        border-radius:999px;
-        border:1px solid rgba(148,163,184,0.65);
-        background:transparent;
-        color:var(--text-main);
-        cursor:pointer;
-        font-size:.85rem;
-    }
-
-    /* Jet animation on Add to Cart */
-    .jet-icon{
-        position:fixed;
-        width:70px;
-        height:70px;
-        pointer-events:none;
-        z-index:999;
-        opacity:0;
-    }
-    .jet-icon img{
-        width:100%;
-        height:100%;
-        object-fit:contain;
-    }
-    .jet-animate{
-        animation:jet 0.8s forwards ease-out;
-    }
-
-    /* Toast */
-    .toast{
-        position:fixed;
-        bottom:20px;
-        left:50%;
-        transform:translateX(-50%) translateY(120%);
-        padding:.9rem 1.3rem;
-        border-radius:999px;
-        background:rgba(15,23,42,0.96);
-        border:1px solid rgba(148,163,184,0.4);
-        color:var(--text-main);
-        font-size:.85rem;
-        display:flex;
-        align-items:center;
-        gap:.6rem;
-        z-index:70;
-        transition:.3s;
-    }
-    .toast.active{
-        transform:translateX(-50%) translateY(0);
-    }
+    /* Cart styles provided by shared cart.blade.php partial */
 
     /* Footer */
     .footer{
@@ -2389,11 +2230,7 @@
         text-align:center;
     }
 
-    /* Animations & responsive */
-    @keyframes jet{
-        0%{transform:translate(0,0) scale(1);opacity:1}
-        100%{transform:translate(var(--jet-x),var(--jet-y)) scale(0.1);opacity:0}
-    }
+    /* Animations & responsive (jet keyframes in shared cart.blade.php) */
     @keyframes floatParticle{
         0%{transform:translateY(100vh) translateX(0);opacity:0}
         10%,90%{opacity:1}
@@ -3030,7 +2867,7 @@
 </div>
 
 <!-- NABI PAK SAW STAMP -->
-<img alt="Nabi Pak SAW Stamp - TROY Perfumes Contribution" class="nabipak-stamp" id="nabiStamp" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Islamic_star_and_crescent.svg/1200px-Islamic_star_and_crescent.svg.png" title="Nabi Pak SAW Stamp - Click for contribution details"/>
+<img alt="Nabi Pak SAW Stamp - TROY Perfumes Contribution" class="nabipak-stamp" id="nabiStamp" src="/PBUH.png" title="Nabi Pak SAW Stamp - Click for contribution details"/>
 <!-- CONTRIBUTION POPUP -->
 <div class="contribution-modal" id="contributionModal">
 <div class="contribution-content">
@@ -3039,7 +2876,7 @@
                 As part of our commitment, 2% of your order amount will be contributed in the name of Allah. 
                 Please press the stamp of Nabi Pak SAW to confirm your contribution and proceed with checkout.
             </p>
-<img alt="Nabi Pak SAW Stamp - Confirm Contribution" class="contribution-stamp" id="confirmContribution" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Islamic_star_and_crescent.svg/1200px-Islamic_star_and_crescent.svg.png" title="Click to confirm contribution"/>
+<img alt="Nabi Pak SAW Stamp - Confirm Contribution" class="contribution-stamp" id="confirmContribution" src="/PBUH.png" title="Click to confirm contribution"/>
 <p class="contribution-note">May Allah accept your contribution and bless you</p>
 </div>
 </div>
@@ -3180,11 +3017,9 @@
 
 <!-- Floating Particles -->
 <div class="particles" id="particles"></div>
-<!-- Jet used for add-to-cart animation -->
-<div class="jet-icon" id="jetIcon">
-<img alt="Cart Animation Jet" src="https://cdn.pixabay.com/photo/2016/03/31/20/26/plane-1295660_1280.png"/>
-</div>
+{{-- Jet icon now provided by cart partial --}}
 @include('navbar')
+@include('cart')
 <!-- HERO (simplified – only video and tag) -->
 <section class="hero">
 <div>
@@ -3224,9 +3059,14 @@
 </div>
 <div class="hero-visual">
 <div class="hero-card">
-    <!-- TV SCREEN + YOUTUBE VIDEO -->
-    <div class="hero-video-container tv-screen">
-        <iframe src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&modestbranding=1" 
+    <!-- TV SCREEN + VIDEO -->
+    <div class="hero-video-container tv-screen" id="tvScreenContainer">
+        <video id="tvScreenVideo" autoplay muted loop playsinline
+               src="https://www.youtube.com/embed/5qap5aO4i9A"
+               style="display:none;">
+        </video>
+        <iframe id="tvScreenIframe" 
+                src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&modestbranding=1" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>
         </iframe>
@@ -3618,44 +3458,7 @@
 </p>
 </div>
 </footer>
-<!-- OVERLAY + CART -->
-<div class="overlay" id="overlay"></div>
-<div class="cart-modal" id="cartModal">
-<div class="cart-header">
-<h3 class="cart-title">Your Cart</h3>
-<button class="close-cart btn-outline" id="closeCart" style="flex:0 0 auto;width:auto;padding:.4rem .8rem;">Close</button>
-</div>
-<div class="cart-body" id="cartItems"></div>
-<div class="cart-footer">
-<div class="cart-total-row">
-<span>Total</span>
-<span id="cartTotalAmount">Rs 0</span>
-</div>
-<!-- Location sharing section in cart -->
-<div class="location-share-section">
-    <div class="location-share-title">
-        <i class="fas fa-map-marker-alt"></i> Delivery Location
-    </div>
-    <div class="location-share-details" id="cartLocationDetails">
-        <span id="cartLocationText">Allow location access for precise delivery</span>
-        <button class="btn-ghost" id="updateLocationBtn" style="margin-top: 10px; padding: 5px 10px; font-size: 0.8rem;">
-            <i class="fas fa-location-dot"></i> Update Location
-        </button>
-    </div>
-</div>
-<div class="cart-actions">
-<button class="btn-outline" onclick="clearCart()">Clear Cart</button>
-<button class="btn-primary" id="checkoutBtn" style="flex:1;">
-<i class="fab fa-whatsapp"></i> Checkout with Location
-                </button>
-</div>
-</div>
-</div>
-<!-- Toast -->
-<div class="toast" id="toast">
-<i class="fas fa-circle-check" style="color:#22c55e;"></i>
-<span class="toast-message">Added to cart</span>
-</div>
+{{-- Cart overlay/modal/toast now provided by cart partial --}}
 
 <!-- SCRIPTS (unchanged – same as original) -->
 <script>
@@ -4410,24 +4213,14 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         // PERFUME DATA (Loaded from admin display data)
         let perfumes = [];
 
-        // Cart
-        let cart = [];
+        // Cart managed by shared cart.blade.php (uses window.troyCart)
         let favorites = [];
 
-        // DOM refs
+        // DOM refs (cart DOM refs managed by shared cart.blade.php)
         const perfumeGrid = document.getElementById('perfumeGrid');
-        const cartItems = document.getElementById('cartItems');
-        const cartTotalAmount = document.getElementById('cartTotalAmount');
-        const cartCount = document.querySelector('.cart-count');
-        const cartModal = document.getElementById('cartModal');
-        const cartToggle = document.getElementById('cartToggle');
-        const closeCart = document.getElementById('closeCart');
-        const overlay = document.getElementById('overlay');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        const toast = document.getElementById('toast');
+        const toast = document.getElementById('cartToast') || document.getElementById('toast');
         const header = document.getElementById('header');
         const particlesContainer = document.getElementById('particles');
-        const jetIcon = document.getElementById('jetIcon');
         const nabiStamp = document.getElementById('nabiStamp');
         const contributionModal = document.getElementById('contributionModal');
         const confirmContribution = document.getElementById('confirmContribution');
@@ -4615,12 +4408,8 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
                         loadFromLocalStorage();
                     });
                 
-                // Load cart from localStorage
-                const savedCart = localStorage.getItem('troy-cart');
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    updateCartUI();
-                }
+                // Sync cart with shared cart component (already loaded by cart.blade.php)
+                if (window.updateCartUI) window.updateCartUI();
                 
                 // Load favorites from localStorage
                 const savedFavorites = localStorage.getItem('troy-favorites');
@@ -4746,21 +4535,8 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         }
 
         function setupEventListeners() {
-            // Cart toggle
-            cartToggle.addEventListener('click', toggleCart);
-            closeCart.addEventListener('click', toggleCart);
-            overlay.addEventListener('click', toggleCart);
-            
-            // Checkout with contribution modal
-            if (checkoutBtn) {
-                checkoutBtn.addEventListener('click', function() {
-                    if(cart.length === 0){
-                        showToast('Your cart is empty!');
-                        return;
-                    }
-                    contributionModal.classList.add('active');
-                });
-            }
+            // Cart toggle/close/overlay/checkout listeners are handled by shared cart.blade.php
+            // (shared cart detects contributionModal and shows it automatically)
 
             // Contribution modal
             if (nabiStamp) {
@@ -5023,126 +4799,9 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             }
         }
 
-        function addToCart(perfume, sourceButton = null) {
-            if(!perfume) {
-                console.error('Perfume not found');
-                return;
-            }
+        // addToCart, animateJet — provided by shared cart.blade.php
 
-            const id = perfume.id;
-            const existing = cart.find(item => item.id === id);
-            if(existing){
-                existing.quantity += 1;
-            }else{
-                cart.push({ ...perfume, quantity:1 });
-            }
-            updateCartUI();
-            animateJet(sourceButton);
-            showToast(`${perfume.name} added to cart`);
-        }
-
-        function animateJet(sourceButton) {
-            if(!sourceButton || !jetIcon) return;
-
-            const btnRect = sourceButton.getBoundingClientRect();
-            const cartRect = cartToggle.getBoundingClientRect();
-
-            const startX = btnRect.left + btnRect.width / 2;
-            const startY = btnRect.top + btnRect.height / 2;
-
-            const endX = cartRect.left + cartRect.width / 2;
-            const endY = cartRect.top + cartRect.height / 2;
-
-            const deltaX = endX - startX;
-            const deltaY = endY - startY;
-
-            jetIcon.style.left = startX + 'px';
-            jetIcon.style.top = startY + 'px';
-            jetIcon.style.setProperty('--jet-x', deltaX + 'px');
-            jetIcon.style.setProperty('--jet-y', deltaY + 'px');
-
-            jetIcon.classList.remove('jet-animate');
-            void jetIcon.offsetWidth;
-            jetIcon.classList.add('jet-animate');
-        }
-
-        function updateCartUI() {
-            if (!cartItems || !cartTotalAmount || !cartCount) return;
-            
-            cartItems.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-muted);">Your cart is empty</div>';
-            } else {
-                cart.forEach(item => {
-                    const line = item.price * item.quantity;
-                    total += line;
-
-                    const row = document.createElement('div');
-                    row.className = 'cart-item';
-                    row.innerHTML = `
-                        <div class="cart-thumb">
-                            <img src="${item.images ? item.images[0] : item.image}" alt="${item.name}">
-                        </div>
-                        <div class="cart-info">
-                            <div class="cart-name">${item.name}</div>
-                            <div class="cart-meta">Rs ${item.price.toLocaleString()} x ${item.quantity}</div>
-                            <div class="cart-qty">
-                                <button class="qty-btn" data-action="minus">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="qty-btn" data-action="plus">+</button>
-                                <button class="remove-item">Remove</button>
-                            </div>
-                        </div>
-                    `;
-                    const minusBtn = row.querySelector('[data-action="minus"]');
-                    const plusBtn = row.querySelector('[data-action="plus"]');
-                    const removeBtn = row.querySelector('.remove-item');
-
-                    minusBtn.addEventListener('click', () => {
-                        if(item.quantity > 1){
-                            item.quantity--;
-                        }else{
-                            cart = cart.filter(c => c.id !== item.id);
-                        }
-                        updateCartUI();
-                    });
-                    plusBtn.addEventListener('click', () => {
-                        item.quantity++;
-                        updateCartUI();
-                    });
-                    removeBtn.addEventListener('click', () => {
-                        cart = cart.filter(c => c.id !== item.id);
-                        updateCartUI();
-                    });
-
-                    cartItems.appendChild(row);
-                });
-            }
-
-            cartTotalAmount.textContent = 'Rs ' + total.toLocaleString();
-            cartCount.textContent = cart.reduce((sum, i) => sum + i.quantity, 0);
-            
-            // Save cart to localStorage
-            try {
-                localStorage.setItem('troy-cart', JSON.stringify(cart));
-            } catch (e) {
-                console.error('Error saving cart:', e);
-            }
-        }
-
-        function toggleCart() {
-            if (cartModal) cartModal.classList.toggle('open');
-            if (overlay) overlay.classList.toggle('active');
-            if (mobileNav) mobileNav.classList.remove('active');
-        }
-
-        function clearCart() {
-            cart = [];
-            updateCartUI();
-            showToast('Cart cleared');
-        }
+        // updateCartUI, toggleCart, clearCart — provided by shared cart.blade.php
 
         function getCurrentCity() {
             // Try to use user's location first
@@ -5178,7 +4837,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             message += '────────────────────%0a';
 
             let total = 0;
-            cart.forEach(item => {
+            window.troyCart.forEach(item => {
                 const line = item.price * item.quantity;
                 total += line;
                 message += `• ${item.name} x ${item.quantity} = Rs ${line.toLocaleString()}%0a`;
@@ -5199,9 +4858,11 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             const url = `https://wa.me/923140063717?text=${message}`;
             window.open(url, '_blank');
             showToast('Order sent on WhatsApp with location details');
-            clearCart();
-            toggleCart();
+            window.clearCart();
+            window.toggleCart();
         }
+        // Override shared proceedToCheckout with customer-specific version
+        window.proceedToCheckout = proceedToCheckout;
 
         function buyNow(perfume) {
             if(!perfume) {
@@ -5249,9 +4910,14 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         }
 
         function showToast(text) {
+            // Delegate to shared cart toast if available
+            if (window.showCartToast) {
+                window.showCartToast(text);
+                return;
+            }
             if (!toast) return;
             
-            const span = toast.querySelector('.toast-message');
+            const span = toast.querySelector('.toast-message') || toast.querySelector('.cart-toast-message');
             if (span) span.textContent = text;
             toast.classList.add('active');
             setTimeout(() => {
@@ -6286,6 +5952,34 @@ window.addEventListener("storage", function(event) {
     }
 });
 
+</script>
+
+<script>
+// ===== LOAD ACTIVE TV VIDEO FROM DATABASE =====
+(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/tv-video/active')
+            .then(r => r.json())
+            .then(data => {
+                if (data.video && data.video.url) {
+                    const videoEl = document.getElementById('tvScreenVideo');
+                    const iframeEl = document.getElementById('tvScreenIframe');
+                    if (videoEl && iframeEl) {
+                        // Hide iframe, show uploaded video
+                        iframeEl.style.display = 'none';
+                        videoEl.src = data.video.url;
+                        videoEl.style.display = 'block';
+                        videoEl.play().catch(() => {});
+                    }
+                }
+                // If no active video, the YouTube iframe stays as fallback
+            })
+            .catch(() => {
+                // On error, keep the YouTube fallback
+                console.log('No active TV video found, using YouTube fallback.');
+            });
+    });
+})();
 </script>
 </script>
 </body>

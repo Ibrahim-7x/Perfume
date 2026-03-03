@@ -359,6 +359,7 @@
 </head>
 <body>
     @include('navbar')
+    @include('cart')
 
     <!-- Page Header -->
     <div class="page-header">
@@ -377,39 +378,8 @@
     </div>
 
     <script>
-        // Cart management
-        let cart = [];
-        
-        // Load cart from localStorage
-        try {
-            const savedCart = localStorage.getItem('troy-cart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-            }
-        } catch (e) {
-            console.error('Error loading cart:', e);
-        }
-
-        // Save cart to localStorage
-        function saveCart() {
-            try {
-                localStorage.setItem('troy-cart', JSON.stringify(cart));
-            } catch (e) {
-                console.error('Error saving cart:', e);
-            }
-        }
-
-        // Add to cart
-        function addToCart(perfume) {
-            const existing = cart.find(item => item.id === perfume.id);
-            if (existing) {
-                existing.quantity++;
-            } else {
-                cart.push({...perfume, quantity: 1});
-            }
-            saveCart();
-            alert(`${perfume.name} added to cart!`);
-        }
+        // Cart is managed by the shared cart component (cart.blade.php)
+        // addToCart() is available globally via window.addToCart
 
         // Buy on WhatsApp
         function buyNow(perfume) {

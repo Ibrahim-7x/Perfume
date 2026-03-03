@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PerfumeController as AdminPerfumeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\PerfumeController as FrontendPerfumeController;
 use App\Http\Controllers\Frontend\ReviewController as FrontendReviewController;
@@ -84,3 +85,10 @@ Route::get('/api/user', function() {
 
 // Admin Stats API
 Route::get('/api/admin/stats', [DashboardController::class, 'stats']);
+
+// TV Video API routes
+Route::get('/api/tv-video/active', [VideoController::class, 'active']);
+Route::get('/api/tv-videos', [VideoController::class, 'index']);
+Route::post('/admin/tv-videos', [VideoController::class, 'store']);
+Route::put('/admin/tv-videos/{video}/activate', [VideoController::class, 'setActive']);
+Route::delete('/admin/tv-videos/{video}', [VideoController::class, 'destroy']);

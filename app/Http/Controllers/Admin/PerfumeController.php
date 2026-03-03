@@ -55,6 +55,11 @@ class PerfumeController extends Controller
             }
         }
 
+        // Handle images (base64 data URLs from admin panel)
+        if ($request->has('images') && is_array($request->images)) {
+            $this->saveBase64Images($perfume, $request->images);
+        }
+
         return response()->json([
             'success' => true,
             'id' => $perfume->id,
@@ -86,6 +91,40 @@ class PerfumeController extends Controller
 
         $perfume->update($validated);
 
+        // Handle notes update
+        if ($request->has('notes') && is_array($request->notes)) {
+            $perfume->notes()->delete();
+            foreach ($request->notes as $index => $note) {
+                if (!empty($note)) {
+                    PerfumeNote::create([
+                        'perfume_id' => $perfume->id,
+                        'note' => $note,
+                        'type' => $index < 3 ? 'top' : ($index < 6 ? 'middle' : 'base'),
+                    ]);
+                }
+            }
+        }
+
+        // Handle images (base64 data URLs from admin panel)
+        if ($request->has('images') && is_array($request->images)) {
+            // Check if any new base64 images were provided
+            $hasNewImages = false;
+            foreach ($request->images as $img) {
+                if (!empty($img) && str_starts_with($img, 'data:image/')) {
+                    $hasNewImages = true;
+                    break;
+                }
+            }
+            if ($hasNewImages) {
+                // Delete old image files from storage
+                foreach ($perfume->images as $oldImage) {
+                    Storage::disk('public')->delete($oldImage->image_path);
+                }
+                $perfume->images()->delete();
+                $this->saveBase64Images($perfume, $request->images);
+            }
+        }
+
         return response()->json([
             'success' => true,
             'id' => $perfume->id,
@@ -100,6 +139,11 @@ class PerfumeController extends Controller
             return response()->json(['error' => 'Unauthenticated'], 401);
         }
         
+        // Delete image files from storage
+        foreach ($perfume->images as $image) {
+            Storage::disk('public')->delete($image->image_path);
+        }
+        
         // Delete related images and notes
         $perfume->images()->delete();
         $perfume->notes()->delete();
@@ -109,6 +153,41 @@ class PerfumeController extends Controller
             'success' => true,
             'message' => 'Perfume deleted successfully'
         ]);
+    }
+
+    /**
+     * Save base64 encoded images from the admin panel to disk and database.
+     */
+    private function saveBase64Images(Perfume $perfume, array $images): void
+    {
+        foreach ($images as $index => $imageData) {
+            if (empty($imageData)) {
+                continue;
+            }
+
+            // Handle base64 data URL (e.g., "data:image/png;base64,iVBOR...")
+            if (str_starts_with($imageData, 'data:image/')) {
+                // Extract mime type and base64 data
+                if (preg_match('/^data:image\/(\w+);base64,(.+)$/', $imageData, $matches)) {
+                    $extension = $matches[1] === 'jpeg' ? 'jpg' : $matches[1];
+                    $decoded = base64_decode($matches[2]);
+
+                    if ($decoded === false) {
+                        continue;
+                    }
+
+                    $filename = 'perfume-images/' . $perfume->id . '_' . time() . '_' . $index . '.' . $extension;
+                    Storage::disk('public')->put($filename, $decoded);
+
+                    PerfumeImage::create([
+                        'perfume_id' => $perfume->id,
+                        'image_path' => $filename,
+                        'is_primary' => $index === 0,
+                        'sort_order' => $index,
+                    ]);
+                }
+            }
+        }
     }
 
     /**

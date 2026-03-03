@@ -968,126 +968,89 @@
                 </div>
             </div>
 
-            <!-- Customer Videos Tab (unchanged, placeholder) -->
+            <!-- TV Video Upload Tab -->
             <div class="tab-content" id="videos">
                 <div class="section-header">
-                    <h1 class="section-title">Customer Experience Videos</h1>
-                    <button class="btn btn-primary" onclick="openVideoModal()">
-                        <i class="fas fa-plus"></i> Add New Video
-                    </button>
+                    <h1 class="section-title">TV Screen Video Manager</h1>
                 </div>
-                <!-- ... (original content) ... -->
                 <div class="control-grid">
+                    <!-- Upload Card -->
                     <div class="control-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <div class="card-title">Upload New TV Video</div>
+                        </div>
+                        
+                        <form id="tvVideoUploadForm" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="form-group">
+                                <label class="form-label">Video Title</label>
+                                <input type="text" class="form-input" id="tvVideoTitle" name="title" placeholder="e.g. Royal Oud Promo">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Select Video File</label>
+                                <input type="file" class="form-input" id="tvVideoFile" name="video" accept="video/mp4,video/webm,video/ogg,video/quicktime" style="padding: 0.6rem;">
+                                <small style="color: var(--text-muted);">Max 100MB. Formats: MP4, WebM, OGG, MOV</small>
+                            </div>
+
+                            <!-- Video Requirements Info -->
+                            <div style="background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                                <p style="font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; font-size: 0.85rem;">
+                                    <i class="fas fa-info-circle"></i> Video Requirements
+                                </p>
+                                <ul style="color: var(--text-muted); font-size: 0.8rem; list-style: none; padding: 0; margin: 0; line-height: 1.8;">
+                                    <li><i class="fas fa-check" style="color: var(--primary); width: 16px;"></i> <strong>Formats:</strong> MP4, WebM, OGG, MOV</li>
+                                    <li><i class="fas fa-check" style="color: var(--primary); width: 16px;"></i> <strong>Max size:</strong> 100 MB</li>
+                                    <li><i class="fas fa-check" style="color: var(--primary); width: 16px;"></i> <strong>Min resolution:</strong> 640×360 (360p)</li>
+                                    <li><i class="fas fa-check" style="color: var(--primary); width: 16px;"></i> <strong>Max resolution:</strong> 3840×2160 (4K)</li>
+                                    <li><i class="fas fa-check" style="color: var(--primary); width: 16px;"></i> <strong>Best aspect ratio:</strong> 16:9 (recommended)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Error display -->
+                            <div id="tvUploadError" style="display:none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 1rem; color: #ef4444; font-size: 0.85rem;">
+                                <i class="fas fa-exclamation-triangle"></i> <span id="tvUploadErrorMsg"></span>
+                            </div>
+
+                            <div id="tvUploadProgress" style="display:none; margin-bottom:1rem;">
+                                <div style="background: var(--bg-soft); border-radius: 8px; overflow: hidden; height: 8px;">
+                                    <div id="tvUploadBar" style="height:100%; background: var(--primary); width:0%; transition: width 0.3s;"></div>
+                                </div>
+                                <small id="tvUploadPercent" style="color: var(--text-muted);">0%</small>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" id="tvUploadBtn" style="width:100%;">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload & Set as Active
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Current Active Video -->
+                    <div class="control-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="card-title">Currently Active TV Video</div>
+                        </div>
+                        <div id="activeVideoPreview" style="text-align:center; padding:1rem 0;">
+                            <p style="color: var(--text-muted);">Loading...</p>
+                        </div>
+                    </div>
+
+                    <!-- All Uploaded Videos -->
+                    <div class="control-card" style="grid-column: 1 / -1;">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-film"></i>
                             </div>
-                            <div class="card-title">Current Featured Video</div>
+                            <div class="card-title">All Uploaded Videos</div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Video Title</label>
-                            <input type="text" class="form-input" id="videoTitle" value="CEO Spotlight: Tech Giant Executive">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Customer Name</label>
-                            <input type="text" class="form-input" id="customerName" value="Mark Chen">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Company</label>
-                            <input type="text" class="form-input" id="customerCompany" value="TechNova Solutions">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-textarea" id="videoDescription">Exclusive interview with Mark Chen, CTO of TechNova Solutions, sharing how our Midnight Elixir fragrance has become an integral part of his leadership style and business meetings.</textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Video URL</label>
-                            <input type="text" class="form-input" id="videoURL" value="Autonomous.mp4" placeholder="Video file name or URL">
-                        </div>
-                    </div>
-                    
-                    <div class="control-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                            <div class="card-title">Video Statistics</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Initial View Count</label>
-                            <input type="number" class="form-input" id="viewCount" value="15842">
-                            <small style="color: var(--text-muted);">This will auto-increment on the customer page</small>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Initial Like Count</label>
-                            <input type="number" class="form-input" id="likeCount" value="2847">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Initial Share Count</label>
-                            <input type="number" class="form-input" id="shareCount" value="1429">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Auto-increment Rate</label>
-                            <select class="form-select" id="incrementRate">
-                                <option value="slow">Slow (every 30s)</option>
-                                <option value="medium" selected>Medium (every 10s)</option>
-                                <option value="fast">Fast (every 5s)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="autoIncrement" checked> Enable Auto-increment
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="control-card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-share-alt"></i>
-                            </div>
-                            <div class="card-title">Social Sharing</div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="enableFacebook" checked> Enable Facebook Sharing
-                            </label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="enableTwitter" checked> Enable Twitter Sharing
-                            </label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="enableWhatsApp" checked> Enable WhatsApp Sharing
-                            </label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="enableCopyLink" checked> Enable Copy Link
-                            </label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" id="enableLikes" checked> Enable Like Button
-                            </label>
+                        <div id="allVideosList" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; padding-top:1rem;">
+                            <p style="color: var(--text-muted);">Loading...</p>
                         </div>
                     </div>
                 </div>
@@ -2053,28 +2016,8 @@
                 featuredPerfume: document.getElementById('featuredPerfume').value
             };
             
-            // Video Settings
-            adminData.videos = {
-                title: document.getElementById('videoTitle').value,
-                customerName: document.getElementById('customerName').value,
-                company: document.getElementById('customerCompany').value,
-                description: document.getElementById('videoDescription').value,
-                url: document.getElementById('videoURL').value,
-                stats: {
-                    views: parseInt(document.getElementById('viewCount').value),
-                    likes: parseInt(document.getElementById('likeCount').value),
-                    shares: parseInt(document.getElementById('shareCount').value)
-                },
-                autoIncrement: document.getElementById('autoIncrement').checked,
-                incrementRate: document.getElementById('incrementRate').value,
-                socialSharing: {
-                    facebook: document.getElementById('enableFacebook').checked,
-                    twitter: document.getElementById('enableTwitter').checked,
-                    whatsapp: document.getElementById('enableWhatsApp').checked,
-                    copyLink: document.getElementById('enableCopyLink').checked,
-                    likes: document.getElementById('enableLikes').checked
-                }
-            };
+            // Video Settings - now managed via database upload
+            adminData.videos = {};
             
             // Weather Settings
             adminData.weather = {
@@ -2913,6 +2856,216 @@
             }
         }
 
+        // ===== TV VIDEO MANAGEMENT =====
+        function loadTvVideos() {
+            // Load active video
+            fetch('/api/tv-video/active')
+                .then(r => r.json())
+                .then(data => {
+                    const container = document.getElementById('activeVideoPreview');
+                    if (data.video) {
+                        container.innerHTML = `
+                            <p style="color:var(--primary); font-weight:600; margin-bottom:0.5rem;">${data.video.title}</p>
+                            <video src="${data.video.url}" controls style="width:100%; max-height:220px; border-radius:12px; background:#000;"></video>
+                        `;
+                    } else {
+                        container.innerHTML = '<p style="color:var(--text-muted);">No active video. Upload one above.</p>';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('activeVideoPreview').innerHTML = '<p style="color:var(--danger);">Error loading active video.</p>';
+                });
+
+            // Load all videos
+            fetch('/api/tv-videos')
+                .then(r => r.json())
+                .then(data => {
+                    const list = document.getElementById('allVideosList');
+                    if (!data.videos || data.videos.length === 0) {
+                        list.innerHTML = '<p style="color:var(--text-muted);">No videos uploaded yet.</p>';
+                        return;
+                    }
+                    list.innerHTML = data.videos.map(v => `
+                        <div style="background:var(--bg-soft); border:1px solid var(--border-subtle); border-radius:12px; padding:1rem; position:relative;">
+                            <video src="${v.url}" controls style="width:100%; max-height:160px; border-radius:8px; background:#000; margin-bottom:0.5rem;"></video>
+                            <p style="font-weight:600; font-size:0.9rem; margin-bottom:0.25rem;">${v.title}</p>
+                            <small style="color:var(--text-muted);">${v.created_at}</small>
+                            <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
+                                ${v.is_active
+                                    ? '<span style="color:var(--primary); font-size:0.85rem;"><i class="fas fa-check-circle"></i> Active</span>'
+                                    : `<button class="btn btn-secondary" style="font-size:0.75rem; padding:0.3rem 0.7rem;" onclick="activateTvVideo(${v.id})"><i class="fas fa-play"></i> Set Active</button>`
+                                }
+                                <button class="btn" style="font-size:0.75rem; padding:0.3rem 0.7rem; background:var(--danger); color:#fff; border:none; border-radius:8px; cursor:pointer;" onclick="deleteTvVideo(${v.id})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `).join('');
+                })
+                .catch(() => {
+                    document.getElementById('allVideosList').innerHTML = '<p style="color:var(--danger);">Error loading videos.</p>';
+                });
+        }
+
+        document.getElementById('tvVideoUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fileInput = document.getElementById('tvVideoFile');
+            const errorDiv = document.getElementById('tvUploadError');
+            const errorMsg = document.getElementById('tvUploadErrorMsg');
+
+            // Hide previous errors
+            errorDiv.style.display = 'none';
+
+            if (!fileInput.files.length) {
+                showAlert('Please select a video file', 'error');
+                return;
+            }
+
+            const file = fileInput.files[0];
+
+            // Client-side validation: file type
+            const allowedTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
+            if (!allowedTypes.includes(file.type)) {
+                errorMsg.textContent = `Invalid format "${file.type}". Allowed: MP4, WebM, OGG, MOV.`;
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Client-side validation: file size (100MB)
+            if (file.size > 100 * 1024 * 1024) {
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
+                errorMsg.textContent = `File too large (${sizeMB} MB). Maximum allowed: 100 MB.`;
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Client-side validation: video dimensions
+            const videoEl = document.createElement('video');
+            videoEl.preload = 'metadata';
+            videoEl.onloadedmetadata = function() {
+                window.URL.revokeObjectURL(videoEl.src);
+                const w = videoEl.videoWidth;
+                const h = videoEl.videoHeight;
+
+                if (w < 640 || h < 360) {
+                    errorMsg.textContent = `Resolution too low (${w}×${h}). Minimum: 640×360 (360p).`;
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                if (w > 3840 || h > 2160) {
+                    errorMsg.textContent = `Resolution too high (${w}×${h}). Maximum: 3840×2160 (4K).`;
+                    errorDiv.style.display = 'block';
+                    return;
+                }
+
+                // Passed all checks — proceed with upload
+                doUpload(file);
+            };
+            videoEl.onerror = function() {
+                // Can't read metadata, let server validate
+                doUpload(file);
+            };
+            videoEl.src = URL.createObjectURL(file);
+        });
+
+        function doUpload(file) {
+            const errorDiv = document.getElementById('tvUploadError');
+            const errorMsg = document.getElementById('tvUploadErrorMsg');
+
+            const formData = new FormData();
+            formData.append('video', file);
+            formData.append('title', document.getElementById('tvVideoTitle').value || file.name);
+
+            const progressDiv = document.getElementById('tvUploadProgress');
+            const progressBar = document.getElementById('tvUploadBar');
+            const progressText = document.getElementById('tvUploadPercent');
+            const uploadBtn = document.getElementById('tvUploadBtn');
+
+            progressDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/admin/tv-videos');
+            xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+
+            xhr.upload.addEventListener('progress', function(e) {
+                if (e.lengthComputable) {
+                    const pct = Math.round((e.loaded / e.total) * 100);
+                    progressBar.style.width = pct + '%';
+                    progressText.textContent = pct + '%';
+                }
+            });
+
+            xhr.onload = function() {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Upload & Set as Active';
+                progressDiv.style.display = 'none';
+                progressBar.style.width = '0%';
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    showAlert('Video uploaded and set as active!', 'success');
+                    document.getElementById('tvVideoUploadForm').reset();
+                    loadTvVideos();
+                } else {
+                    try {
+                        const err = JSON.parse(xhr.responseText);
+                        const msg = err.message || (err.errors && err.errors.video ? err.errors.video[0] : 'Upload failed');
+                        errorMsg.textContent = msg;
+                        errorDiv.style.display = 'block';
+                        showAlert(msg, 'error');
+                    } catch(e) {
+                        errorMsg.textContent = 'Upload failed. Server returned an error.';
+                        errorDiv.style.display = 'block';
+                        showAlert('Upload failed', 'error');
+                    }
+                }
+            };
+
+            xhr.onerror = function() {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Upload & Set as Active';
+                progressDiv.style.display = 'none';
+                errorMsg.textContent = 'Upload failed. Check your connection.';
+                errorDiv.style.display = 'block';
+                showAlert('Upload failed. Check your connection.', 'error');
+            };
+
+            xhr.send(formData);
+        }
+
+        function activateTvVideo(id) {
+            fetch(`/admin/tv-videos/${id}/activate`, {
+                method: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(r => r.json())
+            .then(() => {
+                showAlert('Video set as active', 'success');
+                loadTvVideos();
+            })
+            .catch(() => showAlert('Failed to activate video', 'error'));
+        }
+
+        function deleteTvVideo(id) {
+            if (!confirm('Are you sure you want to delete this video?')) return;
+            fetch(`/admin/tv-videos/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            })
+            .then(r => r.json())
+            .then(() => {
+                showAlert('Video deleted', 'success');
+                loadTvVideos();
+            })
+            .catch(() => showAlert('Failed to delete video', 'error'));
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadAdminData();
@@ -2921,6 +3074,7 @@
             setInterval(updateStats, 30000);
             setInterval(autoSave, 60000);
             updateDesignPreview();
+            loadTvVideos();
         });
     </script>
 </body>

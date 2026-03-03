@@ -495,6 +495,7 @@
 </head>
 <body>
 @include('navbar')
+@include('cart')
 
 <!-- Hero Section -->
 <section class="about-hero">
