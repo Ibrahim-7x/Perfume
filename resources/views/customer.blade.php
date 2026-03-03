@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('troy-theme') || 'light');</script>
 <head>
 <meta charset="utf-8"/>
 <title>TROY Perfumes – Customer View</title>
@@ -31,13 +32,169 @@
         --shadow-main:0 22px 65px rgba(15,23,42,0.95);
     }
 
+    /* BRANDS MARQUEE SECTION */
+    .brands-section {
+        padding: 30px 0;
+        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 50%, var(--bg) 100%);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .brands-section::before,
+    .brands-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .brands-section::before {
+        left: 0;
+        background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+    }
+
+    .brands-section::after {
+        right: 0;
+        background: linear-gradient(270deg, var(--bg) 0%, transparent 100%);
+    }
+
+    .brands-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .brands-title h2 {
+        font-size: 2rem;
+        color: var(--text-main);
+        margin-bottom: 10px;
+    }
+
+    .brands-title p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .brands-marquee {
+        display: flex;
+        width: fit-content;
+        animation: scroll 30s linear infinite;
+    }
+
+    .brands-marquee:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .brand-card {
+        flex-shrink: 0;
+        width: 180px;
+        height: 100px;
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-elevated);
+        border-radius: 16px;
+        border: 1px solid rgba(148,163,184,0.2);
+        transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        cursor: pointer;
+    }
+
+    .brand-card:hover {
+        transform: scale(1.06) translateY(-3px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 30px rgba(34, 197, 94, 0.15);
+    }
+
+    .brand-card img {
+        max-width: 120px;
+        max-height: 60px;
+        object-fit: contain;
+        filter: grayscale(0.2);
+        transition: filter 0.3s ease;
+    }
+
+    .brand-card:hover img {
+        filter: grayscale(0);
+    }
+
+    .brand-card .brand-name {
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Duplicate brands for seamless loop */
+    .brands-marquee-inner {
+        display: flex;
+    }
+
+    /* POWERED BY JAZZ WATERMARK */
+    .powered-by-jazz {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .powered-by-jazz:hover {
+        opacity: 0.8;
+    }
+
+    .powered-by-jazz-text {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .powered-by-jazz-logo {
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #106ebe 0%, #ff6b00 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+        font-size: 0.6rem;
+    }
+
+    /* Adjust footer padding to account for watermark */
+    .footer {
+        padding-bottom: 80px;
+    }
+
     *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
         font-family:'Poppins',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
         background:radial-gradient(circle at top, #172554 0, #020617 55%, #000 100%);
         color:var(--text-main);
         min-height:100vh;
         overflow-x:hidden;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
     }
 
     /* LOCATION PERMISSION MODAL */
@@ -420,14 +577,17 @@
         display:flex;
         align-items:center;
         justify-content:space-between;
-        padding:1.2rem 4.5rem;
+        padding:1rem 4.5rem;
         background:linear-gradient(to bottom,rgba(2,6,23,0.96),rgba(2,6,23,0.85),transparent);
         backdrop-filter:blur(18px);
-        border-bottom:1px solid rgba(148,163,184,0.2);
+        border-bottom:1px solid rgba(148,163,184,0.15);
+        transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
     }
     .header-scrolled{
         background:rgba(2,6,23,0.98);
         box-shadow:0 18px 45px rgba(15,23,42,0.9);
+        padding-top:0.6rem;
+        padding-bottom:0.6rem;
     }
     .logo{
         display:flex;
@@ -437,9 +597,14 @@
         color:var(--text-main);
     }
     .logo-img{
-        width:100px;
-        height:100px;
+        width:70px;
+        height:70px;
         border-radius:16px;
+        transition:all 0.4s ease;
+    }
+    .header-scrolled .logo-img{
+        width:50px;
+        height:50px;
     }
     .logo-text{
         font-weight:900;
@@ -455,8 +620,10 @@
         color:var(--text-muted);
         text-decoration:none;
         font-size:.95rem;
+        font-weight:500;
         position:relative;
         padding-bottom:.25rem;
+        transition:color 0.3s ease;
     }
     .nav-link::after{
         content:'';
@@ -494,24 +661,30 @@
     /* Cart button */
     .cart-toggle{
         position:relative;
-        width:84px;
-        height:84px;
+        width:52px;
+        height:52px;
         border-radius:999px;
-        border:none;
+        border:1px solid rgba(148,163,184,0.3);
         background:rgba(15,23,42,0.95);
         display:flex;
         align-items:center;
         justify-content:center;
         cursor:pointer;
-        box-shadow:0 12px 80px rgba(15,23,42,0.9);
+        box-shadow:0 8px 25px rgba(15,23,42,0.6);
         color:var(--text-main);
+        transition:all 0.3s ease;
+    }
+    .cart-toggle:hover{
+        border-color:var(--primary);
+        background:rgba(34,197,94,0.1);
+        transform:translateY(-2px);
     }
     .cart-count{
         position:absolute;
         top:-4px;
         right:-4px;
-        min-width:36px;
-        height:36px;
+        min-width:22px;
+        height:22px;
         border-radius:999px;
         background:var(--danger);
         color:#fff;
@@ -533,8 +706,9 @@
     }
     .hero-title{
         font-size:4.2rem;
-        line-height:1.02;
-        letter-spacing:.04em;
+        line-height:1.05;
+        letter-spacing:-0.01em;
+        font-weight:800;
         margin-bottom:1rem;
     }
     .hero-gradient{
@@ -546,6 +720,8 @@
         color:var(--text-muted);
         max-width:520px;
         margin-bottom:1.6rem;
+        font-size:1.05rem;
+        line-height:1.7;
     }
     .hero-tags{
         display:flex;
@@ -576,16 +752,16 @@
         color:#022c22;
         font-weight:600;
         cursor:pointer;
-        box-shadow:0 18px 40px rgba(22,163,74,0.6);
+        box-shadow:0 12px 30px rgba(22,163,74,0.4);
         display:inline-flex;
         align-items:center;
         gap:.5rem;
         font-size:.92rem;
-        transition:.3s;
+        transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
     }
     .btn-primary:hover{
-        transform:translateY(-1px);
-        box-shadow:0 20px 60px rgba(22,163,74,0.7);
+        transform:translateY(-3px);
+        box-shadow:0 16px 40px rgba(22,163,74,0.55);
     }
     .btn-ghost{
         padding:.85rem 1.4rem;
@@ -1196,6 +1372,301 @@
         box-shadow: 0 0 5px rgba(0, 243, 255, 0.8);
     }
 
+    /* ========== CUSTOMER REVIEWS SECTION ========== */
+    .reviews-section {
+        margin-top: 3rem;
+        padding: 2rem 0;
+    }
+
+    .reviews-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .reviews-header h3 {
+        font-size: 2rem;
+        color: #00f3ff;
+        margin-bottom: 8px;
+        text-shadow: 0 0 10px rgba(0,243,255,0.4);
+    }
+
+    .reviews-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .reviews-slider-wrapper {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    }
+
+    .reviews-grid.sliding-out {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    .reviews-grid.sliding-in {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+
+    .reviews-nav-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem auto 0;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 243, 255, 0.4);
+        background: rgba(0, 20, 40, 0.7);
+        color: #00f3ff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.35s ease;
+        backdrop-filter: blur(8px);
+    }
+
+    .reviews-nav-arrow:hover {
+        background: rgba(0, 243, 255, 0.15);
+        border-color: #00f3ff;
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.35);
+        transform: scale(1.1);
+    }
+
+    .reviews-nav-arrow:active {
+        transform: scale(0.95);
+    }
+
+    .reviews-page-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 1rem;
+    }
+
+    .reviews-page-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(0, 243, 255, 0.2);
+        border: 1px solid rgba(0, 243, 255, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .reviews-page-dot.active {
+        background: #00f3ff;
+        box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+        transform: scale(1.3);
+    }
+
+    .review-card {
+        background: linear-gradient(145deg, rgba(0, 20, 40, 0.9), rgba(5, 11, 30, 0.95));
+        border-radius: 18px;
+        padding: 1.8rem;
+        border: 1px solid rgba(0, 243, 255, 0.15);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    .review-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #00f3ff, transparent);
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+
+    .review-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(0, 243, 255, 0.4);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 243, 255, 0.1);
+    }
+
+    .review-card:hover::before {
+        opacity: 1;
+    }
+
+    .review-card.featured {
+        border-color: rgba(0, 243, 255, 0.35);
+        box-shadow: 0 0 15px rgba(0, 243, 255, 0.08);
+    }
+
+    .review-card-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 1rem;
+    }
+
+    .review-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00f3ff, #9d00ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #050816;
+        flex-shrink: 0;
+        box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+    }
+
+    .review-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .review-customer-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .review-customer-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-main);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .review-customer-title {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .review-featured-badge {
+        background: linear-gradient(135deg, #00f3ff, #9d00ff);
+        color: #050816;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+    }
+
+    .review-stars {
+        display: flex;
+        gap: 3px;
+        margin-bottom: 0.8rem;
+    }
+
+    .review-stars i {
+        color: #eab308;
+        font-size: 0.9rem;
+    }
+
+    .review-stars i.empty {
+        color: rgba(234, 179, 8, 0.25);
+    }
+
+    .review-text {
+        color: var(--text-main);
+        font-size: 0.92rem;
+        line-height: 1.65;
+        margin-bottom: 1rem;
+        opacity: 0.92;
+    }
+
+    .review-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .review-perfume {
+        font-size: 0.8rem;
+        color: #00f3ff;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .review-perfume i {
+        font-size: 0.75rem;
+    }
+
+    .review-date {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+    }
+
+    .reviews-loading {
+        text-align: center;
+        padding: 3rem 0;
+        color: var(--text-muted);
+    }
+
+    .reviews-loading i {
+        font-size: 2rem;
+        color: #00f3ff;
+        margin-bottom: 1rem;
+        display: block;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .reviews-empty {
+        text-align: center;
+        padding: 3rem 0;
+        color: var(--text-muted);
+    }
+
+    .reviews-empty i {
+        font-size: 3rem;
+        color: rgba(0, 243, 255, 0.3);
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    @media (max-width: 1024px) {
+        .reviews-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .reviews-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .reviews-header h3 {
+            font-size: 1.5rem;
+        }
+    }
+
     /* ========== REDESIGNED WEATHER SECTION ========== */
     .weather-section{
         background:transparent;
@@ -1490,17 +1961,17 @@
     }
     .perfume-card{
         background:var(--bg-elevated);
-        border-radius:0;                /* straight corners */
-        border:1px solid rgba(148,163,184,0.33);
+        border-radius:0;
+        border:1px solid rgba(148,163,184,0.25);
         box-shadow:var(--shadow-soft);
         overflow:hidden;
         cursor:pointer;
-        transition:transform .32s, box-shadow .32s, border-color .32s;
+        transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
     }
     .perfume-card:hover{
-        transform:translateY(-6px);
-        box-shadow:0 22px 60px rgba(15,23,42,0.95);
-        border-color:rgba(56,189,248,0.7);
+        transform:translateY(-8px) scale(1.01);
+        box-shadow:0 22px 55px rgba(15,23,42,0.9);
+        border-color:rgba(56,189,248,0.6);
     }
     .perfume-image{
         position:relative;
@@ -1535,7 +2006,10 @@
         width:100%;
         height:100%;
         object-fit:cover;
-        transition: transform 0.6s ease, opacity 0.6s ease;
+        transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.6s ease;
+    }
+    .perfume-card:hover .perfume-image-front img{
+        transform:scale(1.06);
     }
     .perfume-image-front img.flipped {
         transform: scale(1.05);
@@ -1847,11 +2321,11 @@
         transform:translateX(-50%) translateY(0);
     }
 
-    /* Footer (unchanged) */
+    /* Footer */
     .footer{
         background:#020617;
-        border-top:1px solid rgba(15,23,42,0.9);
-        padding:3rem 4.5rem 2rem;
+        border-top:1px solid rgba(148,163,184,0.15);
+        padding:3.5rem 4.5rem 2rem;
     }
     .footer-content{
         display:grid;
@@ -1866,33 +2340,46 @@
     }
     .footer-column h3{
         margin-bottom:.8rem;
+        font-weight:600;
     }
     .footer-links{
         list-style:none;
         display:flex;
         flex-direction:column;
-        gap:.4rem;
+        gap:.5rem;
         font-size:.9rem;
     }
     .footer-links a{
         color:var(--text-muted);
         text-decoration:none;
+        transition:color 0.3s ease, transform 0.3s ease;
+        display:inline-block;
+    }
+    .footer-links a:hover{
+        color:var(--primary);
+        transform:translateX(3px);
     }
     .social-links{
         display:flex;
         gap:.6rem;
     }
     .social-link{
-        width:32px;
-        height:32px;
+        width:34px;
+        height:34px;
         border-radius:999px;
-        border:1px solid rgba(148,163,184,0.5);
+        border:1px solid rgba(148,163,184,0.4);
         display:flex;
         align-items:center;
         justify-content:center;
         color:var(--text-muted);
         text-decoration:none;
         font-size:.85rem;
+        transition:all 0.3s ease;
+    }
+    .social-link:hover{
+        border-color:var(--primary);
+        color:var(--primary);
+        transform:translateY(-2px);
     }
     .footer-bottom{
         border-top:1px solid rgba(15,23,42,0.85);
@@ -2697,95 +3184,7 @@
 <div class="jet-icon" id="jetIcon">
 <img alt="Cart Animation Jet" src="https://cdn.pixabay.com/photo/2016/03/31/20/26/plane-1295660_1280.png"/>
 </div>
-<!-- Header -->
-<header class="header" id="header">
-<a class="logo" href="#">
-<img alt="TROY Perfumes Logo" class="troy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDBDOC45NTQgMCAwIDguOTU0IDAgMjBTOC45NTQgNDAgMjAgNDBTNDAgMzEuMDQ2IDQwIDIwUzMxLjA0NiAwIDIwIDBaIiBmaWxsPSIjMjJjNTUiLz4KPHBhdGggZD0iTTE1IDE1SDEwVjI1SDE1VjE1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTI1IDE1SDIwVjI1SDI1VjE1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTMwIDI1SDI1VjMwSDMwVjI1WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+"/>
-<div class="logo-text">TROY</div>
-</a>
-<button class="mobile-menu-toggle" id="mobileMenuToggle">
-<i class="fas fa-bars"></i>
-</button>
-<nav class="nav-links">
-<a class="nav-link" href="#featured">Perfumes</a>
-<a class="nav-link" href="#weather">Weather Match</a>
-<a class="nav-link" href="#customer-experience">Customer Experience</a>
-<a class="nav-link" href="#" id="moodMatchLink">
-    <i class="fas fa-smile-beam"></i> Mood Match
-</a>
-</nav>
-<div class="mobile-nav" id="mobileNav">
-<div class="mobile-nav-links">
-<a class="mobile-nav-link" href="#featured">Perfumes</a>
-<a class="mobile-nav-link" href="#weather">Weather Match</a>
-<a class="mobile-nav-link" href="#customer-experience">Customer Experience</a>
-<a class="mobile-nav-link" href="#" id="mobileMoodMatchLink">
-    <i class="fas fa-smile-beam"></i> Mood Match
-</a>
-</div>
-</div>
-<div class="header-actions">
-<div class="pill-badge">AI matched</div>
-<span id="authButtons" style="display:none;">
-    <a href="/login" class="btn-login" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px;">
-        <i class="fas fa-sign-in-alt"></i> Sign In
-    </a>
-    <a href="/register" class="btn-register" style="background: var(--primary); color: #022c22; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600;">
-        Register
-    </a>
-</span>
-<span id="userMenu" style="display:none;">
-    <a href="/profile" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;">
-        <i class="fas fa-user-circle"></i> <span id="userName"></span>
-    </a>
-    <a href="/admin-panel" id="adminLink" style="color: var(--accent); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: none;">
-        <i class="fas fa-cog"></i> Admin Panel
-    </a>
-    <form action="/logout" method="POST" style="display: inline;">
-        @csrf
-        <button type="submit" style="background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; cursor: pointer;">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-    </form>
-</span>
-<button aria-label="Shopping Cart" class="cart-toggle" id="cartToggle">
-<i class="fas fa-shopping-bag"></i>
-<div class="cart-count">0</div>
-</button>
-</div>
-</header>
-<script>
-// Check authentication status on page load
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/check-admin')
-        .then(response => response.json())
-        .then(data => {
-            const authButtons = document.getElementById('authButtons');
-            const userMenu = document.getElementById('userMenu');
-            const userName = document.getElementById('userName');
-            const adminLink = document.getElementById('adminLink');
-            
-            if (authButtons && userMenu) {
-                if (data.isLoggedIn) {
-                    // User is logged in
-                    authButtons.style.display = 'none';
-                    userMenu.style.display = 'flex';
-                    if (userName) userName.textContent = data.user;
-                    if (data.isAdmin && adminLink) {
-                        adminLink.style.display = 'inline-block';
-                    }
-                } else {
-                    // User is not logged in
-                    authButtons.style.display = 'flex';
-                    userMenu.style.display = 'none';
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error checking auth:', error);
-        });
-});
-</script>
+@include('navbar')
 <!-- HERO (simplified – only video and tag) -->
 <section class="hero">
 <div>
@@ -3024,7 +3423,128 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
     </div>
+
+    <!-- CUSTOMER REVIEWS FROM DATABASE -->
+    <div class="reviews-section" id="customer-reviews">
+        <div class="reviews-header">
+            <h3><i class="fas fa-star"></i> What Our Customers Say</h3>
+            <p>Real reviews from our valued customers</p>
+        </div>
+        <div class="reviews-slider-wrapper">
+            <div class="reviews-grid" id="reviews-grid">
+                <div class="reviews-loading" id="reviews-loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading reviews...</p>
+                </div>
+            </div>
+        </div>
+        <button class="reviews-nav-arrow" id="reviews-next-arrow" style="display:none;" title="Next reviews">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="reviews-page-dots" id="reviews-page-dots"></div>
+    </div>
 </section>
+
+<!-- PARTNER BRANDS MARQUEE SECTION -->
+<section class="brands-section" id="partner-brands">
+    <div class="brands-title">
+        <h2>Our Partner Brands</h2>
+        <p>Trusted by world's finest fragrance houses</p>
+    </div>
+    <div class="brands-marquee">
+        <div class="brands-marquee-inner">
+            <!-- Brand 1 -->
+            <div class="brand-card">
+                <span class="brand-name">CHANEL</span>
+            </div>
+            <!-- Brand 2 -->
+            <div class="brand-card">
+                <span class="brand-name">DIOR</span>
+            </div>
+            <!-- Brand 3 -->
+            <div class="brand-card">
+                <span class="brand-name">GUCCI</span>
+            </div>
+            <!-- Brand 4 -->
+            <div class="brand-card">
+                <span class="brand-name">TOM FORD</span>
+            </div>
+            <!-- Brand 5 -->
+            <div class="brand-card">
+                <span class="brand-name">VERSACE</span>
+            </div>
+            <!-- Brand 6 -->
+            <div class="brand-card">
+                <span class="brand-name">PRADA</span>
+            </div>
+            <!-- Brand 7 -->
+            <div class="brand-card">
+                <span class="brand-name">YSL</span>
+            </div>
+            <!-- Brand 8 -->
+            <div class="brand-card">
+                <span class="brand-name">JO MALONE</span>
+            </div>
+            <!-- Brand 9 -->
+            <div class="brand-card">
+                <span class="brand-name">ARMANI</span>
+            </div>
+            <!-- Brand 10 -->
+            <div class="brand-card">
+                <span class="brand-name">BURBERRY</span>
+            </div>
+            <!-- DUPLICATE BRANDS FOR SEAMLESS LOOP -->
+            <!-- Brand 1 -->
+            <div class="brand-card">
+                <span class="brand-name">CHANEL</span>
+            </div>
+            <!-- Brand 2 -->
+            <div class="brand-card">
+                <span class="brand-name">DIOR</span>
+            </div>
+            <!-- Brand 3 -->
+            <div class="brand-card">
+                <span class="brand-name">GUCCI</span>
+            </div>
+            <!-- Brand 4 -->
+            <div class="brand-card">
+                <span class="brand-name">TOM FORD</span>
+            </div>
+            <!-- Brand 5 -->
+            <div class="brand-card">
+                <span class="brand-name">VERSACE</span>
+            </div>
+            <!-- Brand 6 -->
+            <div class="brand-card">
+                <span class="brand-name">PRADA</span>
+            </div>
+            <!-- Brand 7 -->
+            <div class="brand-card">
+                <span class="brand-name">YSL</span>
+            </div>
+            <!-- Brand 8 -->
+            <div class="brand-card">
+                <span class="brand-name">JO MALONE</span>
+            </div>
+            <!-- Brand 9 -->
+            <div class="brand-card">
+                <span class="brand-name">ARMANI</span>
+            </div>
+            <!-- Brand 10 -->
+            <div class="brand-card">
+                <span class="brand-name">BURBERRY</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- POWERED BY JAZZ WATERMARK -->
+<div class="powered-by-jazz">
+    <div class="powered-by-jazz-text">
+        <span>Powered by</span>
+        <div class="powered-by-jazz-logo">JAZZ</div>
+    </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -4430,11 +4950,11 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
                             <i class="fas fa-thermometer-half"></i> ${tempDisplay}
                         </div>
                         <div class="perfume-actions">
-                            <button class="btn-buy" data-id="${p.id}">
-                                <i class="fab fa-whatsapp"></i> Buy Now
+                            <button class="btn-buy" onclick='buyNow(${JSON.stringify(p)})'>
+                                <i class="fab fa-whatsapp"></i> Buy
                             </button>
-                            <button class="btn-primary" data-id="${p.id}">
-                                <i class="fas fa-shopping-bag"></i> Add to Cart
+                            <button class="btn-primary" onclick='addToCart(${JSON.stringify(p)})'>
+                                <i class="fas fa-shopping-bag"></i> Add
                             </button>
                             <button class="btn-favorite ${isFavorite ? 'active' : ''}" data-id="${p.id}">
                                 <i class="fas fa-heart"></i>
@@ -4503,13 +5023,13 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             }
         }
 
-        function addToCart(id, sourceButton) {
-            const perfume = perfumes.find(p => p.id === id);
+        function addToCart(perfume, sourceButton = null) {
             if(!perfume) {
-                console.error('Perfume not found with ID:', id);
+                console.error('Perfume not found');
                 return;
             }
 
+            const id = perfume.id;
             const existing = cart.find(item => item.id === id);
             if(existing){
                 existing.quantity += 1;
@@ -4683,13 +5203,13 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             toggleCart();
         }
 
-        function buyNow(id) {
-            const perfume = perfumes.find(p => p.id === id);
+        function buyNow(perfume) {
             if(!perfume) {
-                console.error('Perfume not found with ID:', id);
+                console.error('Perfume not found');
                 return;
             }
 
+            const id = perfume.id;
             const city = getCurrentCity();
             let message = '🛒 *TROY PERFUMES - BUY NOW* 🛒%0a%0a';
             
@@ -5049,12 +5569,181 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             }
         }
         
+        // ========== LOAD CUSTOMER REVIEWS FROM DATABASE ==========
+        let allReviews = [];
+        let currentReviewPage = 0;
+        const REVIEWS_PER_PAGE = 3;
+
+        function loadCustomerReviews() {
+            const grid = document.getElementById('reviews-grid');
+            const loading = document.getElementById('reviews-loading');
+            if (!grid) return;
+
+            fetch('/api/reviews')
+                .then(res => res.json())
+                .then(data => {
+                    if (loading) loading.remove();
+
+                    if (!data.success || !data.reviews || data.reviews.length === 0) {
+                        grid.innerHTML = `
+                            <div class="reviews-empty" style="grid-column:1/-1">
+                                <i class="fas fa-comment-slash"></i>
+                                <p>No reviews yet. Be the first to share your experience!</p>
+                            </div>`;
+                        return;
+                    }
+
+                    allReviews = data.reviews;
+                    currentReviewPage = 0;
+                    renderReviewPage(currentReviewPage);
+                    setupReviewNavigation();
+                })
+                .catch(err => {
+                    console.error('Error loading reviews:', err);
+                    if (loading) loading.remove();
+                    grid.innerHTML = `
+                        <div class="reviews-empty" style="grid-column:1/-1">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Unable to load reviews right now.</p>
+                        </div>`;
+                });
+        }
+
+        function getTotalPages() {
+            return Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
+        }
+
+        function renderReviewPage(page) {
+            const grid = document.getElementById('reviews-grid');
+            if (!grid) return;
+
+            const start = page * REVIEWS_PER_PAGE;
+            const pageReviews = allReviews.slice(start, start + REVIEWS_PER_PAGE);
+
+            grid.innerHTML = '';
+            pageReviews.forEach(review => {
+                grid.appendChild(createReviewCard(review));
+            });
+
+            updatePageDots(page);
+        }
+
+        function slideToPage(newPage) {
+            const grid = document.getElementById('reviews-grid');
+            if (!grid || newPage === currentReviewPage) return;
+
+            // Slide out current cards
+            grid.classList.add('sliding-out');
+
+            setTimeout(() => {
+                currentReviewPage = newPage;
+                renderReviewPage(currentReviewPage);
+
+                grid.classList.remove('sliding-out');
+                grid.classList.add('sliding-in');
+
+                // Force reflow then slide in
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        grid.classList.remove('sliding-in');
+                    });
+                });
+            }, 350);
+        }
+
+        function setupReviewNavigation() {
+            const arrow = document.getElementById('reviews-next-arrow');
+            const dotsContainer = document.getElementById('reviews-page-dots');
+            const totalPages = getTotalPages();
+
+            if (totalPages <= 1) {
+                if (arrow) arrow.style.display = 'none';
+                if (dotsContainer) dotsContainer.style.display = 'none';
+                return;
+            }
+
+            // Show arrow
+            if (arrow) {
+                arrow.style.display = 'flex';
+                arrow.onclick = () => {
+                    const nextPage = (currentReviewPage + 1) % totalPages;
+                    slideToPage(nextPage);
+                };
+            }
+
+            // Build page dots
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalPages; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'reviews-page-dot' + (i === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => slideToPage(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+        }
+
+        function updatePageDots(activePage) {
+            const dots = document.querySelectorAll('.reviews-page-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activePage);
+            });
+        }
+
+        function createReviewCard(review) {
+            const card = document.createElement('div');
+            card.className = 'review-card' + (review.is_featured ? ' featured' : '');
+
+            // Avatar: image or initials
+            let avatarContent;
+            if (review.avatar) {
+                avatarContent = `<img src="${review.avatar}" alt="${review.customer_name}">`;
+            } else {
+                const initials = review.customer_name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+                avatarContent = initials;
+            }
+
+            // Stars
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<i class="fas fa-star ${i > review.rating ? 'empty' : ''}"></i>`;
+            }
+
+            const featuredBadge = review.is_featured
+                ? '<span class="review-featured-badge">Featured</span>'
+                : '';
+
+            const perfumeTag = review.perfume_purchased
+                ? `<span class="review-perfume"><i class="fas fa-spray-can"></i> ${review.perfume_purchased}</span>`
+                : '';
+
+            card.innerHTML = `
+                <div class="review-card-header">
+                    <div class="review-avatar">${avatarContent}</div>
+                    <div class="review-customer-info">
+                        <div class="review-customer-name">${review.customer_name}</div>
+                        <div class="review-customer-title">${review.customer_title || ''}</div>
+                    </div>
+                    ${featuredBadge}
+                </div>
+                <div class="review-stars">${stars}</div>
+                <p class="review-text">${review.review}</p>
+                <div class="review-footer">
+                    ${perfumeTag}
+                    <span class="review-date">${review.created_at}</span>
+                </div>
+            `;
+
+            return card;
+        }
+
         // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
             createSparkles();
             autoIncrementStats();
             setupShareButtons();
             setupAudioControls();
+            loadCustomerReviews();
         });
     </script>
 
@@ -5246,18 +5935,9 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             // Add to cart button
             moodAddToCartBtn.addEventListener('click', () => {
                 if (recommendedPerfume) {
-                    const perfumeId = recommendedPerfume.id;
-                    const perfume = window.perfumes.find(p => p.id === perfumeId);
-                    if (perfume && typeof window.addToCart === 'function') {
-                        const addToCartButton = document.querySelector(`[data-id="${perfumeId}"]`);
-                        if (addToCartButton) {
-                            window.addToCart(perfumeId, addToCartButton);
-                            showToast(`${perfume.name} added to cart from mood match!`);
-                        } else {
-                            const fakeButton = document.createElement('button');
-                            window.addToCart(perfumeId, fakeButton);
-                            showToast(`${perfume.name} added to cart!`);
-                        }
+                    if (recommendedPerfume && typeof window.addToCart === 'function') {
+                        window.addToCart(recommendedPerfume, moodAddToCartBtn);
+                        showToast(`${recommendedPerfume.name} added to cart from mood match!`);
                     }
                 }
             });

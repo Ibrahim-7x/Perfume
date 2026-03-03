@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         // Run perfume seeder
         $this->call([
             PerfumeSeeder::class,
+            CustomerReviewSeeder::class,
         ]);
     }
 }

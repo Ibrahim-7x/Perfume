@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('troy-theme') || 'light');</script>
 <head>
     <meta charset="utf-8">
     <title>TROY Perfumes – All Fragrances</title>
@@ -29,11 +30,14 @@
         }
 
         *{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;}
         body{
             font-family:'Poppins',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
             background:radial-gradient(circle at top, #172554 0, #020617 55%, #000 100%);
+            background-attachment:fixed;
             color:var(--text-main);
             min-height:100vh;
+            -webkit-font-smoothing:antialiased;
         }
 
         /* Simple Header */
@@ -86,20 +90,27 @@
         /* Page Title */
         .page-header{
             text-align:center;
-            padding:3rem 2rem 2rem;
+            padding:3.5rem 2rem 2rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+        @keyframes fadeInDown{
+            from{opacity:0;transform:translateY(-15px);}
+            to{opacity:1;transform:translateY(0);}
         }
         .page-title{
-            font-size:2.5rem;
-            font-weight:700;
-            margin-bottom:0.5rem;
+            font-size:2.8rem;
+            font-weight:800;
+            margin-bottom:0.6rem;
             background:linear-gradient(90deg,var(--primary),var(--accent));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
             background-clip:text;
+            letter-spacing:-0.01em;
         }
         .page-subtitle{
             color:var(--text-muted);
-            font-size:1.1rem;
+            font-size:1.05rem;
+            font-weight:400;
         }
 
         /* Perfume Grid */
@@ -110,66 +121,159 @@
         }
         .perfume-grid{
             display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-            gap:2rem;
+            grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+            gap:1.8rem;
         }
         .perfume-card{
             background:var(--bg-elevated);
-            border-radius:16px;
-            border:1px solid rgba(148,163,184,0.33);
-            box-shadow:var(--shadow-soft);
+            border-radius:20px;
+            border:1px solid rgba(148,163,184,0.2);
+            box-shadow:0 4px 20px rgba(15,23,42,0.5);
             overflow:hidden;
             cursor:pointer;
-            transition:transform .32s, box-shadow .32s, border-color .32s;
+            transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+            animation:fadeInUp 0.5s ease-out both;
+        }
+        @keyframes fadeInUp{
+            from{opacity:0;transform:translateY(20px);}
+            to{opacity:1;transform:translateY(0);}
         }
         .perfume-card:hover{
-            transform:translateY(-6px);
-            box-shadow:0 22px 60px rgba(15,23,42,0.95);
-            border-color:rgba(56,189,248,0.7);
+            transform:translateY(-8px) scale(1.01);
+            box-shadow:0 20px 50px rgba(15,23,42,0.85);
+            border-color:rgba(56,189,248,0.5);
         }
         .perfume-image{
             position:relative;
-            height:240px;
+            height:250px;
             overflow:hidden;
         }
-        .perfume-image img{
+        .perfume-image-inner{
+            width:100%;
+            height:100%;
+            transform-style:preserve-3d;
+            transition:transform .7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .perfume-image-front,
+        .perfume-image-back{
+            position:absolute;
+            inset:0;
+            backface-visibility:hidden;
+        }
+        .perfume-image-front img{
             width:100%;
             height:100%;
             object-fit:cover;
+            transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+        }
+        .perfume-card:hover .perfume-image-inner{
+            transform:rotateY(180deg);
+        }
+        .perfume-card:hover .perfume-image-front img{
+            transform:scale(1.06);
+        }
+        .perfume-image-back{
+            transform:rotateY(180deg);
+            padding:1.4rem;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            gap:.65rem;
+            background:radial-gradient(circle at top,#0f172a,#020617);
+        }
+        .perfume-image-back h4{
+            font-size:1rem;
+            font-weight:700;
+            color:var(--accent);
+            margin-bottom:0.1rem;
+        }
+        .perfume-notes{
+            display:flex;
+            flex-wrap:wrap;
+            gap:.35rem;
+        }
+        .note-tag{
+            padding:.22rem .6rem;
+            border-radius:999px;
+            background:rgba(15,23,42,0.9);
+            border:1px solid rgba(148,163,184,0.4);
+            font-size:.72rem;
+            color:var(--text-main);
+        }
+        .perfume-meta{
+            font-size:.82rem;
+            color:var(--text-muted);
+        }
+        .perfume-temperature-back{
+            font-size:.82rem;
+            color:var(--text-muted);
+            display:flex;
+            align-items:center;
+            gap:0.3rem;
+        }
+        .perfume-temperature-back i{
+            color:var(--accent);
+        }
+        .flip-instruction{
+            font-size:.75rem;
+            color:var(--text-muted);
+            margin-top:.3rem;
+        }
+        .perfume-image::after{
+            content:'';
+            position:absolute;
+            bottom:0;
+            left:0;
+            right:0;
+            height:60px;
+            background:linear-gradient(to top,var(--bg-elevated),transparent);
+            pointer-events:none;
+            z-index:1;
         }
         .perfume-badge{
             position:absolute;
             top:12px;
             left:12px;
-            padding:.3rem .8rem;
+            padding:.35rem .9rem;
             border-radius:999px;
-            background:rgba(15,23,42,0.8);
-            border:1px solid rgba(56,189,248,0.75);
+            background:rgba(15,23,42,0.85);
+            backdrop-filter:blur(8px);
+            border:1px solid rgba(56,189,248,0.6);
             font-size:.72rem;
+            font-weight:600;
+            letter-spacing:0.03em;
+            z-index:1;
         }
         .perfume-info{
-            padding:1.2rem;
+            padding:1.2rem 1.4rem;
         }
         .perfume-title-row{
             display:flex;
             justify-content:space-between;
             align-items:center;
-            margin-bottom:0.5rem;
+            margin-bottom:0.4rem;
+            gap:0.5rem;
         }
         .perfume-name{
-            font-size:1.1rem;
+            font-size:1.05rem;
             font-weight:600;
+            line-height:1.3;
         }
         .perfume-price{
-            font-size:1.1rem;
+            font-size:1.05rem;
             font-weight:700;
             color:var(--primary);
+            white-space:nowrap;
         }
         .perfume-desc{
             color:var(--text-muted);
-            font-size:0.9rem;
+            font-size:0.85rem;
             margin-bottom:1rem;
-            line-height:1.5;
+            line-height:1.55;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            -webkit-box-orient:vertical;
+            overflow:hidden;
         }
         .perfume-actions{
             display:flex;
@@ -178,7 +282,7 @@
         .btn-buy,.btn-primary{
             flex:1;
             padding:10px;
-            border-radius:8px;
+            border-radius:10px;
             border:none;
             font-weight:600;
             cursor:pointer;
@@ -186,7 +290,7 @@
             align-items:center;
             justify-content:center;
             gap:6px;
-            transition:all 0.3s;
+            transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
             font-size:0.85rem;
         }
         .btn-buy{
@@ -195,14 +299,16 @@
         }
         .btn-buy:hover{
             box-shadow:0 6px 20px rgba(34,197,94,0.4);
+            transform:translateY(-1px);
         }
         .btn-primary{
-            background:rgba(56,189,248,0.2);
+            background:rgba(56,189,248,0.15);
             color:var(--accent);
-            border:1px solid rgba(56,189,248,0.5);
+            border:1px solid rgba(56,189,248,0.4);
         }
         .btn-primary:hover{
-            background:rgba(56,189,248,0.3);
+            background:rgba(56,189,248,0.25);
+            transform:translateY(-1px);
         }
 
         /* Empty State */
@@ -234,26 +340,25 @@
 
         /* Responsive */
         @media (max-width:768px){
-            .header{padding:1rem 1.5rem;}
+            .header{padding:0.8rem 1.5rem;}
             .logo-text{font-size:1.2rem;}
-            .page-title{font-size:1.8rem;}
+            .page-title{font-size:2rem;}
             .container{padding:0 1rem 2rem;}
-            .perfume-grid{grid-template-columns:repeat(2,1fr);gap:1rem;}
+            .perfume-grid{grid-template-columns:repeat(2,1fr);gap:0.8rem;}
+            .perfume-image{height:180px;}
+            .perfume-info{padding:0.9rem 1rem;}
+            .perfume-name{font-size:0.9rem;}
+            .perfume-price{font-size:0.9rem;}
+            .perfume-desc{font-size:0.78rem;}
+            .btn-buy,.btn-primary{padding:8px;font-size:0.78rem;}
+        }
+        @media (max-width:480px){
+            .perfume-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto;}
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <a href="/customer" class="logo">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMwIDBDMTMuNDM4IDAgMCAxMy40MzggMCAzMHMxMy40MzggMzAgMzAgMzBzMzAtMTMuNDM4IDMwLTMwUzQ2LjU2MiAwIDMwIDBaIiBmaWxsPSIjMjJjNTUiLz4KPHBhdGggZD0iTTIyIDIySDI0VjQ4SDIyVjIyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTM4IDIySDQwVjQ4SDM4VjIyWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTQ0IDQ4SDIwVjQ0SDIweiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="TROY" class="logo-img">
-            <span class="logo-text">TROY</span>
-        </a>
-        <a href="/customer" class="back-btn">
-            <i class="fas fa-arrow-left"></i>
-            Back to Home
-        </a>
-    </header>
+    @include('navbar')
 
     <!-- Page Header -->
     <div class="page-header">
@@ -331,12 +436,31 @@
                     return;
                 }
 
-                perfumeGrid.innerHTML = data.perfumes.map(p => `
+                perfumeGrid.innerHTML = data.perfumes.map(p => {
+                    const images = p.images || [];
+                    const imgSrc = images.length > 0 ? images[0] : 'https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800';
+                    const notes = p.notes || [];
+                    const temp = p.recommended_temperature || '';
+                    return `
                     <div class="perfume-card">
                         <div class="perfume-image">
-                            <img src="${p.images && p.images[0] ? p.images[0] : 'https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'}" 
-                                 alt="${p.name}">
-                            <div class="perfume-badge">${Number(p.rating) >= 4.5 ? 'Top Rated' : p.city || 'Special'}</div>
+                            <div class="perfume-image-inner">
+                                <div class="perfume-image-front">
+                                    <img src="${imgSrc}" alt="${p.name}">
+                                    <div class="perfume-badge">${Number(p.rating) >= 4.5 ? 'Top Rated' : p.city || 'Special'}</div>
+                                </div>
+                                <div class="perfume-image-back">
+                                    <h4>Fragrance Details</h4>
+                                    <div class="perfume-notes">
+                                        ${notes.length > 0 ? notes.map(n => `<span class="note-tag">${n}</span>`).join('') : '<span class="note-tag">Premium Blend</span>'}
+                                    </div>
+                                    <div class="perfume-meta">
+                                        ${p.city ? `City: ${p.city}` : ''}${p.rating ? ` · Rating: ${p.rating}` : ''}
+                                    </div>
+                                    ${temp ? `<div class="perfume-temperature-back"><i class="fas fa-thermometer-half"></i> ${temp}</div>` : ''}
+                                    <p class="flip-instruction">Hover to flip back</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="perfume-info">
                             <div class="perfume-title-row">
@@ -354,7 +478,8 @@
                             </div>
                         </div>
                     </div>
-                `).join('');
+                `;
+                }).join('');
                 
             } catch (error) {
                 console.error('Error loading perfumes:', error);

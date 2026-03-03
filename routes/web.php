@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PerfumeController as AdminPerfumeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Frontend\PerfumeController as FrontendPerfumeController;
+use App\Http\Controllers\Frontend\ReviewController as FrontendReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // Customer View Routes
 Route::view('/customer', 'customer')->name('customer');
+Route::view('/about', 'about')->name('about');
 Route::view('/perfumes', 'all-perfumes')->name('perfumes.all');
 Route::view('/admin-panel', 'admin')->name('admin');
 
@@ -25,6 +27,7 @@ Route::prefix('api')->group(function () {
     Route::get('/perfumes/bestsellers', [FrontendPerfumeController::class, 'bestsellers']);
     Route::get('/perfumes/by-temperature', [FrontendPerfumeController::class, 'byTemperature']);
     Route::get('/perfumes/{id}', [FrontendPerfumeController::class, 'show']);
+    Route::get('/reviews', [FrontendReviewController::class, 'index']);
 });
 
 // Admin Routes (requires authentication for page access)

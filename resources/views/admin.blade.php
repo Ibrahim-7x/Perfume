@@ -39,12 +39,17 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: radial-gradient(circle at top, #172554 0, #020617 55%, #000 100%);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
@@ -55,11 +60,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             background: linear-gradient(to bottom, rgba(2, 6, 23, 0.98), rgba(2, 6, 23, 0.95));
             backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s ease;
         }
 
         .logo {
@@ -71,15 +77,21 @@
         }
 
         .logo-img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            font-weight: 800;
+            font-size: 1.4rem;
         }
 
         .logo-text {
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            font-size: 1.5rem;
         }
 
         .admin-actions {
@@ -96,10 +108,10 @@
 
         /* Sidebar */
         .admin-sidebar {
-            width: 280px;
+            width: 270px;
             background: var(--bg-elevated);
-            border-right: 1px solid rgba(148, 163, 184, 0.2);
-            padding: 2rem 1.5rem;
+            border-right: 1px solid rgba(148, 163, 184, 0.12);
+            padding: 1.5rem 1.2rem;
             overflow-y: auto;
         }
 
@@ -134,23 +146,26 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 1.5rem;
+            padding: 0.85rem 1.3rem;
             border-radius: var(--card-radius);
             color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
             cursor: pointer;
+            font-size: 0.92rem;
         }
 
         .nav-item:hover {
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(56, 189, 248, 0.08);
             color: var(--text-main);
+            transform: translateX(4px);
         }
 
         .nav-item.active {
-            background: rgba(34, 197, 94, 0.15);
+            background: rgba(34, 197, 94, 0.12);
             color: var(--primary);
-            border-left: 4px solid var(--primary);
+            border-left: 3px solid var(--primary);
+            font-weight: 500;
         }
 
         .nav-icon {
@@ -188,9 +203,16 @@
         .control-card {
             background: var(--bg-elevated);
             border-radius: var(--card-radius);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.15);
             padding: 1.5rem;
             box-shadow: var(--shadow-soft);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .control-card:hover {
+            border-color: rgba(34, 197, 94, 0.25);
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.85);
+            transform: translateY(-3px);
         }
 
         .card-header {
@@ -234,19 +256,20 @@
         .form-input, .form-file {
             width: 100%;
             padding: 0.75rem 1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            background: rgba(15, 23, 42, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.7);
             color: var(--text-main);
             font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
         .form-input:focus, .form-file:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+            background: rgba(15, 23, 42, 0.85);
         }
 
         .form-file {
@@ -340,14 +363,14 @@
 
         /* Buttons */
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.7rem 1.4rem;
+            border-radius: 10px;
             border: none;
             font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -360,7 +383,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 8px 22px rgba(34, 197, 94, 0.35);
         }
 
         .btn-secondary {
@@ -406,9 +429,16 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.5);
             border-radius: 12px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .perfume-item:hover {
+            background: rgba(15, 23, 42, 0.7);
+            border-color: rgba(56, 189, 248, 0.25);
+            transform: translateX(4px);
         }
 
         .perfume-image {
@@ -495,13 +525,20 @@
             background: var(--bg-elevated);
             border-radius: var(--card-radius);
             padding: 1.5rem;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(34, 197, 94, 0.2);
+            transform: translateY(-3px);
         }
 
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            color: var(--primary);
         }
 
         .stat-label {
