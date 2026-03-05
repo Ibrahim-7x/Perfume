@@ -1,47 +1,111 @@
-# Stage 0: Build
-FROM php:8.4-apache AS laravel-build
+# ============================================================
+# Stage 1: Build frontend assets (Vite + Tailwind CSS)
+# ============================================================
+FROM node:20-alpine AS frontend-build
 
-# Set working directory
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package.json package-lock.json* ./
+
+# Install Node dependencies
+RUN npm ci
+
+# Copy frontend source files needed for build
+COPY vite.config.js ./
+COPY resources ./resources
+
+# Build production assets
+RUN npm run build
+
+# ============================================================
+# Stage 2: PHP / Apache — final production image
+# ============================================================
+FROM php:8.4-apache
+
 WORKDIR /var/www/html
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    curl \
-    && docker-php-ext-install pdo pdo_mysql mbstring xml zip bcmath
+# ---- System dependencies & PHP extensions -------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git \
+        unzip \
+        libzip-dev \
+        libonig-dev \
+        libxml2-dev \
+        zip \
+        curl \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        pdo pdo_mysql mbstring xml zip bcmath gd opcache \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# ---- Apache configuration ----------------------------------
+RUN a2enmod rewrite headers
 
-# Copy application files
+# Point DocumentRoot to Laravel's public directory
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+        /etc/apache2/sites-available/*.conf \
+        /etc/apache2/apache2.conf
+
+# Allow .htaccess overrides
+RUN sed -ri -e 's/AllowOverride None/AllowOverride All/g' \
+        /etc/apache2/apache2.conf
+
+# ---- PHP production settings --------------------------------
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+# OPcache tuning
+RUN echo "opcache.enable=1\n\
+opcache.memory_consumption=128\n\
+opcache.interned_strings_buffer=16\n\
+opcache.max_accelerated_files=10000\n\
+opcache.validate_timestamps=0\n" > /usr/local/etc/php/conf.d/opcache.ini
+
+# Upload / POST limits (useful for perfume images)
+RUN echo "upload_max_filesize=20M\n\
+post_max_size=25M\n\
+memory_limit=256M\n" > /usr/local/etc/php/conf.d/uploads.ini
+
+# ---- Composer ------------------------------------------------
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copy composer files first for better Docker layer caching
+COPY composer.json composer.lock* ./
+
+# Install PHP dependencies (production only)
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+
+# ---- Application source code --------------------------------
 COPY . .
 
-# Copy composer from official image
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Copy built frontend assets from Stage 1
+COPY --from=frontend-build /app/public/build ./public/build
 
-# Install PHP dependencies (production)
-RUN composer install --no-dev --optimize-autoloader
+# Finish composer (generate autoload, run post-scripts)
+RUN composer dump-autoload --optimize \
+    && composer run-script post-autoload-dump
 
-# Set permissions
-RUN chown -R www-data:www-data storage bootstrap/cache \
+# ---- Storage & permissions -----------------------------------
+RUN mkdir -p storage/logs \
+             storage/framework/cache/data \
+             storage/framework/sessions \
+             storage/framework/views \
+             bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-# Update Apache DocumentRoot to Laravel public folder
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+# Create storage symlink
+RUN php artisan storage:link || true
 
-# Clear Laravel caches
-RUN php artisan config:clear \
-    && php artisan route:clear \
-    && php artisan cache:clear \
-    && php artisan view:clear
+# ---- Entrypoint script (handles Render's PORT env var) -------
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Expose port 80
-EXPOSE 80
+# Render injects PORT (default 10000) — expose it
+EXPOSE 10000
 
-# Start Apache
-CMD ["apache2-foreground"]
+ENTRYPOINT ["docker-entrypoint.sh"]
