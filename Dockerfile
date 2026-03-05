@@ -7,22 +7,16 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev
 
-RUN docker-php-ext-install \
-    pdo \
-    pdo_mysql \
-    mbstring \
-    bcmath \
-    xml \
-    zip
+RUN docker-php-ext-install pdo pdo_mysql mbstring bcmath xml zip
+
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
 RUN chown -R www-data:www-data storage bootstrap/cache
-
-EXPOSE 80
