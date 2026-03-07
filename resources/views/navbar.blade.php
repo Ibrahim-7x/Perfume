@@ -176,21 +176,6 @@
     html[data-theme="light"] .brand-video {
         background: #ffffff !important;
     }
-    /* Light theme: cart modal */
-    html[data-theme="light"] .cart-modal {
-        background: #ffffff !important;
-        border-left-color: rgba(100,116,139,0.15);
-        box-shadow: -10px 0 35px rgba(0,0,0,0.08);
-    }
-    html[data-theme="light"] .cart-thumb {
-        background: #ffffff;
-    }
-    html[data-theme="light"] .cart-item {
-        border-bottom-color: rgba(100,116,139,0.12);
-    }
-    html[data-theme="light"] .cart-footer {
-        border-top-color: rgba(100,116,139,0.12);
-    }
     /* Light theme: footer */
     html[data-theme="light"] .footer {
         background: #ffffff !important;
