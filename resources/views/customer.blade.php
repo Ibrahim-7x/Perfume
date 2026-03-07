@@ -368,7 +368,100 @@
     .nabipak-stamp:hover {
         box-shadow: 0 0 35px rgba(255, 215, 0, 0.9);
     }
-    
+
+    /* LADIES STAMP */
+    .ladies-stamp {
+        position: fixed;
+        top: 90px;
+        left: 20px;
+        width: 60px;
+        height: 60px;
+        z-index: 100;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+        animation: stampCoinFlip 6s ease-in-out infinite;
+        cursor: pointer;
+        border: 2px solid #ff69b4;
+    }
+
+    .ladies-stamp:hover {
+        box-shadow: 0 0 35px rgba(255, 105, 180, 0.9);
+    }
+
+    /* COMING SOON MODAL */
+    .coming-soon-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .coming-soon-modal.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .coming-soon-content {
+        background: radial-gradient(circle at top, #0f172a, #020617);
+        border-radius: 28px;
+        padding: 2.5rem;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        border: 2px solid rgba(255, 105, 180, 0.5);
+        box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+        position: relative;
+        animation: modalAppear 0.5s ease-out;
+    }
+
+    .coming-soon-content img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        border: 3px solid #ff69b4;
+        box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+    }
+
+    .coming-soon-content h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #ff69b4;
+    }
+
+    .coming-soon-content p {
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .coming-soon-close {
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        color: #fff;
+        border: none;
+        padding: 0.7rem 2rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .coming-soon-close:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+    }
+
     @keyframes stampCoinFlip {
         0%   { transform: rotateY(0deg); }
         50%  { transform: rotateY(1080deg); }
@@ -1781,7 +1874,7 @@
         position:relative;
     }
     .weather-container{
-        max-width:100%;                /* full width inside section */
+        max-width:100%;
         margin:0;
         display:flex;
         gap:3rem;
@@ -1793,6 +1886,7 @@
         position:relative;
         overflow:hidden;
         backdrop-filter:blur(12px);
+        flex-wrap: wrap;
     }
     .weather-container:before{
         content:'';
@@ -1802,112 +1896,212 @@
         animation:rotate 24s linear infinite;
         pointer-events:none;
     }
-    .weather-visual{
-        flex:1;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        z-index:1;
-        justify-content:center;
-    }
-    .thermometer{
-        width:35px;
-        height:180px;
-        border-radius:18px;
-        background:linear-gradient(to top,#22c55e,#eab308,#f97316,#ef4444);
-        position:relative;
-        overflow:hidden;
-        margin-bottom:1.4rem;
-    }
-    .thermometer-fill{
-        position:absolute;
-        inset:auto 0 0;
-        background:rgba(15,23,42,0.92);
-        transition:height 1.1s;
-    }
-    .thermometer-bulb{
-        width:58px;
-        height:58px;
-        border-radius:999px;
-        background:radial-gradient(circle,#ef4444,#b91c1c);
-        margin-top:-12px;
-        box-shadow:0 0 22px rgba(248,113,113,0.75);
-    }
-    .temp-display{
-        margin-top:1.1rem;
-        font-size:2.4rem;
-        font-weight:600;
-        line-height:1;
-    }
-    .temp-label{
-        font-size:1.2rem;
-        color:var(--text-main);
-        margin-bottom:0.5rem;
-    }
-    .weather-icon-container{
-        font-size:3rem;
-        margin-top:0.5rem;
-    }
-    .weather-condition{
-        font-size:1rem;
-        color:var(--text-muted);
+
+    /* Left column – description & metrics */
+    .weather-left {
+        flex: 2;
+        min-width: 300px;
+        z-index: 1;
     }
 
-    .weather-info{
-        flex:1.5;
-        z-index:1;
+    .weather-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        background: linear-gradient(135deg, #fff, #a5f3fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
-    .weather-title{
-        font-size:1.8rem;
-        margin-bottom:1rem;
+
+    .weather-desc {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 500px;
     }
-    .weather-desc{
-        color:var(--text-muted);
-        margin-bottom:1.8rem;
-        font-size:1rem;
-        line-height:1.5;
+
+    /* Horizontal metrics grid – 4 items in a row */
+    .metrics-row {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.8rem;
+        flex-wrap: wrap;
     }
-    .weather-details{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:1rem;
-        margin-bottom:2rem;
-        background:rgba(15,23,42,0.6);
-        border-radius:20px;
-        padding:1.2rem 1.5rem;
-        border:1px solid rgba(56,189,248,0.2);
+
+    .metric-card {
+        background: rgba(15, 23, 42, 0.7);
+        border-radius: 20px;
+        padding: 1.2rem 1rem;
+        text-align: center;
+        flex: 1 1 120px;
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        backdrop-filter: blur(4px);
     }
-    .weather-detail{
-        display:flex;
-        align-items:center;
-        gap:0.8rem;
-        font-size:0.95rem;
+
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1.2;
+        margin-bottom: 0.3rem;
     }
-    .weather-detail i{
-        color:var(--primary);
-        width:20px;
+
+    .metric-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
     }
-    .city-selector{
-        display:flex;
-        flex-wrap:wrap;
-        gap:0.6rem;
-        margin-bottom:1.5rem;
+
+    .match-message {
+        font-size: 1rem;
+        color: var(--accent);
+        background: rgba(56, 189, 248, 0.1);
+        padding: 0.6rem 1.2rem;
+        border-radius: 40px;
+        display: inline-block;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        margin-top: 0.5rem;
     }
-    .city-btn{
-        padding:0.5rem 1.2rem;
-        border-radius:999px;
-        border:1px solid rgba(148,163,184,0.4);
-        background:rgba(15,23,42,0.8);
-        color:var(--text-muted);
-        font-size:0.85rem;
-        cursor:pointer;
-        transition:0.2s;
+
+    /* Right column – large temperature & city */
+    .weather-right {
+        flex: 1;
+        min-width: 200px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 23, 42, 0.5);
+        border-radius: 32px;
+        padding: 2rem 1.5rem;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        text-align: center;
     }
-    .city-btn.active{
-        background:linear-gradient(135deg,#22c55e,#38bdf8);
-        color:#022c22;
-        border-color:transparent;
+
+    .large-temp {
+        font-size: 5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+        margin-bottom: 0.3rem;
     }
+
+    .city-name-lg {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--text-main);
+        margin-bottom: 0.2rem;
+    }
+
+    .condition-lg {
+        font-size: 1rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .condition-lg i {
+        color: var(--accent);
+        font-size: 1.2rem;
+    }
+
+    /* Carousel and other elements remain below the two columns */
+    .carousel-wrapper {
+        width: 100%;
+        margin-top: 2rem;
+        z-index: 1;
+    }
+
+    /* City carousel */
+    .city-carousel-container {
+        perspective: 1200px;
+        width: 100%;
+        height: 320px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0 2rem;
+        position: relative;
+    }
+
+    .city-carousel {
+        position: relative;
+        width: 240px;
+        height: 240px;
+        transform-style: preserve-3d;
+        animation: rotateCarousel 30s infinite linear;
+        transition: animation-play-state 0.3s;
+    }
+
+    .city-carousel:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes rotateCarousel {
+        from { transform: rotateY(0deg); }
+        to   { transform: rotateY(360deg); }
+    }
+
+    .carousel-item {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 2px rgba(34,197,94,0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backface-visibility: visible;
+        border: 2px solid transparent;
+    }
+
+    .carousel-item:hover {
+        transform: scale(1.1) translateZ(30px);
+        box-shadow: 0 20px 40px rgba(34,197,94,0.6);
+        border-color: var(--primary);
+        z-index: 100;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .carousel-item .city-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        color: white;
+        padding: 0.8rem 0.5rem 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: 0.3s;
+        pointer-events: none;
+    }
+
+    .carousel-item:hover .city-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
+    .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(280px); }
+    .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(280px); }
+    .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(280px); }
+    .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(280px); }
+    .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(280px); }
 
     /* City search bar */
     .city-search-container {
@@ -1958,6 +2152,7 @@
         gap: 1.5rem;
         transition: all 0.3s ease;
         backdrop-filter: blur(8px);
+        margin-top: 1.5rem;
     }
     .weather-perfume-card:hover {
         border-color: var(--primary);
@@ -3073,8 +3268,31 @@
         .mobile-menu-toggle { display: block; }
         .hero-title{font-size:3rem;}
         .section{padding:3.2rem 1.5rem;}
-        .weather-details{
-            grid-template-columns:1fr;
+        .city-carousel-container {
+            height: 260px;
+        }
+        .city-carousel {
+            width: 180px;
+            height: 180px;
+        }
+        .carousel-item {
+            width: 120px;
+            height: 120px;
+        }
+        .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(180px); }
+        .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(180px); }
+        .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(180px); }
+        .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(180px); }
+        .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(180px); }
+        .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(180px); }
+        .weather-container {
+            flex-direction: column;
+        }
+        .metrics-row {
+            justify-content: center;
+        }
+        .weather-right {
+            width: 100%;
         }
         .footer{padding:3rem 1.5rem 2rem;}
         .footer-content{
@@ -3149,6 +3367,18 @@
     </div>
 </div>
 
+</div>
+
+<!-- LADIES STAMP -->
+<img alt="Ladies Collection - Coming Soon" class="ladies-stamp" id="ladiesStamp" src="/Ladies.png" title="Ladies Collection - Coming Soon"/>
+<!-- COMING SOON MODAL -->
+<div class="coming-soon-modal" id="comingSoonModal">
+<div class="coming-soon-content">
+<img alt="Ladies Collection" src="/Ladies.png"/>
+<h2>Coming Soon</h2>
+<p>Our exclusive Ladies Collection is on its way. Stay tuned for something truly special!</p>
+<button class="coming-soon-close" id="closeComingSoon">Close</button>
+</div>
 </div>
 
 <!-- NABI PAK SAW STAMP -->
@@ -3375,45 +3605,56 @@
 <div class="promotions-layout">
 <!-- LEFT: Weather + perfumes -->
 <div class="promotions-main">
-<!-- Weather Section (redesigned) -->
+<!-- Weather Section – redesigned to match image -->
 <section class="weather-section" id="weather">
 <h2 class="section-title">Live Weather-Matched Fragrances</h2>
 <div class="weather-container">
-    <!-- Left column -->
-    <div class="weather-visual">
-        <div class="thermometer">
-            <div class="thermometer-fill" id="thermometerFill" style="height:40%;"></div>
-        </div>
-        <div class="thermometer-bulb"></div>
-        <div class="temp-display" id="tempDisplay">Loading...</div>
-        <div class="temp-label" id="tempLabel">Lahore</div>
-        <div class="weather-icon-container" id="weatherIcon"></div>
-        <div class="weather-condition" id="weatherCondition"></div>
-    </div>
-
-    <!-- Right column -->
-    <div class="weather-info">
-        <h2 class="weather-title">Find Your Perfect Scent</h2>
+    <!-- Left column: description, metrics, match message -->
+    <div class="weather-left">
+        <h3 class="weather-title">Find Your Perfect Scent</h3>
         <p class="weather-desc" id="weatherRecommendation">Fetching live weather data...</p>
 
-        <!-- Weather details grid -->
-        <div class="weather-details">
-            <div class="weather-detail"><i class="fas fa-wind"></i> <span id="windSpeed">Wind: -- km/h</span></div>
-            <div class="weather-detail"><i class="fas fa-tint"></i> <span id="humidity">Humidity: --%</span></div>
-            <div class="weather-detail"><i class="fas fa-temperature-half"></i> <span id="feelsLike">Feels like: --°C</span></div>
-            <div class="weather-detail"><i class="fas fa-map-marker-alt"></i> <span id="userLocation">Location: Allow access</span></div>
+        <!-- Horizontal metrics row -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <div class="metric-value" id="metricHumidity">--%</div>
+                <div class="metric-label">HUMIDITY</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="metricFeelsLike">--°C</div>
+                <div class="metric-label">FEELS LIKE</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="metricTemp">--°C</div>
+                <div class="metric-label">TEMPERATURE</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="metricWind">-- km/h</div>
+                <div class="metric-label">WIND</div>
+            </div>
         </div>
 
-        <!-- City selector -->
-        <div class="city-selector">
-            <button class="city-btn active" data-city="Lahore" data-lat="31.5497" data-lon="74.3436">Lahore</button>
-            <button class="city-btn" data-city="Karachi" data-lat="24.8607" data-lon="67.0011">Karachi</button>
-            <button class="city-btn" data-city="Islamabad" data-lat="33.6844" data-lon="73.0479">Islamabad</button>
-            <button class="city-btn" data-city="Dubai" data-lat="25.2048" data-lon="55.2708">Dubai</button>
-            <button class="city-btn" data-city="London" data-lat="51.5074" data-lon="-0.1278">London</button>
-            <button class="city-btn" id="myLocationBtn">
-                <i class="fas fa-location-dot"></i> My Location
-            </button>
+        <!-- Match message (updates based on perfume found) -->
+        <div class="match-message" id="matchMessage">Perfume match found for the city</div>
+    </div>
+
+    <!-- Right column: large temperature, city, condition -->
+    <div class="weather-right">
+        <div class="large-temp" id="largeTempDisplay">--°C</div>
+        <div class="city-name-lg" id="cityNameLarge">Lahore</div>
+        <div class="condition-lg" id="conditionLarge">
+            <i class="fas fa-sun" id="conditionIcon"></i>
+            <span id="conditionText">Clear</span>
+        </div>
+    </div>
+
+    <!-- Carousel and other elements (unchanged) placed after the two columns -->
+    <div class="carousel-wrapper">
+        <!-- 3D City Carousel -->
+        <div class="city-carousel-container">
+            <div class="city-carousel" id="cityCarousel">
+                <!-- Cities will be inserted by JavaScript -->
+            </div>
         </div>
 
         <!-- City search input -->
@@ -4069,9 +4310,10 @@
                     myLocationBtn.classList.add('active');
                 }
                 
-                // Update temperature display
-                if (document.getElementById('tempLabel')) {
-                    document.getElementById('tempLabel').textContent = userLocation.city || "Your Location";
+                // Update city name display
+                const cityNameLargeEl = document.getElementById('cityNameLarge');
+                if (cityNameLargeEl) {
+                    cityNameLargeEl.textContent = userLocation.city || "Your Location";
                 }
                 
                 // Fetch weather for user's location
@@ -4196,29 +4438,27 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         "London": { lat: 51.5074, lon: -0.1278 }
     };
 
-    let tempDisplay, thermometerFill, weatherRecommendation, tempLabel;
-    let windSpeedEl, humidityEl, feelsLikeEl;
-    let cityButtons, weatherIconContainer, weatherConditionEl;
-    let refreshButton;
-    let citySearchBtn, citySearchInput;
+    // New elements
+    let weatherRecommendation, cityNameLarge, largeTempDisplay, conditionText, conditionIcon;
+    let metricHumidity, metricFeelsLike, metricTemp, metricWind;
+    let refreshButton, citySearchBtn, citySearchInput;
+    let matchMessage;
 
     function initWeather() {
-        tempDisplay = document.getElementById('tempDisplay');
-        thermometerFill = document.getElementById('thermometerFill');
         weatherRecommendation = document.getElementById('weatherRecommendation');
-        tempLabel = document.getElementById('tempLabel');
-        
-        windSpeedEl = document.getElementById('windSpeed');
-        humidityEl = document.getElementById('humidity');
-        feelsLikeEl = document.getElementById('feelsLike');
-        
-        cityButtons = document.querySelectorAll('.city-btn');
-        weatherIconContainer = document.getElementById('weatherIcon');
-        weatherConditionEl = document.getElementById('weatherCondition');
+        cityNameLarge = document.getElementById('cityNameLarge');
+        largeTempDisplay = document.getElementById('largeTempDisplay');
+        conditionText = document.getElementById('conditionText');
+        conditionIcon = document.getElementById('conditionIcon');
+        metricHumidity = document.getElementById('metricHumidity');
+        metricFeelsLike = document.getElementById('metricFeelsLike');
+        metricTemp = document.getElementById('metricTemp');
+        metricWind = document.getElementById('metricWind');
         refreshButton = document.getElementById('refreshWeather');
         citySearchBtn = document.getElementById('citySearchBtn');
         citySearchInput = document.getElementById('citySearchInput');
-        
+        matchMessage = document.getElementById('matchMessage');
+
         const defaultCity = "Lahore";
         updateCityWeather(defaultCity);
         setupEventListeners();
@@ -4226,67 +4466,32 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
     }
 
     function setupEventListeners() {
-        cityButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const city = this.dataset.city;
-                const lat = this.dataset.lat;
-                const lon = this.dataset.lon;
-                
-                cityButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                updateCityWeather(city);
-                fetchLiveWeather(city);
-            });
-        });
-        
         if (refreshButton) {
             refreshButton.addEventListener('click', function() {
-                const activeCity = document.querySelector('.city-btn.active');
-                if (activeCity) {
-                    const city = activeCity.dataset.city;
-                    fetchLiveWeather(city);
-                    
-                    if (tempDisplay) tempDisplay.textContent = "Loading...";
-                    if (weatherRecommendation) weatherRecommendation.textContent = "Fetching live weather data...";
-                    if (refreshButton) refreshButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-                    
-                    setTimeout(() => {
-                        if (refreshButton) refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Weather';
-                    }, 2000);
-                }
+                const activeCity = document.querySelector('.city-btn.active')?.dataset.city || 'Lahore';
+                fetchLiveWeather(activeCity);
+                if (largeTempDisplay) largeTempDisplay.textContent = "Loading...";
+                if (weatherRecommendation) weatherRecommendation.textContent = "Fetching live weather data...";
+                refreshButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+                setTimeout(() => { if (refreshButton) refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Weather'; }, 2000);
             });
         }
-
-        // City search button
         if (citySearchBtn) {
             citySearchBtn.addEventListener('click', function() {
                 const cityName = citySearchInput.value.trim();
-                if (!cityName) {
-                    alert('Please enter a city name');
-                    return;
-                }
-                // Geocode city name to coordinates using Nominatim
+                if (!cityName) { alert('Please enter a city name'); return; }
                 fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`)
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.length > 0) {
                             const lat = parseFloat(data[0].lat);
                             const lon = parseFloat(data[0].lon);
-                            const displayName = data[0].display_name.split(',')[0]; // simple city name
-                            // Update active city button (remove active from others)
-                            cityButtons.forEach(b => b.classList.remove('active'));
-                            // Add a temporary class or just update label
-                            tempLabel.textContent = displayName;
-                            // Fetch weather using coordinates
+                            const displayName = data[0].display_name.split(',')[0];
+                            if (cityNameLarge) cityNameLarge.textContent = displayName;
                             fetchLiveWeather(displayName, lat, lon);
-                        } else {
-                            alert('City not found. Please try another name.');
-                        }
+                        } else alert('City not found. Please try another name.');
                     })
-                    .catch(err => {
-                        console.error('Geocoding error:', err);
-                        alert('Could not fetch city data. Please try again.');
-                    });
+                    .catch(err => { console.error('Geocoding error:', err); alert('Could not fetch city data. Please try again.'); });
             });
         }
     }
@@ -4294,27 +4499,30 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
     function updateCityWeather(city) {
         const weather = cityWeatherData[city];
         if (!weather) return;
-        
-        if (tempDisplay) tempDisplay.textContent = weather.temp + '°C';
-        if (tempLabel) tempLabel.textContent = city;
-        
-        if (thermometerFill) {
-            let heightPercent = 100 - ((weather.temp / 40) * 100);
-            if (heightPercent < 5) heightPercent = 5;
-            if (heightPercent > 95) heightPercent = 95;
-            thermometerFill.style.height = heightPercent + '%';
+
+        if (largeTempDisplay) largeTempDisplay.textContent = weather.temp + '°C';
+        if (cityNameLarge) cityNameLarge.textContent = city;
+        if (weatherRecommendation) weatherRecommendation.textContent = `In ${city}'s ${weather.condition.toLowerCase()} ${weather.temp}°C, ${weather.recommendation}`;
+
+        // Update metrics
+        if (metricTemp) metricTemp.textContent = weather.temp + '°C';
+        if (metricWind) metricWind.textContent = weather.wind + ' km/h';
+        if (metricHumidity) metricHumidity.textContent = weather.humidity + '%';
+        if (metricFeelsLike) metricFeelsLike.textContent = weather.feelsLike + '°C';
+
+        // Update condition
+        if (conditionText) conditionText.textContent = weather.condition;
+        if (conditionIcon) {
+            let icon = "fa-sun";
+            if (weather.condition.includes("cloud")) icon = "fa-cloud";
+            else if (weather.condition.includes("Rain")) icon = "fa-cloud-rain";
+            else if (weather.condition.includes("Snow")) icon = "fa-snowflake";
+            else if (weather.condition.includes("Thunderstorm")) icon = "fa-bolt";
+            else if (weather.condition.includes("Fog")) icon = "fa-smog";
+            conditionIcon.className = `fas ${icon}`;
         }
-        
-        if (weatherRecommendation) {
-            weatherRecommendation.textContent = `In ${city}'s ${weather.condition} ${weather.temp}°C, ${weather.recommendation}`;
-        }
-        
-        if (windSpeedEl) windSpeedEl.textContent = `Wind: ${weather.wind} km/h`;
-        if (humidityEl) humidityEl.textContent = `Humidity: ${weather.humidity}%`;
-        if (feelsLikeEl) feelsLikeEl.textContent = `Feels like: ${weather.feelsLike}°C`;
-        
-        updateWeatherIcon(weather.condition, weather.temp);
-        // After updating weather, also update perfume recommendation
+
+        // Update match message (based on perfume recommendation later)
         if (window.updateWeatherPerfumeRecommendation) {
             window.updateWeatherPerfumeRecommendation(weather.temp);
         }
@@ -4322,64 +4530,53 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
 
     async function fetchLiveWeather(city, customLat, customLon) {
         let lat, lon;
-        
         if (customLat && customLon) {
             lat = customLat;
             lon = customLon;
         } else {
             const coords = cityCoords[city];
-            if (!coords) {
-                console.log(`No coordinates found for ${city}`);
-                return;
-            }
+            if (!coords) { console.log(`No coordinates found for ${city}`); return; }
             lat = coords.lat;
             lon = coords.lon;
         }
-        
         try {
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto`;
-            
             const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const data = await response.json();
-            
             if (data.current) {
                 const liveTemp = Math.round(data.current.temperature_2m);
                 const liveHumidity = data.current.relative_humidity_2m;
                 const liveWind = Math.round(data.current.wind_speed_10m);
                 const feelsLike = calculateFeelsLike(liveTemp, liveHumidity, liveWind);
                 const condition = getWeatherCondition(data.current.weather_code);
-                
-                if (tempDisplay) tempDisplay.textContent = liveTemp + '°C';
-                if (tempLabel) tempLabel.textContent = city;
-                
-                if (thermometerFill) {
-                    let heightPercent = 100 - ((liveTemp / 40) * 100);
-                    if (heightPercent < 5) heightPercent = 5;
-                    if (heightPercent > 95) heightPercent = 95;
-                    thermometerFill.style.height = heightPercent + '%';
-                }
-                
+
+                if (largeTempDisplay) largeTempDisplay.textContent = liveTemp + '°C';
+                if (cityNameLarge) cityNameLarge.textContent = city;
                 if (weatherRecommendation) {
                     const recommendation = getRecommendation(condition, liveTemp);
                     weatherRecommendation.textContent = `In ${city}'s ${condition.toLowerCase()} ${liveTemp}°C, ${recommendation}`;
                 }
-                
-                if (windSpeedEl) windSpeedEl.textContent = `Wind: ${liveWind} km/h`;
-                if (humidityEl) humidityEl.textContent = `Humidity: ${liveHumidity}%`;
-                if (feelsLikeEl) feelsLikeEl.textContent = `Feels like: ${feelsLike}°C`;
-                
-                updateWeatherIcon(condition, liveTemp);
-                
-                // Update perfume recommendation card based on temperature
-                if (window.updateWeatherPerfumeRecommendation) {
-                    window.updateWeatherPerfumeRecommendation(liveTemp);
+
+                // Update metrics
+                if (metricTemp) metricTemp.textContent = liveTemp + '°C';
+                if (metricWind) metricWind.textContent = liveWind + ' km/h';
+                if (metricHumidity) metricHumidity.textContent = liveHumidity + '%';
+                if (metricFeelsLike) metricFeelsLike.textContent = feelsLike + '°C';
+
+                // Update condition
+                if (conditionText) conditionText.textContent = condition;
+                if (conditionIcon) {
+                    let icon = "fa-sun";
+                    if (condition.includes("cloud")) icon = "fa-cloud";
+                    else if (condition.includes("Rain")) icon = "fa-cloud-rain";
+                    else if (condition.includes("Snow")) icon = "fa-snowflake";
+                    else if (condition.includes("Thunderstorm")) icon = "fa-bolt";
+                    else if (condition.includes("Fog")) icon = "fa-smog";
+                    conditionIcon.className = `fas ${icon}`;
                 }
-                
-                console.log(`Live weather updated for ${city}: ${liveTemp}°C`);
+
+                if (window.updateWeatherPerfumeRecommendation) window.updateWeatherPerfumeRecommendation(liveTemp);
             }
         } catch (error) {
             console.log(`Using fallback data for ${city}:`, error.message);
@@ -4388,13 +4585,8 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
     }
 
     function calculateFeelsLike(temp, humidity, wind) {
-        if (temp >= 27) {
-            const feelsLike = temp + 0.05 * humidity;
-            return Math.round(feelsLike);
-        } else if (temp <= 10 && wind > 15) {
-            const feelsLike = 13.12 + 0.6215 * temp - 11.37 * Math.pow(wind, 0.16) + 0.3965 * temp * Math.pow(wind, 0.16);
-            return Math.round(feelsLike);
-        }
+        if (temp >= 27) { return Math.round(temp + 0.05 * humidity); }
+        else if (temp <= 10 && wind > 15) { return Math.round(13.12 + 0.6215 * temp - 11.37 * Math.pow(wind, 0.16) + 0.3965 * temp * Math.pow(wind, 0.16)); }
         return temp;
     }
 
@@ -4412,57 +4604,80 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
     }
 
     function getRecommendation(condition, temp) {
-        if (temp >= 30) {
-            return "Perfect for light, fresh fragrances that stay vibrant in the heat.";
-        } else if (temp >= 20) {
-            return "Ideal for versatile scents that work from day to evening.";
-        } else if (temp >= 10) {
-            return "Great for warm, cozy fragrances that embrace the cooler air.";
-        } else {
-            return "Best for rich, intense scents that project well in cold weather.";
-        }
-    }
-
-    function updateWeatherIcon(condition, temp) {
-        if (!weatherIconContainer || !weatherConditionEl) return;
-        
-        let iconClass = "fas fa-sun";
-        let conditionText = condition;
-        
-        if (condition.includes("Clear")) {
-            iconClass = temp > 25 ? "fas fa-sun" : "fas fa-sun";
-        } else if (condition.includes("cloud")) {
-            iconClass = "fas fa-cloud";
-        } else if (condition.includes("Rain") || condition.includes("Drizzle")) {
-            iconClass = "fas fa-cloud-rain";
-        } else if (condition.includes("Snow")) {
-            iconClass = "fas fa-snowflake";
-        } else if (condition.includes("Thunderstorm")) {
-            iconClass = "fas fa-bolt";
-        } else if (condition.includes("Fog")) {
-            iconClass = "fas fa-smog";
-        }
-        
-        weatherIconContainer.innerHTML = `<i class="${iconClass}"></i>`;
-        weatherConditionEl.textContent = conditionText;
-        
-        if (temp >= 30) {
-            weatherIconContainer.style.color = "#f97316";
-        } else if (temp >= 20) {
-            weatherIconContainer.style.color = "#eab308";
-        } else if (temp >= 10) {
-            weatherIconContainer.style.color = "#38bdf8";
-        } else {
-            weatherIconContainer.style.color = "#60a5fa";
-        }
+        if (temp >= 30) return "Perfect for light, fresh fragrances that stay vibrant in the heat.";
+        else if (temp >= 20) return "Ideal for versatile scents that work from day to evening.";
+        else if (temp >= 10) return "Great for warm, cozy fragrances that embrace the cooler air.";
+        else return "Best for rich, intense scents that project well in cold weather.";
     }
 
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(initWeather, 1000);
     });
 
-    // Make fetchLiveWeather globally available for location system
     window.fetchLiveWeather = fetchLiveWeather;
+})();
+</script>
+
+<script>
+/* === 3D CITY CAROUSEL === */
+(function() {
+    const carouselCities = [
+        { name: 'Lahore', lat: 31.5497, lon: 74.3436, image: 'https://images.pexels.com/photos/4064436/pexels-photo-4064436.jpeg?auto=compress&cs=tinysrgb&w=600' },
+        { name: 'Karachi', lat: 24.8607, lon: 67.0011, image: 'https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=600' },
+        { name: 'Islamabad', lat: 33.6844, lon: 73.0479, image: 'https://images.pexels.com/photos/2179018/pexels-photo-2179018.jpeg?auto=compress&cs=tinysrgb&w=600' },
+        { name: 'Dubai', lat: 25.2048, lon: 55.2708, image: 'https://images.pexels.com/photos/290595/pexels-photo-290595.jpeg?auto=compress&cs=tinysrgb&w=600' },
+        { name: 'London', lat: 51.5074, lon: -0.1278, image: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=600' },
+        { name: 'New York', lat: 40.7128, lon: -74.0060, image: 'https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=600' }
+    ];
+
+    const carousel = document.getElementById('cityCarousel');
+    if (!carousel) return;
+
+    carouselCities.forEach((city, index) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        item.dataset.city = city.name;
+        item.dataset.lat = city.lat;
+        item.dataset.lon = city.lon;
+
+        item.innerHTML = `
+            <img src="${city.image}" alt="${city.name}" loading="lazy">
+            <div class="city-label">${city.name}</div>
+        `;
+
+        item.addEventListener('mouseenter', function() {
+            const cityName = this.dataset.city;
+            const lat = parseFloat(this.dataset.lat);
+            const lon = parseFloat(this.dataset.lon);
+
+            const cityNameLarge = document.getElementById('cityNameLarge');
+            if (cityNameLarge) cityNameLarge.textContent = cityName;
+
+            if (typeof window.fetchLiveWeather === 'function') {
+                window.fetchLiveWeather(cityName, lat, lon);
+            } else {
+                console.warn('fetchLiveWeather not found');
+                const tempEl = document.getElementById('largeTempDisplay');
+                if (tempEl) {
+                    const tempText = tempEl.textContent;
+                    const temp = parseInt(tempText) || 24;
+                    if (window.updateWeatherPerfumeRecommendation) {
+                        window.updateWeatherPerfumeRecommendation(temp);
+                    }
+                }
+            }
+
+            document.querySelectorAll('.carousel-item').forEach(el => el.style.borderColor = 'transparent');
+            this.style.borderColor = 'var(--primary)';
+        });
+
+        carousel.appendChild(item);
+    });
+
+    setTimeout(() => {
+        const firstItem = document.querySelector('.carousel-item');
+        if (firstItem) firstItem.dispatchEvent(new Event('mouseenter'));
+    }, 1000);
 })();
 </script>
 
@@ -4688,7 +4903,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
                         }
                         
                         // After perfumes are loaded, update weather recommendation
-                        const tempEl = document.getElementById('tempDisplay');
+                        const tempEl = document.getElementById('largeTempDisplay');
                         if (tempEl) {
                             let tempText = tempEl.textContent;
                             let temp = parseInt(tempText) || 24;
@@ -4833,6 +5048,26 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         function setupEventListeners() {
             // Cart toggle/close/overlay/checkout listeners are handled by shared cart.blade.php
             // (shared cart detects contributionModal and shows it automatically)
+
+            // Ladies stamp - Coming Soon modal
+            const ladiesStamp = document.getElementById('ladiesStamp');
+            const comingSoonModal = document.getElementById('comingSoonModal');
+            const closeComingSoon = document.getElementById('closeComingSoon');
+            if (ladiesStamp && comingSoonModal) {
+                ladiesStamp.addEventListener('click', function() {
+                    comingSoonModal.classList.add('active');
+                });
+            }
+            if (closeComingSoon && comingSoonModal) {
+                closeComingSoon.addEventListener('click', function() {
+                    comingSoonModal.classList.remove('active');
+                });
+                comingSoonModal.addEventListener('click', function(e) {
+                    if (e.target === comingSoonModal) {
+                        comingSoonModal.classList.remove('active');
+                    }
+                });
+            }
 
             // Contribution modal
             if (nabiStamp) {
