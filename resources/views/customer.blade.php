@@ -688,19 +688,21 @@
         color:var(--text-main);
     }
     .logo-img{
-        width:70px;
-        height:70px;
-        border-radius:16px;
+        width:56px;
+        height:56px;
+        border-radius:14px;
+        border:1px solid rgba(34,197,94,0.4);
+        object-fit:cover;
         transition:all 0.4s ease;
     }
     .header-scrolled .logo-img{
-        width:50px;
-        height:50px;
+        width:42px;
+        height:42px;
     }
     .logo-text{
         font-weight:900;
         letter-spacing:.15em;
-        font-size:2.05rem;
+        font-size:5rem;
     }
     .nav-links{
         display:flex;
@@ -1832,240 +1834,38 @@
     }
     .perfume-grid{
         display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
         gap:2.1rem;
     }
-    
-    /* Limited grid for customer page (4-5 items) */
-    .perfume-grid.limit-5 {
-        grid-template-columns: repeat(5, 1fr);
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-    
-    /* Responsive: 4 columns on medium screens */
-    @media (max-width: 1200px) {
-        .perfume-grid.limit-5 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    
-    /* Responsive: 3 columns on smaller screens */
-    @media (max-width: 900px) {
-        .perfume-grid.limit-5 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-    
-    /* Responsive: 2 columns on mobile */
-    @media (max-width: 600px) {
-        .perfume-grid.limit-5 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    
     /* View All Button */
-    .view-all-container {
-        text-align: center;
-        margin-top: 2rem;
-        padding-bottom: 1rem;
-    }
-    
-    .view-all-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 14px 36px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-        color: #022c22;
-        font-weight: 600;
-        font-size: 1rem;
-        border: none;
-        border-radius: 999px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    
-    .view-all-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
-    }
-    
-    .view-all-btn i {
-        transition: transform 0.3s ease;
-    }
-    
-    .view-all-btn:hover i {
-        transform: translateX(5px);
-    }
-    .perfume-card{
-        background:var(--bg-elevated);
-        border-radius:0;
-        border:1px solid rgba(148,163,184,0.25);
-        box-shadow:var(--shadow-soft);
-        overflow:hidden;
-        cursor:pointer;
-        transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    .perfume-card:hover{
-        transform:translateY(-8px) scale(1.01);
-        box-shadow:0 22px 55px rgba(15,23,42,0.9);
-        border-color:rgba(56,189,248,0.6);
-    }
-    .perfume-image{
-        position:relative;
-        height:240px;
-        overflow:hidden;
-    }
-    .perfume-image-inner{
-        width:100%;
-        height:100%;
-        transform-style:preserve-3d;
-        transition:transform .7s;
-    }
-    .perfume-image-front,
-    .perfume-image-back{
-        position:absolute;
-        inset:0;
-        backface-visibility:hidden;
-    }
-    .perfume-image-back{
-        transform:rotateY(180deg);
-        padding:1.4rem;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        gap:.65rem;
-        background:radial-gradient(circle at top,#0f172a,#020617);
-    }
-    .perfume-card:hover .perfume-image-inner{
-        transform:rotateY(180deg);
-    }
-    .perfume-image-front img{
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.6s ease;
-    }
-    .perfume-card:hover .perfume-image-front img{
-        transform:scale(1.06);
-    }
-    .perfume-image-front img.flipped {
-        transform: scale(1.05);
-        opacity: 0.9;
-    }
-    .perfume-badge{
-        position:absolute;
-        top:12px;
-        left:12px;
-        padding:.3rem .8rem;
-        border-radius:999px;
-        background:rgba(15,23,42,0.8);
-        border:1px solid rgba(56,189,248,0.75);
-        font-size:.72rem;
-    }
-    .perfume-logo{
-        position:absolute;
-        bottom:10px;
-        right:10px;
-        width:30px;
-        height:30px;
-        border-radius:999px;
-        padding:6px;
-        background:rgba(15,23,42,0.85);
-    }
-    .perfume-notes{
-        display:flex;
-        flex-wrap:wrap;
-        gap:.35rem;
-    }
-    .note-tag{
-        padding:.22rem .6rem;
-        border-radius:999px;
-        background:rgba(15,23,42,0.9);
-        border:1px solid rgba(148,163,184,0.4);
-        font-size:.72rem;
-    }
-    .flip-instruction{
-        font-size:.75rem;
-        color:var(--text-muted);
-        margin-top:.3rem;
-    }
-    .perfume-info{
-        padding:1.5rem 1.6rem 1.6rem;
-    }
-    .perfume-name{
-        font-size:1.1rem;
-        margin-bottom:.2rem;
-    }
-    .perfume-desc{
-        font-size:.86rem;
-        color:var(--text-muted);
-        margin-bottom:.75rem;
-    }
-    .perfume-price{
-        font-size:1rem;
-        font-weight:600;
-        margin-bottom:1rem;
-    }
-    /* temperature styling */
-    .perfume-temperature {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-    }
-    .perfume-temperature i {
-        color: var(--accent);
-    }
-    .perfume-actions{
-        display:flex;
-        align-items:center;
-        gap:.6rem;
-        flex-wrap:wrap;
-    }
-    .btn-favorite{
-        width:40px;
-        height:40px;
-        border-radius:999px;
-        border:1px solid rgba(148,163,184,0.7);
-        background:rgba(15,23,42,0.92);
-        color:#f97316;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        cursor:pointer;
-    }
-    .btn-favorite.active{
-        background:rgba(234,179,8,0.15);
-        border-color:#eab308;
-        color:#facc15;
-    }
+    .view-all-container{text-align:center;margin-top:2.5rem;padding-bottom:1rem;}
+    .view-all-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;background:linear-gradient(135deg,var(--primary),var(--primary-strong));color:#022c22;font-weight:600;font-size:1rem;border:none;border-radius:999px;cursor:pointer;text-decoration:none;transition:all .3s ease;}
+    .view-all-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(34,197,94,0.4);}
+    .view-all-btn:hover i{transform:translateX(5px);}
+    .view-all-btn i{transition:transform .3s ease;}
+    /* ===== GAPSY CARD STYLE ===== */
+    .gapsy-card{position:relative;width:100%;height:480px;background:linear-gradient(145deg,#1a1e2b,#2d2f3b);border-radius:32px;overflow:hidden;box-shadow:0 20px 30px -10px rgba(0,0,0,0.5);transition:transform .4s cubic-bezier(0.2,0.9,0.3,1),box-shadow .4s;border:1px solid rgba(148,163,184,0.2);margin:0 auto;}
+    .gapsy-card:hover{transform:scale(1.02) translateY(-6px);box-shadow:0 30px 40px -12px rgba(0,0,0,0.7);border-color:rgba(34,197,94,0.3);}
+    .gapsy-card-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:transform .5s,opacity .3s;}
+    .gapsy-card:hover .gapsy-card-bg{transform:scale(1.05);opacity:.5;}
+    .gapsy-card-content{position:absolute;bottom:-30px;left:0;right:0;padding:2rem 1.8rem;background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.4) 70%,transparent 100%);color:#fff;transition:transform .4s;}
+    .gapsy-card:hover .gapsy-card-content{transform:translateY(-5px);}
+    .gapsy-card-category{font-size:.8rem;font-weight:400;text-transform:uppercase;letter-spacing:2px;color:#22c55e;margin-bottom:.5rem;opacity:.9;}
+    .gapsy-card-title{font-size:2.2rem;font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:.4rem;text-transform:uppercase;}
+    .gapsy-card-price{font-size:1.2rem;font-weight:500;color:rgba(255,255,255,0.8);margin-bottom:1.2rem;}
+    .gapsy-weather-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.5);border-radius:40px;font-size:.8rem;color:#fff;margin-bottom:1.5rem;backdrop-filter:blur(4px);}
+    .gapsy-actions{display:flex;gap:.8rem;opacity:0;transform:translateY(15px);transition:opacity .3s,transform .3s;flex-wrap:wrap;}
+    .gapsy-card:hover .gapsy-actions{opacity:1;transform:translateY(0);}
+    .gapsy-btn{padding:.7rem 1.4rem;border-radius:40px;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;border:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+    .gapsy-btn-primary{background:#fff;color:#1a1e2b;}
+    .gapsy-btn-primary:hover{background:#f0f0f0;box-shadow:0 8px 20px rgba(34,197,94,0.4);}
+    .gapsy-btn-secondary{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);color:#fff;border:1px solid rgba(255,255,255,0.3);}
+    .gapsy-btn-secondary:hover{background:rgba(255,255,255,0.25);border-color:var(--primary);}
 
-    /* Beautiful Buy Now button (matching Add to Cart style) */
-    .btn-buy {
-        padding:.75rem 1.6rem;
-        border-radius:999px;
-        border:none;
-        background:linear-gradient(135deg, #25D366, #128C7E);
-        color:#fff;
-        font-weight:600;
-        cursor:pointer;
-        box-shadow:0 18px 40px rgba(37, 211, 102, 0.3);
-        display:inline-flex;
-        align-items:center;
-        gap:.5rem;
-        font-size:.92rem;
-        transition:all 0.3s ease;
-        text-decoration:none;
-    }
-    .btn-buy:hover {
-        transform:translateY(-2px);
-        box-shadow:0 20px 60px rgba(37, 211, 102, 0.5);
-    }
+    .gapsy-favorite{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);color:#f97316;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .gapsy-favorite.active{background:rgba(234,179,8,0.2);border-color:#eab308;color:#facc15;}
+    .gapsy-favorite:hover{transform:scale(1.1);}
+    .gapsy-badge{position:absolute;top:1rem;right:1rem;background:rgba(239,68,68,0.9);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;letter-spacing:.08em;text-transform:uppercase;z-index:2;}
 
     /* Perfume detail modal */
     .perfume-modal{
@@ -2666,6 +2466,10 @@
         }
     }
     
+    @media(max-width:768px){
+        .gapsy-card{height:420px;}
+        .gapsy-card-title{font-size:1.8rem;}
+    }
     @media(max-width:480px){
         .hero-title{font-size:2.4rem;}
         .perfume-grid{grid-template-columns:1fr;}
@@ -2676,6 +2480,91 @@
             grid-template-columns: 1fr;
         }
     }
+
+    /* ── PROMO TICKER ── */
+    .promo-banner{background:linear-gradient(90deg,rgba(5,8,22,0.98),rgba(7,15,37,0.99));border-top:1px solid rgba(34,197,94,0.2);border-bottom:1px solid rgba(34,197,94,0.2);overflow:hidden;padding:.6rem 0;}
+    .promo-ticker{overflow:hidden;white-space:nowrap;}
+    .promo-track{display:inline-flex;animation:ticker 30s linear infinite;}
+    .promo-track:hover{animation-play-state:paused;}
+    .promo-item{font-size:.82rem;color:var(--text-muted);padding:0 2rem;white-space:nowrap;}
+    .promo-item i{color:var(--primary);margin-right:.4rem;}
+    @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    html[data-theme="light"] .promo-banner{background:linear-gradient(90deg,rgba(255,255,255,0.98),rgba(248,250,252,0.99));border-color:rgba(34,197,94,0.15);}
+
+    /* ── PACKAGING SECTION ── */
+    .pkg-section{padding:5rem 2rem;background:var(--bg);}
+    .section-label-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:1rem;padding:.3rem .9rem;border:1px solid rgba(34,197,94,0.35);border-radius:999px;background:rgba(34,197,94,0.07);}
+    .pkg-slider-wrapper{display:flex;align-items:center;gap:1rem;max-width:1000px;margin:0 auto;}
+    .pkg-track-outer{flex:1;overflow:hidden;}
+    .pkg-slider{display:flex;gap:1.5rem;width:fit-content;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+    .pkg-slide{flex:0 0 280px;}
+    .pkg-img-box{border-radius:20px;overflow:hidden;border:1px solid var(--border-subtle);aspect-ratio:3/4;background:rgba(5,8,22,0.9);transition:border-color .3s,transform .3s,box-shadow .3s;cursor:pointer;}
+    .pkg-img-box:hover{border-color:rgba(34,197,94,0.45);transform:translateY(-4px);box-shadow:0 20px 45px rgba(0,0,0,0.5);}
+    .pkg-img-box img{width:100%;height:100%;object-fit:cover;display:block;}
+    .pkg-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;background:var(--pp,rgba(34,197,94,0.07));}
+    .pkg-placeholder i{font-size:2.5rem;color:var(--text-muted);opacity:.4;}
+    .pkg-placeholder span{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);opacity:.4;}
+    .pkg-caption{text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:.75rem;letter-spacing:.04em;}
+    .pkg-arrow{width:44px;height:44px;border-radius:50%;flex-shrink:0;border:1px solid var(--border-subtle);background:rgba(5,8,22,0.9);color:var(--text-muted);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+    .pkg-arrow:hover{border-color:var(--primary);color:var(--primary);}
+    .pkg-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem;}
+    .pkg-dot{width:8px;height:8px;border-radius:50%;background:rgba(148,163,184,0.3);cursor:pointer;transition:.3s;}
+    .pkg-dot.active{background:var(--primary);width:22px;border-radius:4px;}
+    html[data-theme="light"] .pkg-section{background:#ffffff;}
+    html[data-theme="light"] .pkg-img-box{background:#f8fafc;border-color:rgba(100,116,139,0.2);}
+    html[data-theme="light"] .pkg-arrow{background:#fff;border-color:rgba(100,116,139,0.2);}
+
+    /* ── DISCOUNT BAR ── */
+    .discount-bar{position:fixed;top:0;left:0;right:0;z-index:99998;padding:.65rem 1.5rem;background:var(--db-bg,linear-gradient(90deg,#16a34a,#22c55e));box-shadow:0 4px 20px rgba(0,0,0,0.4);animation:discountSlideDown .4s ease-out;}
+    @keyframes discountSlideDown{from{transform:translateY(-100%);}to{transform:translateY(0);}}
+    .discount-bar-inner{display:flex;align-items:center;justify-content:center;gap:.8rem;max-width:900px;margin:0 auto;position:relative;}
+    .discount-bar-icon{font-size:1rem;color:#022c22;}
+    .discount-bar-text{font-size:.85rem;font-weight:600;color:#022c22;text-align:center;}
+    .discount-bar-text strong{font-weight:800;}
+    .discount-bar-close{position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.15);border:none;color:#022c22;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:.2s;}
+    .discount-bar-close:hover{background:rgba(0,0,0,0.3);}
+
+    /* ── ADMIN PANEL ── */
+    .admin-toggle{position:fixed;bottom:2rem;right:2rem;z-index:9997;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#022c22;cursor:pointer;box-shadow:0 8px 25px rgba(22,163,74,0.5);transition:.3s;animation:adminPulse 3s ease-in-out infinite;}
+    .admin-toggle:hover{transform:scale(1.08);}
+    @keyframes adminPulse{0%,100%{box-shadow:0 8px 25px rgba(22,163,74,0.5);}50%{box-shadow:0 8px 35px rgba(22,163,74,0.8),0 0 0 8px rgba(34,197,94,0.1);}}
+    .admin-panel{position:fixed;bottom:5.5rem;right:2rem;z-index:9997;width:360px;max-height:80vh;overflow-y:auto;background:rgba(7,15,37,0.98);border:1px solid rgba(34,197,94,0.35);border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.7);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(12px) scale(.97);transition:.3s cubic-bezier(.4,0,.2,1);}
+    .admin-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+    .admin-panel-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid rgba(148,163,184,0.12);position:sticky;top:0;background:rgba(7,15,37,0.98);border-radius:20px 20px 0 0;}
+    .admin-panel-title{font-size:.92rem;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:.5rem;}
+    .admin-close{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;transition:.2s;}
+    .admin-close:hover{color:var(--text-main);}
+    .admin-panel-body{padding:1rem 1.5rem 1.5rem;display:flex;flex-direction:column;gap:1.2rem;}
+    .admin-block{background:rgba(255,255,255,0.03);border:1px solid rgba(148,163,184,0.1);border-radius:14px;padding:1.2rem;}
+    .admin-block-title{font-size:.8rem;font-weight:700;color:var(--text-main);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem;}
+    .admin-block-title i{color:var(--primary);}
+    .admin-row{display:flex;align-items:center;justify-content:space-between;}
+    .admin-label{font-size:.82rem;color:var(--text-muted);}
+    .admin-toggle-switch{position:relative;display:inline-block;width:44px;height:24px;}
+    .admin-toggle-switch input{opacity:0;width:0;height:0;}
+    .admin-slider-sw{position:absolute;inset:0;border-radius:999px;background:rgba(148,163,184,0.2);cursor:pointer;transition:.3s;}
+    .admin-slider-sw::before{content:'';position:absolute;height:18px;width:18px;border-radius:50%;left:3px;bottom:3px;background:#fff;transition:.3s;}
+    .admin-toggle-switch input:checked+.admin-slider-sw{background:var(--primary);}
+    .admin-toggle-switch input:checked+.admin-slider-sw::before{transform:translateX(20px);}
+    .admin-input{width:100%;padding:.55rem .8rem;border-radius:10px;border:1px solid rgba(148,163,184,0.2);background:rgba(255,255,255,0.04);color:var(--text-main);font-size:.82rem;font-family:'Poppins',sans-serif;outline:none;transition:.2s;}
+    .admin-input:focus{border-color:var(--primary);}
+    .admin-apply-btn{margin-top:1rem;width:100%;padding:.6rem;border-radius:10px;border:none;background:linear-gradient(135deg,#22c55e,#16a34a);color:#022c22;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:.2s;}
+    .admin-apply-btn:hover{opacity:.9;}
+    .admin-colour-btn{padding:.35rem .8rem;border-radius:8px;border:2px solid transparent;color:#fff;font-size:.75rem;font-weight:600;cursor:pointer;transition:.2s;font-family:'Poppins',sans-serif;}
+    .admin-colour-btn.active{border-color:#fff;}
+    .admin-promo-msg{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:rgba(255,255,255,0.04);border-radius:8px;padding:.4rem .7rem;font-size:.78rem;color:var(--text-muted);}
+    .admin-promo-del{background:none;border:none;color:rgba(239,68,68,0.6);cursor:pointer;font-size:.8rem;transition:.2s;}
+    .admin-promo-del:hover{color:#ef4444;}
+    .admin-pkg-row{display:flex;align-items:center;gap:.7rem;background:rgba(255,255,255,0.03);border-radius:10px;padding:.6rem .8rem;}
+    .admin-pkg-label{flex:1;font-size:.8rem;color:var(--text-muted);}
+    .admin-pkg-upload{padding:.35rem .75rem;border-radius:8px;border:1px solid rgba(34,197,94,0.4);background:rgba(34,197,94,0.07);color:var(--primary);font-size:.75rem;cursor:pointer;font-family:'Poppins',sans-serif;transition:.2s;}
+    .admin-pkg-upload:hover{background:rgba(34,197,94,0.15);}
+    html[data-theme="light"] .admin-panel{background:rgba(255,255,255,0.98);border-color:rgba(34,197,94,0.25);}
+    html[data-theme="light"] .admin-panel-header{background:rgba(255,255,255,0.98);}
+    html[data-theme="light"] .admin-block{background:rgba(0,0,0,0.02);border-color:rgba(100,116,139,0.12);}
+    html[data-theme="light"] .admin-input{background:rgba(0,0,0,0.03);border-color:rgba(100,116,139,0.2);color:#1e293b;}
+    html[data-theme="light"] .admin-promo-msg{background:rgba(0,0,0,0.03);}
+    html[data-theme="light"] .admin-pkg-row{background:rgba(0,0,0,0.02);}
 </style>
 </head>
 <body>
@@ -2950,6 +2839,23 @@
 </div>
 
 <!-- PROMOTIONS + WEATHER + PERFUMES LAYOUT -->
+
+<!-- ── PROMO TICKER BANNER ── -->
+<div class="promo-banner" id="promoBanner">
+  <div class="promo-ticker">
+    <div class="promo-track" id="promoTrack">
+      <span class="promo-item"><i class="fas fa-tag"></i> Free shipping on orders above PKR 3,000 &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-gift"></i> Complimentary gift wrap on every order &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-star"></i> New arrivals — Summer 2026 Collection now live &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-truck"></i> Same-day delivery available in Lahore &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-tag"></i> Free shipping on orders above PKR 3,000 &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-gift"></i> Complimentary gift wrap on every order &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-star"></i> New arrivals — Summer 2026 Collection now live &nbsp;·&nbsp;</span>
+      <span class="promo-item"><i class="fas fa-truck"></i> Same-day delivery available in Lahore &nbsp;·&nbsp;</span>
+    </div>
+  </div>
+</div>
+
 <section class="section promotions">
 <div class="promotions-layout">
 <!-- LEFT: Weather + perfumes -->
@@ -3062,9 +2968,9 @@
 </section>
 <!-- Featured Perfumes -->
 <section class="section featured" id="featured" style="padding-left:0;padding-right:0;padding-bottom:0;">
-<h2 class="section-title">CUSTOMER CRUSH</h2>
-<p class="section-subtitle">
-                        Our most loved fragrances based on real customer favorites and ratings
+<h2 class="section-title" style="text-align:center;font-size:4.4rem;">Customer Crush</h2>
+<p class="section-subtitle" style="text-align:center;margin-left:auto;margin-right:auto;font-size:1.05rem;">
+                        Our most loved fragrances based on real customer favourites and ratings
                     </p>
 <div class="perfume-grid" id="perfumeGrid">
     <!-- Perfumes will be loaded here -->
@@ -3222,6 +3128,33 @@
     </div>
 </section>
 
+<!-- ── PACKAGING GALLERY ── -->
+<section class="section pkg-section" id="packaging">
+  <div style="text-align:center;margin-bottom:3rem;">
+    <div class="section-label-badge"><i class="fas fa-box-open"></i> Our Packaging</div>
+    <h2 class="section-title" style="font-size:2.8rem;margin-bottom:.5rem;">Crafted to be kept</h2>
+    <p style="color:var(--text-muted);font-size:.92rem;">Every box, bottle, and ribbon is designed as an experience in itself.</p>
+  </div>
+  <div class="pkg-slider-wrapper">
+    <button class="pkg-arrow pkg-arrow--left" id="pkgPrev"><i class="fas fa-chevron-left"></i></button>
+    <div class="pkg-track-outer">
+      <div class="pkg-slider" id="pkgSlider">
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder"><i class="fas fa-box-open"></i><span>Signature Box</span></div></div><div class="pkg-caption">Signature Gift Box — Midnight Black</div></div>
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder" style="--pp:rgba(56,189,248,0.12);"><i class="fas fa-flask"></i><span>Bottle Design</span></div></div><div class="pkg-caption">Hand-cut Crystal Flacon</div></div>
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder" style="--pp:rgba(234,179,8,0.1);"><i class="fas fa-ribbon"></i><span>Gift Wrap</span></div></div><div class="pkg-caption">Luxury Satin Ribbon Wrap</div></div>
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder" style="--pp:rgba(167,139,250,0.1);"><i class="fas fa-certificate"></i><span>Wax Seal</span></div></div><div class="pkg-caption">Embossed TROY Wax Seal</div></div>
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder" style="--pp:rgba(34,197,94,0.1);"><i class="fas fa-bag-shopping"></i><span>Carry Bag</span></div></div><div class="pkg-caption">Premium Kraft Carry Bag</div></div>
+        <div class="pkg-slide"><div class="pkg-img-box"><div class="pkg-placeholder" style="--pp:rgba(251,113,133,0.08);"><i class="fas fa-envelope-open-text"></i><span>Note Card</span></div></div><div class="pkg-caption">Personalised Message Card</div></div>
+      </div>
+    </div>
+    <button class="pkg-arrow pkg-arrow--right" id="pkgNext"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="pkg-dots" id="pkgDots"></div>
+  <p style="text-align:center;font-size:.76rem;color:var(--text-muted);margin-top:1.2rem;font-style:italic;">
+    <i class="fas fa-image" style="margin-right:.35rem;color:var(--primary);"></i>Upload real packaging photos via the Admin Panel (gear icon, bottom-right).
+  </p>
+</section>
+
 <!-- PARTNER BRANDS MARQUEE SECTION -->
 <section class="brands-section" id="partner-brands">
     <div class="brands-title">
@@ -3322,6 +3255,69 @@
         <div class="powered-by-jazz-logo">JAZZ</div>
     </div>
 </div>
+
+<!-- ── DISCOUNT ANNOUNCEMENT BAR ── -->
+<div class="discount-bar" id="discountBar" style="display:none;">
+  <div class="discount-bar-inner">
+    <span class="discount-bar-icon"><i class="fas fa-bolt"></i></span>
+    <span class="discount-bar-text" id="discountBarText">🎉 LIMITED TIME: Use code <strong>TROY20</strong> for 20% off your entire order!</span>
+    <button class="discount-bar-close" id="discountBarClose"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<!-- ── ADMIN PANEL (visible only for admin role) ── -->
+@role('admin')
+<div class="admin-toggle" id="adminToggle" title="Admin Panel"><i class="fas fa-cog"></i></div>
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-panel-header">
+    <div class="admin-panel-title"><i class="fas fa-shield-halved"></i> TROY Admin Panel</div>
+    <button class="admin-close" id="adminClose"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="admin-panel-body">
+
+    <div class="admin-block">
+      <div class="admin-block-title"><i class="fas fa-bolt"></i> Discount Announcement</div>
+      <div class="admin-row">
+        <span class="admin-label">Show Bar</span>
+        <label class="admin-toggle-switch">
+          <input type="checkbox" id="discountToggle">
+          <span class="admin-slider-sw"></span>
+        </label>
+      </div>
+      <div class="admin-row" style="margin-top:.8rem;flex-direction:column;align-items:flex-start;gap:.5rem;">
+        <span class="admin-label">Announcement Text</span>
+        <input class="admin-input" id="discountText" type="text" value="🎉 LIMITED TIME: Use code TROY20 for 20% off your entire order!" placeholder="Enter discount message…"/>
+      </div>
+      <div class="admin-row" style="margin-top:.6rem;flex-direction:column;align-items:flex-start;gap:.5rem;">
+        <span class="admin-label">Bar Colour</span>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          <button class="admin-colour-btn active" data-colour="green" style="background:linear-gradient(90deg,#16a34a,#22c55e);">Green</button>
+          <button class="admin-colour-btn" data-colour="blue" style="background:linear-gradient(90deg,#0369a1,#38bdf8);">Blue</button>
+          <button class="admin-colour-btn" data-colour="gold" style="background:linear-gradient(90deg,#b45309,#eab308);">Gold</button>
+          <button class="admin-colour-btn" data-colour="red" style="background:linear-gradient(90deg,#b91c1c,#ef4444);">Red</button>
+        </div>
+      </div>
+      <button class="admin-apply-btn" id="applyDiscount">Apply Changes</button>
+    </div>
+
+    <div class="admin-block">
+      <div class="admin-block-title"><i class="fas fa-bullhorn"></i> Promo Ticker Messages</div>
+      <div id="promoMsgList" style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.8rem;"></div>
+      <div style="display:flex;gap:.5rem;">
+        <input class="admin-input" id="newPromoMsg" type="text" placeholder="Add new message…" style="flex:1;"/>
+        <button class="admin-apply-btn" id="addPromoMsg" style="margin-top:0;padding:.5rem .9rem;white-space:nowrap;width:auto;">+ Add</button>
+      </div>
+    </div>
+
+    <div class="admin-block">
+      <div class="admin-block-title"><i class="fas fa-images"></i> Packaging Gallery</div>
+      <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem;line-height:1.6;">Upload images to replace placeholder slides.</p>
+      <div id="pkgAdminList" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+    </div>
+
+  </div>
+</div>
+@endrole
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -4170,9 +4166,6 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
 
         // Page type detection - set to true for /perfumes page, false for /customer
         const isAllPerfumesPage = window.location.pathname === '/perfumes' || window.location.pathname === '/all-perfumes';
-        
-        // Limit count for customer page
-        const PERFUME_LIMIT = 5;
 
         // PERFUME DATA (Loaded from admin display data)
         let perfumes = [];
@@ -4665,111 +4658,52 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
                 return;
             }
 
-            // Limit perfumes on customer page (not on /perfumes page)
-            let limitedPerfumes = perfumesToRender;
-            let showViewAllButton = false;
-            
+            // Limit to 5 perfumes on main page
+            const PERFUME_LIMIT = 5;
+            let displayPerfumes = perfumesToRender;
+            let showViewAll = false;
             if (!isAllPerfumesPage && perfumesToRender.length > PERFUME_LIMIT) {
-                limitedPerfumes = perfumesToRender.slice(0, PERFUME_LIMIT);
-                showViewAllButton = true;
-                // Add CSS class to limit grid to 5 items
-                perfumeGrid.classList.add('limit-5');
-            } else {
-                perfumeGrid.classList.remove('limit-5');
+                displayPerfumes = perfumesToRender.slice(0, PERFUME_LIMIT);
+                showViewAll = true;
             }
 
-            limitedPerfumes.forEach((p, idx) => {
+            displayPerfumes.forEach((p, idx) => {
                 const isFavorite = favorites.includes(p.id);
                 const images = p.images || ["https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800"];
-                const tempDisplay = getTemperatureDisplay(p);
+                const badgeText = Number(p.rating) >= 4.5 ? 'Top Rated' : (p.city ? p.city + ' Special' : '');
+                const weatherText = p.weather || getTemperatureDisplay(p);
+                const oldPriceVal = p.oldPrice || Math.round(p.price * 1.3);
                 
                 const card = document.createElement('div');
-                card.className = 'perfume-card';
+                card.className = 'gapsy-card';
+                card.setAttribute('data-id', p.id);
                 card.innerHTML = `
-                    <div class="perfume-image">
-                        <div class="perfume-image-inner">
-                            <div class="perfume-image-front">
-                                <img src="${images[0]}" alt="${p.name} - TROY Perfume" data-img-index="0">
-                                <div class="perfume-badge">${Number(p.rating) >= 4.5 ? 'Top rated' : p.city || 'City special'}</div>
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1IDBDNi43MTcgMCAwIDYuNzE3IDAgMTVTMTAuNzE3IDMwIDE1IDMwUzMwIDIzLjI4MyAzMCAxNVMxNSAwIDE1IDBaIiBmaWxsPSIjMjJjNTUiLz4KPHBhdGggZD0iTTExIDExSDhWMTlIMTBWMTFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTkgMTFIMTZWMTlIMTlWMTFaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjIgMTlIMTlWMjJIMTlWMTlaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=" alt="TROY Logo" class="perfume-logo">
-                            </div>
-                            <div class="perfume-image-back">
-                                <h4>Fragrance Details</h4>
-                                <div class="perfume-notes">
-                                    ${p.notes ? p.notes.map(n => `<span class="note-tag">${n}</span>`).join('') : ''}
-                                </div>
-                                <div class="perfume-meta">
-                                    ${p.city ? `City: ${p.city}` : ''}${p.rating ? ` · Rating: ${p.rating}` : ''}
-                                </div>
-                                <p class="flip-instruction">Hover to flip back</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="perfume-info">
-                        <div class="perfume-title-row">
-                            <h3 class="perfume-name">${p.name}</h3>
-                            <div class="perfume-price">Rs ${p.price.toLocaleString()}</div>
-                        </div>
-                        <p class="perfume-desc">${p.description || ''}</p>
-                        <!-- Temperature info line -->
-                        <div class="perfume-temperature">
-                            <i class="fas fa-thermometer-half"></i> ${tempDisplay}
-                        </div>
-                        <div class="perfume-actions">
-                            <button class="btn-buy" onclick='buyNow(${JSON.stringify(p)})'>
-                                <i class="fab fa-whatsapp"></i> Buy
-                            </button>
-                            <button class="btn-primary" onclick='addToCart(${JSON.stringify(p)})'>
-                                <i class="fas fa-shopping-bag"></i> Add
-                            </button>
-                            <button class="btn-favorite ${isFavorite ? 'active' : ''}" data-id="${p.id}">
-                                <i class="fas fa-heart"></i>
-                            </button>
+                    <img class="gapsy-card-bg" src="${images[0]}" alt="${p.name}" loading="lazy">
+                    ${badgeText ? `<div class="gapsy-badge">${badgeText}</div>` : ''}
+                    <div class="gapsy-card-content">
+                        <div class="gapsy-card-category">${p.category || p.city || 'TROY Collection'}</div>
+                        <div class="gapsy-card-title">${p.name}</div>
+                        <div class="gapsy-card-price">Rs ${Number(p.price).toLocaleString()} <span style="text-decoration:line-through;opacity:.5;font-size:.85rem;">Rs ${Number(oldPriceVal).toLocaleString()}</span></div>
+                        <div class="gapsy-weather-badge"><i class="fas fa-cloud-sun"></i> Best for ${weatherText}</div>
+                        <div class="gapsy-actions">
+                            <button class="gapsy-btn gapsy-btn-primary" onclick='addToCart(${JSON.stringify(p)}, this)'><i class="fas fa-bag-shopping"></i> Add to Cart</button>
+                            <button class="gapsy-btn gapsy-btn-secondary" onclick="quickView(${p.id})">View <i class="fas fa-arrow-right"></i></button>
+                            <button class="gapsy-favorite ${isFavorite ? 'active' : ''}" data-id="${p.id}" onclick="toggleFavorite(${p.id}, this)"><i class="fas fa-star"></i></button>
                         </div>
                     </div>
                 `;
-                
-                // Add image flip functionality if multiple images exist
-                const imageInner = card.querySelector('.perfume-image-inner');
-                const frontImage = card.querySelector('.perfume-image-front img');
-                
-                if (images.length > 1) {
-                    imageInner.dataset.imgIndex = "0";
-                    imageInner.dataset.img0 = images[0];
-                    imageInner.dataset.img1 = images[1];
-
-                    card.addEventListener("mouseenter", () => {
-                        imageInner.dataset.imgIndex = "1";
-                        frontImage.src = imageInner.dataset.img1;
-                        frontImage.classList.add("flipped");
-                    });
-                    
-                    card.addEventListener("mouseleave", () => {
-                        imageInner.dataset.imgIndex = "0";
-                        frontImage.src = imageInner.dataset.img0;
-                        frontImage.classList.remove("flipped");
-                    });
-                }
 
                 perfumeGrid.appendChild(card);
             });
-            
-            // Add "View All" button if there are more perfumes
-            // First, remove any existing "View All" button to prevent duplicates
+
+            // Show "View All" button if more perfumes exist
             const existingViewAll = document.querySelector('.view-all-container');
-            if (existingViewAll) {
-                existingViewAll.remove();
-            }
-            if (showViewAllButton) {
-                const viewAllContainer = document.createElement('div');
-                viewAllContainer.className = 'view-all-container';
-                viewAllContainer.innerHTML = `
-                    <a href="/perfumes" class="view-all-btn">
-                        View All Perfumes
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                `;
-                perfumeGrid.parentNode.insertBefore(viewAllContainer, perfumeGrid.nextSibling);
+            if (existingViewAll) existingViewAll.remove();
+            if (showViewAll) {
+                const viewAllDiv = document.createElement('div');
+                viewAllDiv.className = 'view-all-container';
+                viewAllDiv.innerHTML = `<a href="/perfumes" class="view-all-btn">View All Perfumes <i class="fas fa-arrow-right"></i></a>`;
+                perfumeGrid.parentNode.insertBefore(viewAllDiv, perfumeGrid.nextSibling);
             }
         }
 
@@ -4788,6 +4722,15 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
                 console.error('Error saving favorites:', e);
             }
         }
+
+        // Quick View - show perfume notes in toast
+        window.quickView = function(id) {
+            const p = perfumes.find(x => x.id === id);
+            if (!p) return;
+            const notes = p.notes || [];
+            const noteNames = notes.map(n => typeof n === 'object' ? n.note_name : n);
+            showToast(`${p.name} – ${noteNames.join(', ')}`);
+        };
 
         // addToCart, animateJet — provided by shared cart.blade.php
 
@@ -5830,6 +5773,165 @@ window.addEventListener("storage", function(event) {
     });
 })();
 </script>
+
+<!-- ── ADMIN PANEL + DISCOUNT BAR + PROMO TICKER + PACKAGING JS ── -->
+<script>
+(function(){
+  /* ── PACKAGING SLIDER ── */
+  const pkgSlider=document.getElementById('pkgSlider');
+  const pkgPrev=document.getElementById('pkgPrev');
+  const pkgNext=document.getElementById('pkgNext');
+  const pkgDots=document.getElementById('pkgDots');
+  if(pkgSlider&&pkgPrev&&pkgNext&&pkgDots){
+    const slides=pkgSlider.querySelectorAll('.pkg-slide');
+    const slideW=280+24;
+    let pkgIdx=0;
+    const outer=pkgSlider.parentElement;
+    function getVisible(){return Math.max(1,Math.floor(outer.offsetWidth/slideW));}
+    function maxIdx(){return Math.max(0,slides.length-getVisible());}
+    function moveTo(i){
+      pkgIdx=Math.max(0,Math.min(i,maxIdx()));
+      pkgSlider.style.transform='translateX(-'+pkgIdx*slideW+'px)';
+      renderDots();
+    }
+    function renderDots(){
+      pkgDots.innerHTML='';
+      for(let i=0;i<=maxIdx();i++){
+        const d=document.createElement('div');
+        d.className='pkg-dot'+(i===pkgIdx?' active':'');
+        d.addEventListener('click',()=>moveTo(i));
+        pkgDots.appendChild(d);
+      }
+    }
+    pkgPrev.addEventListener('click',()=>moveTo(pkgIdx-1));
+    pkgNext.addEventListener('click',()=>moveTo(pkgIdx+1));
+    renderDots();
+  }
+
+  /* ── ADMIN PANEL TOGGLE ── */
+  const adminToggle=document.getElementById('adminToggle');
+  const adminPanel=document.getElementById('adminPanel');
+  const adminClose=document.getElementById('adminClose');
+  if(adminToggle&&adminPanel){
+    adminToggle.addEventListener('click',()=>adminPanel.classList.toggle('open'));
+    if(adminClose) adminClose.addEventListener('click',()=>adminPanel.classList.remove('open'));
+    document.addEventListener('click',e=>{
+      if(!adminPanel.contains(e.target)&&e.target!==adminToggle&&!adminToggle.contains(e.target)) adminPanel.classList.remove('open');
+    });
+  }
+
+  /* ── DISCOUNT BAR ── */
+  const bar=document.getElementById('discountBar');
+  const barTextEl=document.getElementById('discountBarText');
+  const barClose=document.getElementById('discountBarClose');
+  const discToggle=document.getElementById('discountToggle');
+  const discTextInput=document.getElementById('discountText');
+  const applyDiscountBtn=document.getElementById('applyDiscount');
+  const colourBtns=document.querySelectorAll('.admin-colour-btn');
+  const colourMap={green:'linear-gradient(90deg,#16a34a,#22c55e)',blue:'linear-gradient(90deg,#0369a1,#38bdf8)',gold:'linear-gradient(90deg,#b45309,#eab308)',red:'linear-gradient(90deg,#b91c1c,#ef4444)'};
+  let chosenColour=colourMap.green;
+
+  function showBar(show){
+    if(!bar) return;
+    bar.style.display=show?'block':'none';
+    const hdr=document.querySelector('.header');
+    if(hdr) hdr.style.top=show?'44px':'0';
+  }
+
+  if(colourBtns.length){
+    colourBtns.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        colourBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        chosenColour=colourMap[btn.dataset.colour];
+      });
+    });
+  }
+
+  if(discToggle) discToggle.addEventListener('change',()=>showBar(discToggle.checked));
+
+  if(barClose) barClose.addEventListener('click',()=>{
+    showBar(false);
+    if(discToggle) discToggle.checked=false;
+  });
+
+  if(applyDiscountBtn) applyDiscountBtn.addEventListener('click',()=>{
+    if(barTextEl&&discTextInput) barTextEl.innerHTML=discTextInput.value;
+    if(bar) bar.style.background=chosenColour;
+    if(discToggle&&discToggle.checked) showBar(true);
+  });
+
+  /* ── PROMO TICKER EDITOR ── */
+  const promoTrack=document.getElementById('promoTrack');
+  const promoMsgList=document.getElementById('promoMsgList');
+  const newPromoInput=document.getElementById('newPromoMsg');
+  const addPromoBtn=document.getElementById('addPromoMsg');
+
+  let promoMessages=[
+    'Free shipping on orders above PKR 3,000',
+    'Complimentary gift wrap on every order',
+    'New arrivals — Summer 2026 Collection now live',
+    'Same-day delivery available in Lahore'
+  ];
+
+  function renderPromoList(){
+    if(!promoMsgList) return;
+    promoMsgList.innerHTML='';
+    promoMessages.forEach((msg,i)=>{
+      const row=document.createElement('div');
+      row.className='admin-promo-msg';
+      row.innerHTML='<span style="flex:1;">'+msg+'</span><button class="admin-promo-del" data-i="'+i+'"><i class="fas fa-trash"></i></button>';
+      row.querySelector('.admin-promo-del').addEventListener('click',()=>{
+        promoMessages.splice(i,1);
+        renderPromoList();
+        updateTicker();
+      });
+      promoMsgList.appendChild(row);
+    });
+  }
+
+  function updateTicker(){
+    if(!promoTrack) return;
+    const doubled=[...promoMessages,...promoMessages];
+    promoTrack.innerHTML=doubled.map(m=>'<span class="promo-item"><i class="fas fa-tag"></i> '+m+' &nbsp;·&nbsp;</span>').join('');
+  }
+
+  if(addPromoBtn){
+    addPromoBtn.addEventListener('click',()=>{
+      if(!newPromoInput) return;
+      const val=newPromoInput.value.trim();
+      if(!val) return;
+      promoMessages.push(val);
+      newPromoInput.value='';
+      renderPromoList();
+      updateTicker();
+    });
+  }
+
+  renderPromoList();
+
+  /* ── PACKAGING ADMIN UPLOAD SLOTS ── */
+  const pkgAdminList=document.getElementById('pkgAdminList');
+  const pkgSlides2=document.querySelectorAll('.pkg-slide');
+  if(pkgAdminList&&pkgSlides2.length){
+    pkgSlides2.forEach((slide,i)=>{
+      const caption=slide.querySelector('.pkg-caption');
+      const row=document.createElement('div');
+      row.className='admin-pkg-row';
+      row.innerHTML='<span class="admin-pkg-label">'+(caption?caption.textContent:'Slide '+(i+1))+'</span><label class="admin-pkg-upload">📁 Upload<input type="file" accept="image/*" style="display:none;"/></label>';
+      const fileInput=row.querySelector('input[type=file]');
+      row.querySelector('.admin-pkg-upload').addEventListener('click',()=>fileInput.click());
+      fileInput.addEventListener('change',()=>{
+        if(!fileInput.files[0]) return;
+        const url=URL.createObjectURL(fileInput.files[0]);
+        const imgBox=slide.querySelector('.pkg-img-box');
+        imgBox.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Packaging"/>';
+      });
+      pkgAdminList.appendChild(row);
+    });
+  }
+})();
 </script>
+
 </body>
 </html>

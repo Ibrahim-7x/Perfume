@@ -115,15 +115,14 @@
         background: #ffffff;
     }
     /* Light theme: all-perfumes page */
-    html[data-theme="light"] .perfume-card {
-        background: #ffffff;
+    html[data-theme="light"] .gapsy-card {
         border-color: rgba(100,116,139,0.15);
     }
-    html[data-theme="light"] .perfume-card:hover {
-        box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    html[data-theme="light"] .gapsy-card:hover {
+        box-shadow: 0 30px 40px -12px rgba(0,0,0,0.15);
     }
-    html[data-theme="light"] .perfume-badge {
-        background: #ffffff;
+    html[data-theme="light"] .gapsy-badge {
+        background: rgba(239,68,68,0.85);
     }
     html[data-theme="light"] .btn-primary {
         background: rgba(56,189,248,0.1);
@@ -280,9 +279,11 @@
         opacity:0.85;
     }
     .logo-img{
-        width:70px;
-        height:70px;
+        width:56px;
+        height:56px;
         border-radius:14px;
+        border:1px solid rgba(34,197,94,0.4);
+        object-fit:cover;
         animation: coinFlip 6s ease-in-out infinite;
     }
     @keyframes coinFlip {
@@ -292,17 +293,17 @@
         100% { transform: rotateY(1080deg); }
     }
     .header-scrolled .logo-img{
-        width:50px;
-        height:50px;
+        width:42px;
+        height:42px;
     }
     .logo-text{
         font-weight:900;
         letter-spacing:.15em;
-        font-size:1.8rem;
+        font-size:5rem;
         transition:font-size 0.3s ease;
     }
     .header-scrolled .logo-text{
-        font-size:1.5rem;
+        font-size:2.5rem;
     }
     .nav-links{
         display:flex;
