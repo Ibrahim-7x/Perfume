@@ -1121,457 +1121,109 @@
     }
 
     /* CUSTOMER EXPERIENCE SECTION (REPLACING BRAND VIDEOS) */
-    .customer-experience {
-        background: transparent;
-        text-align: center;
+    .customer-experience{background:transparent;text-align:center;padding:5rem 2rem;}
+    .this-week-video{
+      position:relative;overflow:hidden;
+      background:linear-gradient(145deg,#050c18 0%,#08142a 50%,#050c18 100%);
+      border-radius:28px;padding:0;margin-bottom:3rem;
+      border:1px solid rgba(192,132,252,0.15);
+      box-shadow:0 40px 100px rgba(0,0,0,0.8),0 0 0 1px rgba(192,132,252,0.1);
     }
-
-    /* FLEX ROW: VIDEO + UPCOMING CUSTOMER SIDE BY SIDE */
-    .video-upcoming-row {
-        display: flex;
-        gap: 1.5rem;
-        align-items: stretch;
-        width: 100%;
-        max-width: 900px;
-        margin: 0 auto 30px;
+    .neon-sparkles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:1;pointer-events:none;border-radius:28px;}
+    .sparkle{position:absolute;background:#c084fc;border-radius:50%;box-shadow:0 0 8px #c084fc,0 0 16px #c084fc;animation:sparkleAnim 3s infinite linear;opacity:.5;}
+    @keyframes sparkleAnim{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.5);opacity:.9;}}
+    .neon-glow{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:radial-gradient(ellipse 60% 50% at 10% 20%,rgba(192,132,252,0.08) 0%,transparent 55%),
+                 radial-gradient(ellipse 50% 60% at 90% 80%,rgba(56,189,248,0.07) 0%,transparent 55%);
+      z-index:1;pointer-events:none;}
+    .this-week-content{position:relative;z-index:2;width:100%;}
+    .current-video-container{
+      display:grid;grid-template-columns:1.1fr 0.9fr;
+      min-height:560px;width:100%;
     }
-
-    .video-upcoming-row .current-video-wrapper {
-        flex: 1;
-        min-width: 0;
-        margin-bottom: 0;
+    .current-video-wrapper{
+      position:relative;overflow:hidden;
+      border-radius:28px 0 0 28px;
+      width:100%;height:100%;min-height:560px;
+      box-shadow:none;border:none;margin-bottom:0;
+      transition:transform .4s cubic-bezier(0.2,0.9,0.3,1);
     }
-
-    /* UPCOMING CUSTOMER BOX (parallel to video) */
-    .upcoming-customer-box {
-        position: relative;
-        z-index: 2;
-        flex: 0 0 280px;
-        display: flex;
-        flex-direction: column;
-        border-radius: 15px;
-        overflow: hidden;
-        border: 2px solid #00f3ff;
-        box-shadow:
-            0 0 20px rgba(0, 243, 255, 0.3),
-            0 0 40px rgba(157, 0, 255, 0.2),
-            0 20px 50px rgba(0, 0, 0, 0.7);
-        background: linear-gradient(135deg,
-            rgba(0, 10, 20, 0.95) 0%,
-            rgba(0, 30, 60, 0.9) 50%,
-            rgba(0, 10, 20, 0.95) 100%);
-        transition: all 0.3s ease;
+    .current-video-wrapper:hover{transform:scale(1.01);}
+    .experience-video-placeholder{
+      width:100%;height:100%;min-height:560px;
+      background:linear-gradient(135deg,#060e1c 0%,#0d1f3e 60%,#060e1c 100%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;color:var(--text-muted);
     }
-
-    .upcoming-customer-box:hover {
-        box-shadow:
-            0 0 30px rgba(0, 243, 255, 0.5),
-            0 0 60px rgba(157, 0, 255, 0.3),
-            0 25px 60px rgba(0, 0, 0, 0.8);
-        transform: translateY(-5px);
+    .experience-video-placeholder i{font-size:5rem;color:rgba(192,132,252,0.4);filter:drop-shadow(0 0 20px rgba(192,132,252,0.3));}
+    .current-video{width:100%;height:100%;min-height:560px;object-fit:cover;display:block;}
+    .current-video-info{
+      padding:3rem 2.5rem;
+      background:linear-gradient(145deg,rgba(10,8,20,0.98),rgba(15,10,30,0.95));
+      border-left:1px solid rgba(192,132,252,0.12);
+      border-radius:0 28px 28px 0;
+      display:flex;flex-direction:column;justify-content:center;gap:1.5rem;
+      text-align:left;
     }
-
-    .upcoming-customer-heading {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #00f3ff;
-        text-shadow: 0 0 12px rgba(0, 243, 255, 0.5);
-        padding: 1.2rem 1rem 0.8rem;
-        text-align: center;
-        margin: 0;
+    .current-video-title{
+      font-size:1.5rem;color:#f1f5ff;margin-bottom:0;
+      display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;
+      text-shadow:none;flex-wrap:wrap;text-align:left;
     }
-
-    .upcoming-customer-inner {
-        flex: 1;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg,
-            rgba(0, 243, 255, 0.08) 0%,
-            rgba(157, 0, 255, 0.08) 50%,
-            rgba(0, 243, 255, 0.05) 100%);
+    .current-video-title .badge{
+      background:linear-gradient(135deg,rgba(192,132,252,0.2),rgba(56,189,248,0.15));
+      color:#c084fc;padding:.3rem .9rem;border-radius:999px;
+      font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      border:1px solid rgba(192,132,252,0.3);width:fit-content;
     }
-
-    .upcoming-customer-inner::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        background: rgba(5, 11, 24, 0.55);
-        z-index: 1;
+    .current-video-description{
+      color:rgba(241,245,255,0.55);line-height:1.75;
+      font-size:.92rem;text-align:left;margin-bottom:0;
+      border-left:3px solid rgba(192,132,252,0.4);padding-left:1rem;
     }
-
-    .upcoming-guess-text {
-        position: relative;
-        z-index: 2;
-        font-size: 2rem;
-        font-weight: 700;
-        color: rgba(229, 242, 255, 0.35);
-        filter: blur(2px);
-        text-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
-        user-select: none;
-        letter-spacing: 3px;
+    .video-stats{
+      display:flex;justify-content:flex-start;gap:1rem;
+      margin-top:0;padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,0.06);flex-wrap:wrap;
     }
-
-    .upcoming-customer-inner:hover .upcoming-guess-text {
-        filter: blur(4px);
-        color: rgba(229, 242, 255, 0.25);
-        transition: all 0.4s ease;
+    .stat-item{
+      display:flex;flex-direction:column;align-items:flex-start;
+      flex:1;min-width:80px;padding:1rem 1.2rem;
+      background:rgba(255,255,255,0.03);border-radius:14px;
+      border:1px solid rgba(255,255,255,0.06);transition:all .3s;
     }
-
-    @media (max-width: 768px) {
-        .video-upcoming-row {
-            flex-direction: column;
-        }
-        .upcoming-customer-box {
-            flex: none;
-            width: 100%;
-            min-height: 200px;
-        }
+    .stat-item:hover{background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.3);transform:translateY(-3px);}
+    .stat-value{font-size:1.4rem;color:#c084fc;font-weight:800;text-shadow:none;display:flex;align-items:center;gap:.4rem;}
+    .stat-label{font-size:.72rem;color:rgba(241,245,255,0.4);margin-top:.25rem;text-transform:uppercase;letter-spacing:.08em;}
+    .stat-icon{font-size:1rem;}
+    .share-container{display:flex;flex-direction:column;align-items:flex-start;gap:.75rem;margin-top:0;}
+    .share-buttons{display:flex;justify-content:flex-start;gap:.5rem;flex-wrap:wrap;}
+    .share-btn{
+      background:rgba(255,255,255,0.04);color:rgba(241,245,255,0.7);
+      border:1px solid rgba(255,255,255,0.1);padding:.45rem 1rem;
+      border-radius:999px;transition:all .3s;display:flex;align-items:center;gap:.45rem;font-size:.8rem;
     }
-    
-    /* THIS WEEK'S CUSTOMER VIDEO SECTION */
-    .this-week-video {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg,
-            rgba(0, 10, 20, 0.95) 0%,
-            rgba(0, 30, 60, 0.9) 50%,
-            rgba(0, 10, 20, 0.95) 100%);
-        border-radius: var(--card-radius);
-        padding: 3rem 2.5rem;
-        margin-bottom: 3rem;
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        box-shadow: var(--shadow-main);
+    .share-btn:hover{border-color:rgba(192,132,252,0.5);transform:translateY(-2px);background:rgba(192,132,252,0.1);}
+    .share-btn.facebook:hover{background:#1877F2;color:#fff;border-color:#1877F2;}
+    .share-btn.twitter:hover{background:#1DA1F2;color:#fff;border-color:#1DA1F2;}
+    .share-btn.whatsapp:hover{background:#25D366;color:#fff;border-color:#25D366;}
+    .share-btn.link:hover{background:rgba(192,132,252,0.9);color:#fff;border-color:#c084fc;}
+    .video-controls-experience{
+      position:absolute;bottom:0;left:0;right:0;width:100%;
+      background:linear-gradient(transparent,rgba(0,0,0,0.85));
+      padding:2rem 1.5rem 1.2rem;display:flex;justify-content:flex-start;
+      align-items:center;opacity:0;transition:all .4s;gap:1rem;
     }
-    
-    /* Neon Sparkling Background Effect */
-    .neon-sparkles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: 1;
-        pointer-events: none;
-        border-radius: var(--card-radius);
+    .current-video-wrapper:hover .video-controls-experience{opacity:1;}
+    .video-btn-experience{
+      background:rgba(192,132,252,0.85);color:#fff;border:none;
+      border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+      transition:all .3s;backdrop-filter:blur(8px);
     }
-    
-    .sparkle {
-        position: absolute;
-        background: #00f3ff;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
-        animation: sparkle 3s infinite linear;
-        opacity: 0.7;
-    }
-    
-    @keyframes sparkle {
-        0%, 100% {
-            transform: scale(1);
-            opacity: 0.7;
-        }
-        50% {
-            transform: scale(1.5);
-            opacity: 1;
-        }
-    }
-    
-    .neon-glow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background:
-            radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(157, 0, 255, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 40% 80%, rgba(0, 243, 255, 0.05) 0%, transparent 50%);
-        z-index: 1;
-        pointer-events: none;
-        border-radius: var(--card-radius);
-    }
-    
-    .this-week-content {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-    
-    .current-video-container {
-        max-width: 900px;
-        margin: 0 auto;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    
-    .current-video-wrapper {
-        position: relative;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow:
-            0 0 20px rgba(0, 243, 255, 0.3),
-            0 0 40px rgba(157, 0, 255, 0.2),
-            0 20px 50px rgba(0, 0, 0, 0.7);
-        border: 2px solid #00f3ff;
-        margin-bottom: 30px;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 800px;
-    }
-    
-    .current-video-wrapper:hover {
-        box-shadow:
-            0 0 30px rgba(0, 243, 255, 0.5),
-            0 0 60px rgba(157, 0, 255, 0.3),
-            0 25px 60px rgba(0, 0, 0, 0.8);
-        transform: translateY(-5px);
-    }
-    
-    .current-video {
-        width: 100%;
-        height: 500px;
-        object-fit: cover;
-        display: block;
-    }
-    
-    .current-video-info {
-        background: rgba(0, 20, 40, 0.8);
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid rgba(0, 243, 255, 0.3);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    .current-video-title {
-        font-size: 1.8rem;
-        color: #00f3ff;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-        flex-wrap: wrap;
-        text-align: center;
-    }
-    
-    .current-video-title .badge {
-        background: linear-gradient(135deg, #00f3ff, #9d00ff);
-        color: #050816;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-    }
-    
-    .current-video-description {
-        color: var(--text-main);
-        line-height: 1.7;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    
-    /* Enhanced Social Stats */
-    .video-stats {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 25px;
-        padding-top: 25px;
-        border-top: 1px solid rgba(0, 243, 255, 0.2);
-        flex-wrap: wrap;
-    }
-    
-    .stat-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-        max-width: 200px;
-        padding: 15px;
-        background: rgba(0, 30, 60, 0.5);
-        border-radius: 10px;
-        border: 1px solid rgba(0, 243, 255, 0.1);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .stat-item:hover {
-        background: rgba(0, 40, 80, 0.7);
-        border-color: #00f3ff;
-        transform: translateY(-3px);
-    }
-    
-    .stat-value {
-        font-size: 1.8rem;
-        color: #00f3ff;
-        font-weight: 700;
-        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .stat-label {
-        font-size: 0.9rem;
-        color: var(--text-main);
-        margin-top: 5px;
-        opacity: 0.9;
-    }
-    
-    .stat-icon {
-        font-size: 1.2rem;
-    }
-    
-    .share-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-    
-    .share-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-    
-    .share-btn {
-        background: rgba(0, 30, 60, 0.7);
-        color: var(--text-main);
-        border: 1px solid rgba(0, 243, 255, 0.3);
-        padding: 8px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.9rem;
-    }
-    
-    .share-btn:hover {
-        background: rgba(0, 40, 80, 0.9);
-        border-color: #00f3ff;
-        transform: translateY(-2px);
-    }
-    
-    .share-btn.facebook:hover {
-        background: #1877F2;
-        color: white;
-    }
-    
-    .share-btn.twitter:hover {
-        background: #1DA1F2;
-        color: white;
-    }
-    
-    .share-btn.whatsapp:hover {
-        background: #25D366;
-        color: white;
-    }
-    
-    .share-btn.link:hover {
-        background: #00f3ff;
-        color: #050816;
-    }
-    
-    /* Video controls */
-    .video-controls-experience {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: all 0.3s ease;
-        gap: 20px;
-    }
-    
-    .current-video-wrapper:hover .video-controls-experience {
-        opacity: 1;
-    }
-    
-    .video-btn-experience {
-        background: rgba(0, 243, 255, 0.8);
-        color: #050816;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .video-btn-experience:hover {
-        background: #00f3ff;
-        transform: scale(1.1);
-        box-shadow: 0 0 15px rgba(0, 243, 255, 0.8);
-    }
-    
-    .video-info-experience {
-        color: var(--text-main);
-        font-size: 0.9rem;
-    }
-
-    /* Volume control */
-    .video-volume-control {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-left: 10px;
-    }
-
-    .video-volume-control i {
-        color: #00f3ff;
-        font-size: 1rem;
-    }
-
-    #volumeSlider {
-        width: 80px;
-        height: 6px;
-        border-radius: 3px;
-        background: rgba(255, 255, 255, 0.2);
-        outline: none;
-        -webkit-appearance: none;
-    }
-
-    #volumeSlider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #00f3ff;
-        cursor: pointer;
-        box-shadow: 0 0 5px rgba(0, 243, 255, 0.8);
-    }
+    .video-btn-experience:hover{background:#c084fc;transform:scale(1.12);box-shadow:0 0 20px rgba(192,132,252,0.6);}
+    .video-info-experience{color:rgba(255,255,255,0.8);font-size:.85rem;font-weight:500;}
+    .video-volume-control{display:flex;align-items:center;gap:.5rem;margin-left:auto;}
+    .video-volume-control i{color:rgba(192,132,252,0.8);}
+    #volumeSlider{width:70px;height:4px;border-radius:3px;background:rgba(255,255,255,0.15);outline:none;-webkit-appearance:none;accent-color:#c084fc;}
 
     /* ========== CUSTOMER REVIEWS SECTION ========== */
     .reviews-section {
@@ -1868,325 +1520,310 @@
         }
     }
 
-    /* ========== REDESIGNED WEATHER SECTION ========== */
-    .weather-section{
-        background:transparent;
-        position:relative;
+    /* ========== REDESIGNED WEATHER SECTION (GAPSY) ========== */
+    :root{
+      --w-bg:#07080f;
+      --w-surface:rgba(255,255,255,0.04);
+      --w-border:rgba(255,255,255,0.08);
+      --w-text:#f1f5ff;
+      --w-muted:rgba(241,245,255,0.42);
+      --w-accent1:#c084fc;
+      --w-accent2:#38bdf8;
+      --w-accent3:#4ade80;
+      --w-accent4:#fb923c;
+      --w-glow1:rgba(192,132,252,0.22);
+      --w-glow2:rgba(56,189,248,0.18);
     }
-    .weather-container{
-        max-width:100%;
-        margin:0;
-        display:flex;
-        gap:3rem;
-        background:var(--bg-elevated);
-        border-radius:var(--card-radius);
-        padding:2.5rem 3rem;
-        border:1px solid rgba(148,163,184,0.32);
-        box-shadow:var(--shadow-soft);
-        position:relative;
-        overflow:hidden;
-        backdrop-filter:blur(12px);
-        flex-wrap: wrap;
+    .weather-section{background:transparent;position:relative;}
+    .weather-section.is-day  { --w-bg:#07080f; --w-surface:rgba(255,255,255,0.05); --w-border:rgba(255,255,255,0.09); --w-text:#f1f5ff; --w-muted:rgba(241,245,255,0.42); }
+    .weather-section.is-night{ --w-bg:#02030a; --w-surface:rgba(20,20,60,0.18);    --w-border:rgba(99,102,241,0.18);  --w-text:#e8eeff; --w-muted:rgba(200,210,255,0.38); }
+    .weather-section.is-morning { --w-bg:#05080f; --w-surface:rgba(251,191,36,0.05); --w-border:rgba(251,191,36,0.15); --w-text:#fffbeb; --w-muted:rgba(253,230,138,0.45); }
+    .weather-section.is-evening { --w-bg:#07050f; --w-surface:rgba(192,132,252,0.06); --w-border:rgba(192,132,252,0.18); --w-text:#f5f0ff; --w-muted:rgba(216,180,254,0.45); }
+    .weather-section { transition: background 1.6s ease, --w-bg 1.6s; }
+
+    .weather-scene{transition:background 1.8s ease, box-shadow 1.8s ease;}
+    .weather-scene.theme-day{
+      background:linear-gradient(160deg,#061830 0%,#083d6b 45%,#0a4a5e 100%);
+      box-shadow:0 0 0 1px rgba(56,189,248,0.4),0 40px 80px rgba(0,80,160,0.4);
     }
-    .weather-container:before{
-        content:'';
-        position:absolute;
-        inset:-60%;
-        background:radial-gradient(circle,rgba(56,189,248,0.12),transparent 70%);
-        animation:rotate 24s linear infinite;
-        pointer-events:none;
+    .weather-scene.theme-day .weather-col-a{background:linear-gradient(135deg,rgba(56,189,248,0.1) 0%,transparent 60%);}
+    .weather-scene.theme-day .w-temp-big{background:linear-gradient(135deg,#ffffff 30%,rgba(56,189,248,0.95) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .weather-scene.theme-day .w-scene-glow{background:radial-gradient(circle,rgba(56,189,248,0.18) 0%,transparent 70%);}
+    .weather-scene.theme-morning{
+      background:linear-gradient(160deg,#1a0e00 0%,#3d2800 40%,#2a1a00 100%);
+      box-shadow:0 0 0 1px rgba(251,191,36,0.5),0 40px 80px rgba(180,100,0,0.3);
+    }
+    .weather-scene.theme-morning .weather-col-a{background:linear-gradient(135deg,rgba(251,191,36,0.1) 0%,transparent 60%);}
+    .weather-scene.theme-morning .w-temp-big{background:linear-gradient(135deg,#ffffff 30%,rgba(251,191,36,0.95) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .weather-scene.theme-evening{
+      background:linear-gradient(160deg,#1a0630 0%,#3d1060 40%,#2a0828 100%);
+      box-shadow:0 0 0 1px rgba(192,132,252,0.5),0 40px 80px rgba(120,20,180,0.35);
+    }
+    .weather-scene.theme-evening .weather-col-a{background:linear-gradient(135deg,rgba(192,132,252,0.1) 0%,transparent 60%);}
+    .weather-scene.theme-evening .w-temp-big{background:linear-gradient(135deg,#ffffff 30%,rgba(192,132,252,0.95) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .weather-scene.theme-night{
+      background:linear-gradient(160deg,#010208 0%,#060818 50%,#020310 100%);
+      box-shadow:0 0 0 1px rgba(99,102,241,0.45),0 40px 80px rgba(0,0,80,0.6);
+    }
+    .weather-scene.theme-night .weather-col-a{background:linear-gradient(135deg,rgba(99,102,241,0.08) 0%,transparent 60%);}
+    .weather-scene.theme-night .w-temp-big{background:linear-gradient(135deg,#ffffff 30%,rgba(147,197,253,0.9) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    .weather-scene{
+      position:relative;border-radius:28px;overflow:hidden;
+      background:var(--w-bg);
+      border:1px solid rgba(255,255,255,0.07);
+      box-shadow:0 0 0 1px rgba(192,132,252,0.12),0 40px 80px rgba(0,0,0,0.7);
+    }
+    .weather-scene-bg{position:absolute;inset:0;transition:background 1.8s ease, opacity 1.4s ease;z-index:0;mix-blend-mode:screen;opacity:0.7;}
+    .weather-scene-bg.clear-day  {background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(56,189,248,0.28) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(74,222,128,0.14) 0%,transparent 60%),radial-gradient(ellipse 100% 50% at 50% 0%,rgba(251,191,36,0.1) 0%,transparent 55%),var(--w-bg);}
+    .weather-scene-bg.clear-night{background:radial-gradient(ellipse 70% 50% at 15% 15%,rgba(99,102,241,0.35) 0%,transparent 55%),radial-gradient(ellipse 50% 70% at 85% 85%,rgba(192,132,252,0.22) 0%,transparent 55%),radial-gradient(ellipse 80% 40% at 50% 100%,rgba(30,20,80,0.5) 0%,transparent 60%),var(--w-bg);}
+    .weather-scene-bg.cloudy      {background:radial-gradient(ellipse 90% 60% at 50% 20%,rgba(100,116,139,0.2) 0%,transparent 60%),var(--w-bg);}
+    .weather-scene-bg.rainy       {background:radial-gradient(ellipse 80% 60% at 30% 10%,rgba(56,189,248,0.14) 0%,transparent 55%),radial-gradient(ellipse 50% 50% at 70% 90%,rgba(30,58,138,0.25) 0%,transparent 55%),var(--w-bg);}
+    .weather-scene-bg.snowy       {background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(186,230,253,0.12) 0%,transparent 55%),var(--w-bg);}
+    .weather-scene-bg.foggy       {background:radial-gradient(ellipse 100% 60% at 50% 50%,rgba(148,163,184,0.12) 0%,transparent 60%),var(--w-bg);}
+    .weather-scene-bg.storm       {background:radial-gradient(ellipse 70% 50% at 20% 20%,rgba(99,102,241,0.15) 0%,transparent 50%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(251,191,36,0.06) 0%,transparent 50%),var(--w-bg);}
+
+    .weather-scene::before{
+      content:'';position:absolute;
+      width:500px;height:500px;border-radius:50%;
+      background:radial-gradient(circle,rgba(192,132,252,0.12) 0%,transparent 70%);
+      top:-150px;left:-100px;z-index:1;pointer-events:none;
+    }
+    .weather-scene::after{
+      content:'';position:absolute;
+      width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,rgba(56,189,248,0.1) 0%,transparent 70%);
+      bottom:-100px;right:-80px;z-index:1;pointer-events:none;
     }
 
-    /* Left column – description & metrics */
-    .weather-left {
-        flex: 2;
-        min-width: 300px;
-        z-index: 1;
+    .weather-fx{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+    .sun-ray{position:absolute;top:-30px;left:50%;width:2px;height:200px;background:linear-gradient(to bottom,rgba(251,191,36,0.3),transparent);transform-origin:bottom center;animation:sunRay 7s ease-in-out infinite;}
+    @keyframes sunRay{0%,100%{opacity:.3;transform:translateX(-50%) rotate(var(--r)) scaleY(1);}50%{opacity:.7;transform:translateX(-50%) rotate(var(--r)) scaleY(1.2);}}
+    .star-dot{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--td) ease-in-out infinite;}
+    @keyframes twinkle{0%,100%{opacity:.15;transform:scale(1);}50%{opacity:.9;transform:scale(1.5);}}
+    .rain-drop{position:absolute;top:-20px;width:1px;border-radius:2px;background:linear-gradient(to bottom,rgba(147,197,253,0.7),transparent);animation:rainFall var(--rd) linear infinite;}
+    @keyframes rainFall{0%{transform:translateY(-20px) rotate(10deg);opacity:0;}5%{opacity:1;}100%{transform:translateY(105%) rotate(10deg);opacity:.3;}}
+    .snow-flake{position:absolute;top:-20px;color:rgba(219,234,254,0.8);font-size:var(--sf);animation:snowFall var(--sd) linear infinite;}
+    @keyframes snowFall{0%{transform:translateY(-20px) translateX(0) rotate(0deg);opacity:0;}8%{opacity:.9;}100%{transform:translateY(105%) translateX(var(--sx)) rotate(360deg);opacity:.4;}}
+    .lightning{position:absolute;top:0;left:40%;width:2px;height:70px;background:linear-gradient(to bottom,#fff,#fbbf24,transparent);opacity:0;animation:lightning 5s ease-in-out infinite;}
+    @keyframes lightning{0%,93%,100%{opacity:0;}94%,96%{opacity:1;}95%,97%{opacity:0;}}
+    .cloud-layer{position:absolute;width:200%;top:8%;animation:cloudDrift var(--cd) linear infinite;display:flex;gap:80px;}
+    .cloud-blob{background:rgba(255,255,255,var(--cop));border-radius:50px;height:35px;}
+    @keyframes cloudDrift{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+    .weather-panel{position:relative;z-index:3;display:grid;grid-template-columns:minmax(280px,1.2fr) 1px minmax(320px,1fr) 1px minmax(280px,1fr);min-height:580px;overflow:hidden;}
+    .w-divider{background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.08) 30%,rgba(255,255,255,0.08) 70%,transparent);align-self:stretch;flex-shrink:0;}
+
+    .weather-col-a{
+      padding:3rem 2.5rem;
+      display:flex;flex-direction:column;justify-content:space-between;gap:1.8rem;
+      background:linear-gradient(135deg,rgba(192,132,252,0.06) 0%,transparent 50%);
+      min-width:0;overflow:hidden;
+    }
+    .weather-col-b{
+      padding:2rem 1.5rem;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+      min-width:0;overflow:hidden;
+    }
+    .weather-col-c{
+      padding:3rem 2.2rem;
+      display:flex;flex-direction:column;gap:1.2rem;
+      background:linear-gradient(225deg,rgba(56,189,248,0.06) 0%,transparent 50%);
+      min-width:0;overflow:hidden;
     }
 
-    .weather-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 0.8rem;
-        background: linear-gradient(135deg, #fff, #a5f3fc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .w-temp-hero{display:flex;flex-direction:column;gap:.4rem;}
+    .w-temp-big{
+      font-size:10rem;font-weight:900;line-height:.85;
+      letter-spacing:-.04em;
+      background:linear-gradient(135deg,#ffffff 30%,rgba(192,132,252,0.9) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      transition:all .6s ease;
     }
+    .w-city-name{font-size:2.1rem;font-weight:700;color:var(--w-text);letter-spacing:-.01em;}
+    .w-local-time{font-size:.9rem;color:var(--w-muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.1rem;}
+    .w-condition-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;}
+    .w-cond-icon{font-size:1.3rem;transition:all .4s;}
+    .w-cond-text{font-size:1.15rem;color:rgba(255,255,255,0.65);font-weight:500;}
 
-    .weather-desc {
-        color: var(--text-muted);
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-        max-width: 500px;
+    .w-metrics{display:flex;flex-wrap:wrap;gap:.45rem;}
+    .w-metric{
+      padding:.38rem .75rem;
+      border-radius:6px;
+      background:var(--w-surface);
+      border:1px solid var(--w-border);
+      display:flex;align-items:center;gap:.38rem;
+      white-space:nowrap;transition:background .2s,border-color .2s;
     }
+    .w-metric:hover{background:rgba(255,255,255,0.08);border-color:rgba(192,132,252,0.35);}
+    .w-metric-icon{font-size:.75rem;}
+    .w-metric-value{font-size:.82rem;font-weight:700;color:var(--w-text);}
+    .w-metric-label{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:var(--w-muted);}
 
-    /* Horizontal metrics grid – 4 items in a row */
-    .metrics-row {
-        display: flex;
-        gap: 1.5rem;
-        margin-bottom: 1.8rem;
-        flex-wrap: wrap;
-    }
+    .w-tod-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .8rem;border-radius:5px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:.6rem;}
+    .w-tod-badge.morning  {background:rgba(251,191,36,0.1); color:#fbbf24;border:1px solid rgba(251,191,36,0.22);}
+    .w-tod-badge.afternoon{background:rgba(74,222,128,0.1); color:#4ade80;border:1px solid rgba(74,222,128,0.22);}
+    .w-tod-badge.evening  {background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.22);}
+    .w-tod-badge.night    {background:rgba(56,189,248,0.1); color:#38bdf8;border:1px solid rgba(56,189,248,0.22);}
 
-    .metric-card {
-        background: rgba(15, 23, 42, 0.7);
-        border-radius: 20px;
-        padding: 1.2rem 1rem;
-        text-align: center;
-        flex: 1 1 120px;
-        border: 1px solid rgba(56, 189, 248, 0.2);
-        backdrop-filter: blur(4px);
-    }
+    .w-intensity-block{background:var(--w-surface);border:1px solid var(--w-border);border-radius:10px;padding:.85rem 1rem;}
+    .w-intensity-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--w-muted);margin-bottom:.5rem;}
+    .w-intensity-track{height:4px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden;}
+    .w-intensity-fill{height:100%;border-radius:999px;transition:width 1.4s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,#4ade80,#38bdf8,#c084fc,#fb923c);}
+    .w-intensity-ticks{display:flex;justify-content:space-between;margin-top:.4rem;}
+    .w-intensity-tick{font-size:.58rem;color:rgba(255,255,255,0.22);}
 
-    .metric-value {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--primary);
-        line-height: 1.2;
-        margin-bottom: 0.3rem;
+    .w-insight-single{
+      background:var(--w-surface);border-left:2px solid var(--w-accent3);
+      padding:.8rem 1rem;font-size:.82rem;color:rgba(255,255,255,0.68);
+      line-height:1.55;display:flex;align-items:flex-start;gap:.6rem;
     }
+    .w-insight-single.blue  {border-left-color:var(--w-accent2);}
+    .w-insight-single.purple{border-left-color:var(--w-accent1);}
+    .w-insight-single.gold  {border-left-color:var(--w-accent4);}
+    .w-insight-icon{font-size:.95rem;flex-shrink:0;margin-top:.1rem;}
+    .w-insights-group{border:1px solid var(--w-border);border-radius:12px;overflow:hidden;}
+    .w-insights-group .w-insight-single+.w-insight-single{border-top:1px solid var(--w-border);}
 
-    .metric-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-muted);
+    .carousel-wrapper{width:100%;z-index:1;}
+    .w-carousel-label{font-size:1.24rem;text-transform:uppercase;letter-spacing:.14em;color:var(--w-muted);text-align:center;}
+    .city-carousel-container{
+      perspective:1200px;
+      width:100%;height:480px;
+      display:flex;justify-content:center;align-items:center;
+      position:relative;overflow:hidden;
     }
+    .city-carousel{position:relative;width:256px;height:256px;transform-style:preserve-3d;animation:rotateCarousel 50s linear infinite;will-change:transform;backface-visibility:hidden;}
+    .city-carousel:hover{animation-play-state:paused;}
+    @keyframes rotateCarousel{0%{transform:rotateY(0deg);}25%{transform:rotateY(90deg);}50%{transform:rotateY(180deg);}75%{transform:rotateY(270deg);}100%{transform:rotateY(360deg);}}
+    .carousel-item{
+      position:absolute;width:256px;height:256px;border-radius:4px;overflow:hidden;
+      box-shadow:0 18px 45px rgba(0,0,0,0.7);
+      transition:all .5s cubic-bezier(0.25,0.46,0.45,0.94);backface-visibility:hidden;border:1.5px solid transparent;will-change:transform,box-shadow;
+    }
+    .carousel-item:hover{box-shadow:0 16px 40px rgba(192,132,252,0.5);border-color:#c084fc;z-index:99;}
+    .carousel-item img{width:100%;height:100%;object-fit:cover;display:block;}
+    .carousel-item .city-label{
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(to top,rgba(7,8,15,.95),transparent);
+      color:#fff;padding:.7rem .5rem .4rem;
+      font-weight:700;font-size:.72rem;text-align:center;
+      opacity:0;transform:translateY(5px);transition:.2s;
+      pointer-events:none;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .carousel-item:hover .city-label{opacity:1;transform:translateY(0);}
+    .carousel-item:nth-child(1){transform:rotateY(0deg)   translateZ(304px);}
+    .carousel-item:nth-child(2){transform:rotateY(60deg)  translateZ(304px);}
+    .carousel-item:nth-child(3){transform:rotateY(120deg) translateZ(304px);}
+    .carousel-item:nth-child(4){transform:rotateY(180deg) translateZ(304px);}
+    .carousel-item:nth-child(5){transform:rotateY(240deg) translateZ(304px);}
+    .carousel-item:nth-child(6){transform:rotateY(300deg) translateZ(304px);}
 
-    .match-message {
-        font-size: 1rem;
-        color: var(--accent);
-        background: rgba(56, 189, 248, 0.1);
-        padding: 0.6rem 1.2rem;
-        border-radius: 40px;
-        display: inline-block;
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        margin-top: 0.5rem;
+    .w-rec-label{
+      font-size:2.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#ffffff;
+      display:flex;align-items:center;justify-content:center;gap:.5rem;text-align:center;padding-left:15%;
     }
+    .w-rec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(192,132,252,0.3),transparent);}
+    .w-perfume-hero{
+      position:relative;border-radius:32px;overflow:hidden;
+      height:480px;width:85%;margin-left:15%;
+      box-shadow:0 20px 30px -10px rgba(0,0,0,0.5);
+      transition:transform .4s cubic-bezier(0.2,0.9,0.3,1),box-shadow .4s;
+      border:1px solid rgba(148,163,184,0.2);
+    }
+    .w-perfume-hero:hover{transform:scale(1.02) translateY(-5px);box-shadow:0 30px 50px -12px rgba(0,0,0,0.7);}
+    .w-perfume-hero-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.72;transition:transform .5s,opacity .3s;}
+    .w-perfume-hero:hover .w-perfume-hero-img{transform:scale(1.05);opacity:.55;}
+    .w-perfume-hero-bg{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.4) 55%,transparent 100%);}
+    .w-perfume-hero-body{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.6rem;transition:transform .4s;}
+    .w-perfume-hero:hover .w-perfume-hero-body{transform:translateY(-4px);}
+    .w-perfume-hero-name{font-size:1.65rem;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.1;margin-bottom:.3rem;text-transform:uppercase;}
+    .w-perfume-hero-reason{font-size:.76rem;color:rgba(255,255,255,0.6);line-height:1.4;margin-bottom:.55rem;}
+    .w-perfume-hero-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem;}
+    .w-perfume-hero-tag{font-size:.64rem;padding:.18rem .55rem;border-radius:999px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.2);}
+    .w-perfume-hero-footer{display:flex;align-items:center;gap:.7rem;}
+    .w-perfume-hero-price{font-size:1.15rem;font-weight:800;color:#4ade80;letter-spacing:-.01em;}
+    .w-perfume-hero-add{
+      padding:.5rem 1.1rem;border-radius:999px;border:none;
+      background:linear-gradient(135deg,#c084fc,#818cf8);
+      color:#fff;font-weight:700;font-size:.78rem;
+      display:inline-flex;align-items:center;gap:.38rem;transition:all .2s;
+    }
+    .w-perfume-hero-add:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(192,132,252,0.45);}
 
-    /* Right column – large temperature & city */
-    .weather-right {
-        flex: 1;
-        min-width: 200px;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: rgba(15, 23, 42, 0.5);
-        border-radius: 32px;
-        padding: 2rem 1.5rem;
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        text-align: center;
+    .w-alts-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--w-muted);}
+    .w-alts{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;}
+    .w-alt-chip{
+      display:flex;flex-direction:column;align-items:center;gap:.3rem;
+      padding:.55rem .35rem;border-radius:10px;
+      background:var(--w-surface);border:1px solid var(--w-border);
+      text-align:center;transition:all .2s;cursor:pointer;
     }
+    .w-alt-chip:hover{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.4);}
+    .w-alt-chip img{width:34px;height:34px;border-radius:6px;object-fit:cover;}
+    .w-alt-chip-name{font-weight:600;color:rgba(255,255,255,0.8);font-size:.7rem;}
+    .w-alt-chip-price{color:#4ade80;font-size:.65rem;font-weight:600;}
 
-    .large-temp {
-        font-size: 5rem;
-        font-weight: 700;
-        line-height: 1;
-        color: #fff;
-        text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
-        margin-bottom: 0.3rem;
+    .weather-bottom-bar{
+      position:relative;z-index:3;
+      padding:.9rem 2.8rem;
+      border-top:1px solid rgba(255,255,255,0.06);
+      display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+      background:rgba(7,8,15,0.6);backdrop-filter:blur(16px);
     }
+    .w-search-wrap{display:flex;gap:.4rem;flex:1;min-width:220px;}
+    .w-search-input{
+      flex:1;padding:.55rem .95rem;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.09);
+      background:rgba(255,255,255,0.05);color:#fff;font-size:.82rem;outline:none;
+      transition:border-color .2s;
+    }
+    .w-search-input::placeholder{color:rgba(255,255,255,0.28);}
+    .w-search-input:focus{border-color:rgba(192,132,252,0.5);background:rgba(192,132,252,0.06);}
+    .w-search-btn{
+      padding:.55rem 1.1rem;border-radius:8px;border:none;
+      background:linear-gradient(135deg,#c084fc,#818cf8);
+      color:#fff;font-weight:700;font-size:.8rem;
+      display:inline-flex;align-items:center;gap:.38rem;transition:.2s;
+    }
+    .w-search-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(192,132,252,0.4);}
+    .w-refresh-btn{
+      padding:.55rem .95rem;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.09);
+      background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.55);
+      font-size:.8rem;display:inline-flex;align-items:center;gap:.38rem;transition:.2s;
+    }
+    .w-refresh-btn:hover{background:rgba(255,255,255,0.09);color:#fff;border-color:rgba(192,132,252,0.3);}
+    .w-last-updated{font-size:.68rem;color:rgba(255,255,255,0.25);margin-left:auto;}
 
-    .city-name-lg {
-        font-size: 1.8rem;
-        font-weight: 500;
-        color: var(--text-main);
-        margin-bottom: 0.2rem;
-    }
+    .city-search-container{display:none;}
+    .weather-perfume-card{display:none;}
 
-    .condition-lg {
-        font-size: 1rem;
-        color: var(--text-muted);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+    @media(max-width:1100px){
+      .weather-panel{grid-template-columns:1fr 1px minmax(260px,.9fr) 1px minmax(240px,.85fr);}
+      .w-temp-big{font-size:7.5rem;}
     }
-
-    .condition-lg i {
-        color: var(--accent);
-        font-size: 1.2rem;
+    @media(max-width:860px){
+      .weather-panel{grid-template-columns:1fr 1px 1fr;grid-template-rows:auto auto;}
+      .weather-col-b{grid-column:1/-1;border-top:1px solid rgba(255,255,255,0.05);padding:2rem 1.5rem;}
+      .w-divider:last-of-type{display:none;}
+      .w-temp-big{font-size:6.5rem;}
+      .city-carousel-container{height:500px;}
     }
-
-    /* Carousel and other elements remain below the two columns */
-    .carousel-wrapper {
-        width: 100%;
-        margin-top: 2rem;
-        z-index: 1;
-    }
-
-    /* City carousel */
-    .city-carousel-container {
-        perspective: 1200px;
-        width: 100%;
-        height: 320px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 1rem 0 2rem;
-        position: relative;
-    }
-
-    .city-carousel {
-        position: relative;
-        width: 240px;
-        height: 240px;
-        transform-style: preserve-3d;
-        animation: rotateCarousel 30s infinite linear;
-        transition: animation-play-state 0.3s;
-    }
-
-    .city-carousel:hover {
-        animation-play-state: paused;
-    }
-
-    @keyframes rotateCarousel {
-        from { transform: rotateY(0deg); }
-        to   { transform: rotateY(360deg); }
-    }
-
-    .carousel-item {
-        position: absolute;
-        width: 180px;
-        height: 180px;
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 2px rgba(34,197,94,0.3);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        backface-visibility: visible;
-        border: 2px solid transparent;
-    }
-
-    .carousel-item:hover {
-        transform: scale(1.1) translateZ(30px);
-        box-shadow: 0 20px 40px rgba(34,197,94,0.6);
-        border-color: var(--primary);
-        z-index: 100;
-    }
-
-    .carousel-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .carousel-item .city-label {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-        color: white;
-        padding: 0.8rem 0.5rem 0.5rem;
-        font-weight: 600;
-        font-size: 1rem;
-        text-align: center;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: 0.3s;
-        pointer-events: none;
-    }
-
-    .carousel-item:hover .city-label {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(280px); }
-    .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(280px); }
-    .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(280px); }
-    .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(280px); }
-    .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(280px); }
-    .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(280px); }
-
-    /* City search bar */
-    .city-search-container {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom:1.8rem;
-    }
-    .city-search-input {
-        flex: 1;
-        padding: 0.8rem 1.2rem;
-        border-radius: 999px;
-        border: 1px solid rgba(148,163,184,0.5);
-        background: rgba(15,23,42,0.8);
-        color: var(--text-main);
-        font-size: 0.95rem;
-        outline: none;
-    }
-    .city-search-input::placeholder {
-        color: var(--text-muted);
-    }
-    .city-search-btn {
-        padding: 0.8rem 1.8rem;
-        border-radius: 999px;
-        border: none;
-        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-        color: #022c22;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: 0.3s;
-    }
-    .city-search-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(34,197,94,0.4);
-    }
-
-    /* Weather Perfume Recommendation Card */
-    .weather-perfume-card {
-        padding: 1.5rem;
-        background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(56,189,248,0.15));
-        border-radius: 20px;
-        border: 1px solid rgba(56,189,248,0.4);
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(8px);
-        margin-top: 1.5rem;
-    }
-    .weather-perfume-card:hover {
-        border-color: var(--primary);
-        background: rgba(34,197,94,0.2);
-    }
-    .weather-perfume-img {
-        width: 80px;
-        height: 80px;
-        border-radius: 16px;
-        object-fit: cover;
-        border: 2px solid rgba(56,189,248,0.5);
-    }
-    .weather-perfume-info {
-        flex: 1;
-    }
-    .weather-perfume-name {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text-main);
-        margin-bottom: 0.3rem;
-    }
-    .weather-perfume-price {
-        color: var(--primary);
-        font-size: 1.1rem;
-        font-weight:500;
-        margin-bottom:0.2rem;
-    }
-    .weather-perfume-badge {
-        font-size: 0.85rem;
-        color: var(--accent);
-        background: rgba(56,189,248,0.15);
-        padding: 0.3rem 1rem;
-        border-radius: 20px;
-        display: inline-block;
+    @media(max-width:600px){
+      .weather-panel{grid-template-columns:1fr;}
+      .w-divider{display:none;}
+      .weather-col-a,.weather-col-b,.weather-col-c{padding:2rem 1.4rem;}
+      .w-temp-big{font-size:5rem;}
+      .city-carousel-container{height:460px;}
+      .carousel-item{width:260px;height:260px;}
+      .carousel-item:nth-child(1){transform:rotateY(0deg)   translateZ(300px);}
+      .carousel-item:nth-child(2){transform:rotateY(60deg)  translateZ(300px);}
+      .carousel-item:nth-child(3){transform:rotateY(120deg) translateZ(300px);}
+      .carousel-item:nth-child(4){transform:rotateY(180deg) translateZ(300px);}
+      .carousel-item:nth-child(5){transform:rotateY(240deg) translateZ(300px);}
+      .carousel-item:nth-child(6){transform:rotateY(300deg) translateZ(300px);}
+      .weather-bottom-bar{padding:.85rem 1.4rem;}
     }
 
     /* Featured Perfumes Grid – straight corners */
@@ -2689,34 +2326,32 @@
         background: #3b82f6;
         color: #ffffff;
     }
-    /* Light theme: upcoming customer box */
-    html[data-theme="light"] .upcoming-customer-box {
+    /* Light theme: guess who card */
+    html[data-theme="light"] .guess-who-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
-    html[data-theme="light"] .upcoming-customer-box:hover {
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    html[data-theme="light"] .guess-who-title {
+        background: linear-gradient(135deg, #1e293b 30%, #7c3aed 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
-    html[data-theme="light"] .upcoming-customer-heading {
+    html[data-theme="light"] .guess-who-hint {
+        color: #64748b;
+    }
+    html[data-theme="light"] .guess-who-hint strong {
         color: #1e293b;
-        text-shadow: none;
     }
-    html[data-theme="light"] .upcoming-customer-inner {
-        background: linear-gradient(135deg,
-            rgba(59, 130, 246, 0.05) 0%,
-            rgba(139, 92, 246, 0.05) 50%,
-            rgba(59, 130, 246, 0.03) 100%);
+    html[data-theme="light"] .guess-who-clue {
+        background: rgba(0, 0, 0, 0.03);
+        border-color: #e2e8f0;
+        color: #64748b;
     }
-    html[data-theme="light"] .upcoming-customer-inner::before {
-        background: rgba(248, 250, 252, 0.7);
-    }
-    html[data-theme="light"] .upcoming-guess-text {
-        color: rgba(30, 41, 59, 0.25);
-        text-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
-    }
-    html[data-theme="light"] .upcoming-customer-inner:hover .upcoming-guess-text {
-        color: rgba(30, 41, 59, 0.15);
+    html[data-theme="light"] .guess-who-right {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(59, 130, 246, 0.05));
+        border-left-color: #e2e8f0;
     }
     /* Light theme: reviews */
     html[data-theme="light"] .reviews-header h3 {
@@ -2799,448 +2434,190 @@
     }
 
     /* ===========================================
-       MOOD MATCH MODAL - FACE DETECTION INTEGRATION
+       MOOD MATCH MODAL — PREMIUM REDESIGN
        =========================================== */
-    .mood-match-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(5, 8, 22, 0.95);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 99999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.4s ease;
-        backdrop-filter: blur(10px);
+    .mood-match-modal{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(2,3,10,0.94);
+      display:flex;align-items:center;justify-content:center;
+      z-index:99999;opacity:0;visibility:hidden;
+      transition:all .5s cubic-bezier(0.2,0.9,0.3,1);
+      backdrop-filter:blur(22px);
     }
+    .mood-match-modal.active{opacity:1;visibility:visible;}
 
-    .mood-match-modal.active {
-        opacity: 1;
-        visibility: visible;
+    .mood-match-container{
+      background:linear-gradient(145deg,#060710 0%,#0e0b20 55%,#060710 100%);
+      border-radius:32px;width:96%;max-width:1180px;max-height:93vh;
+      overflow:hidden;display:flex;flex-direction:column;
+      border:1px solid rgba(192,132,252,0.2);
+      box-shadow:0 0 0 1px rgba(192,132,252,0.07),0 60px 140px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,255,255,0.05);
+      animation:modalSlideIn .45s cubic-bezier(0.2,0.9,0.3,1) both;
     }
+    @keyframes modalSlideIn{from{transform:translateY(30px) scale(0.97);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
 
-    .mood-match-container {
-        background: radial-gradient(circle at top left, var(--bg-elevated), var(--bg));
-        border-radius: var(--card-radius);
-        width: 95%;
-        max-width: 1400px;
-        height: 90vh;
-        max-height: 900px;
-        overflow: hidden;
-        box-shadow: var(--shadow-main);
-        border: 1px solid rgba(56, 189, 248, 0.3);
-        display: flex;
-        flex-direction: column;
+    .mood-match-header{
+      padding:1.3rem 2rem;
+      border-bottom:1px solid rgba(192,132,252,0.1);
+      background:linear-gradient(90deg,rgba(192,132,252,0.08) 0%,rgba(99,102,241,0.04) 50%,transparent 100%);
+      display:flex;justify-content:space-between;align-items:center;flex-shrink:0;
+      position:relative;overflow:hidden;
     }
+    .mood-match-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(192,132,252,0.4),transparent);}
+    .mood-match-title{font-size:1.3rem;color:#f1f5ff;display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:-.02em;}
+    .mood-match-title i{color:#c084fc;}
+    .mm-ai-badge{font-size:.65rem;padding:.22rem .65rem;border-radius:999px;background:linear-gradient(135deg,rgba(192,132,252,0.2),rgba(99,102,241,0.15));border:1px solid rgba(192,132,252,0.3);color:#c084fc;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+    .close-mood-match{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(241,245,255,0.4);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .25s;cursor:pointer;}
+    .close-mood-match:hover{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.5);color:#f87171;transform:rotate(90deg);}
 
-    .mood-match-header {
-        padding: 1.5rem 2rem;
-        border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-        background: rgba(7, 15, 37, 0.8);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .mood-match-content{display:grid;grid-template-columns:1fr 1.05fr;flex:1;overflow:auto;gap:0;}
+    .mood-left-panel{padding:1.8rem 2rem;border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;gap:1.1rem;overflow-y:auto;}
+    .mood-right-panel{padding:1.8rem 2rem;display:flex;flex-direction:column;gap:1.1rem;overflow-y:auto;background:linear-gradient(180deg,rgba(192,132,252,0.03) 0%,transparent 60%);}
+
+    .mood-camera-container{
+      position:relative;width:100%;height:250px;
+      background:linear-gradient(135deg,#04060e,#080d1c);
+      border-radius:20px;overflow:hidden;
+      border:1px solid rgba(192,132,252,0.14);
+      box-shadow:inset 0 0 50px rgba(0,0,0,0.7);
     }
-
-    .mood-match-title {
-        font-size: 1.8rem;
-        color: var(--text-main);
-        display: flex;
-        align-items: center;
-        gap: 12px;
+    .mood-camera-container::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(192,132,252,0.06) 0%,transparent 50%);
+      pointer-events:none;z-index:1;
     }
+    .mood-camera-feed{width:100%;height:100%;object-fit:cover;display:none;}
+    .mood-camera-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;color:rgba(241,245,255,0.3);position:relative;z-index:2;}
+    .mood-camera-placeholder i{font-size:3rem;color:rgba(192,132,252,0.3);margin-bottom:.2rem;}
+    .mood-camera-placeholder p{font-size:.78rem;letter-spacing:.04em;}
 
-    .mood-match-title i {
-        color: var(--primary);
+    .mood-camera-scan{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(192,132,252,0.8),transparent);animation:scanLine 2.5s ease-in-out infinite;z-index:5;display:none;}
+    .mood-camera-container.scanning .mood-camera-scan{display:block;}
+    @keyframes scanLine{0%{top:0;opacity:1;}100%{top:100%;opacity:0;}}
+
+    .mood-camera-container::after{content:'';position:absolute;top:10px;left:10px;width:30px;height:30px;border-top:2px solid rgba(192,132,252,0.6);border-left:2px solid rgba(192,132,252,0.6);border-radius:2px 0 0 0;z-index:3;pointer-events:none;}
+
+    .mood-camera-controls{display:flex;gap:.55rem;flex-wrap:wrap;}
+    .mood-btn{padding:.58rem 1.1rem;border-radius:10px;border:none;font-size:.8rem;font-weight:700;display:inline-flex;align-items:center;gap:.4rem;transition:all .25s;font-family:inherit;cursor:pointer;letter-spacing:.01em;}
+    .mood-btn-primary{background:linear-gradient(135deg,#22c55e,#16a34a);color:#022c22;box-shadow:0 4px 14px rgba(34,197,94,0.3);}
+    .mood-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,0.5);}
+    .mood-btn-secondary{background:rgba(255,255,255,0.04);color:rgba(241,245,255,0.65);border:1px solid rgba(255,255,255,0.1);}
+    .mood-btn-secondary:hover{border-color:rgba(192,132,252,0.45);color:#f1f5ff;background:rgba(192,132,252,0.06);}
+    .mood-btn:disabled{opacity:.3;pointer-events:none;}
+
+    .mood-upload-area{border:1.5px dashed rgba(192,132,252,0.25);border-radius:14px;padding:1.1rem;text-align:center;color:rgba(241,245,255,0.35);cursor:pointer;transition:all .3s;font-size:.82rem;background:rgba(192,132,252,0.02);}
+    .mood-upload-area:hover{border-color:rgba(192,132,252,0.6);background:rgba(192,132,252,0.05);color:rgba(241,245,255,0.7);transform:translateY(-1px);}
+
+    .mood-options-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+    .mood-option-btn{
+      padding:9px 5px;background:rgba(255,255,255,0.02);border-radius:12px;
+      border:1px solid rgba(255,255,255,0.07);color:rgba(241,245,255,0.55);
+      display:flex;flex-direction:column;align-items:center;gap:3px;
+      font-size:.7rem;font-weight:600;transition:all .22s;cursor:pointer;
     }
+    .mood-option-btn:hover{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.35);color:#e9d5ff;transform:translateY(-2px);}
+    .mood-option-btn.active{background:rgba(192,132,252,0.18);border-color:#c084fc;color:#f1f5ff;box-shadow:0 4px 16px rgba(192,132,252,0.25);}
+    .mood-option-btn .mood-emoji{font-size:1.5rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5));}
 
-    .close-mood-match {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.5);
-        color: var(--danger);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s;
+    .mood-mode-selector{display:flex;gap:5px;background:rgba(255,255,255,0.03);border-radius:12px;padding:4px;border:1px solid rgba(255,255,255,0.06);}
+    .mood-mode-btn{flex:1;padding:.48rem .9rem;background:transparent;border-radius:9px;border:none;color:rgba(241,245,255,0.4);display:flex;align-items:center;justify-content:center;gap:5px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .25s;font-family:inherit;text-transform:uppercase;letter-spacing:.06em;}
+    .mood-mode-btn.active{background:linear-gradient(135deg,rgba(192,132,252,0.2),rgba(99,102,241,0.15));color:#f1f5ff;box-shadow:0 2px 12px rgba(192,132,252,0.25);}
+    .mood-analyze-btn{width:100%;justify-content:center;padding:.8rem;font-size:.88rem;letter-spacing:.02em;}
+    .mood-option-btn{--mood-color:#c084fc;}
+    .mood-option-btn:hover{box-shadow:0 4px 18px var(--mood-color,rgba(192,132,252,0.3));}
+    .mood-option-btn.active{box-shadow:0 4px 20px var(--mood-color,rgba(192,132,252,0.3));border-color:var(--mood-color,#c084fc);}
+    #moodPerfumeIcon{transition:all .4s;}
+
+    .mood-aura-display{
+      position:relative;text-align:center;padding:2rem 1rem 1.5rem;
+      background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(192,132,252,0.08) 0%,transparent 70%);
+      border-radius:22px;border:1px solid rgba(192,132,252,0.12);
+      overflow:hidden;
     }
-
-    .close-mood-match:hover {
-        background: rgba(239, 68, 68, 0.2);
-        transform: rotate(90deg);
+    .mood-aura-ring{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      width:120px;height:120px;border-radius:50%;
+      border:1px solid rgba(192,132,252,0.15);
+      animation:auraPulse 3s ease-in-out infinite;
+      pointer-events:none;
     }
+    .mood-aura-ring:nth-child(2){width:160px;height:160px;animation-delay:.6s;border-color:rgba(192,132,252,0.08);}
+    .mood-aura-ring:nth-child(3){width:200px;height:200px;animation-delay:1.2s;border-color:rgba(192,132,252,0.04);}
+    @keyframes auraPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}50%{transform:translate(-50%,-50%) scale(1.08);opacity:.6;}}
+    .mood-icon{font-size:3.8rem;position:relative;z-index:2;filter:drop-shadow(0 0 18px rgba(192,132,252,0.5));margin-bottom:.5rem;display:block;transition:all .4s;}
+    .mood-text{font-size:1.35rem;font-weight:800;color:#f1f5ff;letter-spacing:-.02em;position:relative;z-index:2;}
+    .mood-confidence{color:rgba(241,245,255,0.45);font-size:.82rem;margin-top:.3rem;position:relative;z-index:2;}
 
-    .mood-match-content {
-        display: flex;
-        flex: 1;
-        overflow: hidden;
+    .emotion-chart{display:flex;flex-direction:column;gap:.5rem;}
+    .emotion-chart-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(241,245,255,0.3);margin-bottom:.2rem;}
+    .emotion-bar-row{display:flex;align-items:center;gap:.65rem;}
+    .emotion-label{font-size:.72rem;color:rgba(241,245,255,0.45);width:68px;text-align:right;font-weight:600;}
+    .emotion-track{flex:1;height:5px;background:rgba(255,255,255,0.05);border-radius:999px;overflow:hidden;}
+    .emotion-fill{height:100%;border-radius:999px;transition:width .7s cubic-bezier(0.2,0.9,0.3,1);}
+    .emotion-pct{font-size:.7rem;color:rgba(241,245,255,0.35);width:30px;text-align:right;}
+
+    .mood-perfume-recommendation{
+      background:linear-gradient(145deg,rgba(192,132,252,0.08),rgba(34,197,94,0.04));
+      border-radius:22px;padding:1.5rem;
+      border:1px solid rgba(192,132,252,0.18);
+      position:relative;overflow:hidden;
+      box-shadow:0 8px 35px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.04);
     }
-
-    .mood-left-panel, .mood-right-panel {
-        flex: 1;
-        padding: 2rem;
-        overflow-y: auto;
+    .mood-perfume-recommendation::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,#c084fc,transparent);
     }
-
-    .mood-left-panel {
-        border-right: 1px solid rgba(56, 189, 248, 0.1);
+    .mood-perfume-header{display:flex;align-items:center;margin-bottom:1rem;gap:.85rem;}
+    .mood-perfume-image{
+      width:60px;height:60px;
+      background:linear-gradient(135deg,rgba(192,132,252,0.18),rgba(34,197,94,0.08));
+      border-radius:14px;display:flex;align-items:center;justify-content:center;
+      font-size:1.7rem;color:#c084fc;border:1px solid rgba(192,132,252,0.25);flex-shrink:0;
+      box-shadow:0 4px 16px rgba(192,132,252,0.2);
     }
+    .mood-perfume-info h3{color:#f1f5ff;margin-bottom:3px;font-size:1.1rem;font-weight:800;}
+    .mood-perfume-info p{color:rgba(241,245,255,0.45);font-size:.82rem;}
+    .mood-perfume-desc{color:rgba(241,245,255,0.55);font-size:.86rem;line-height:1.65;border-left:3px solid rgba(192,132,252,0.4);padding-left:.85rem;margin:.4rem 0;}
+    .mood-perfume-notes{display:flex;flex-wrap:wrap;gap:5px;margin-top:.6rem;}
+    .mood-note-tag{background:rgba(255,255,255,0.04);padding:.22rem .6rem;border-radius:999px;font-size:.72rem;color:rgba(241,245,255,0.55);border:1px solid rgba(255,255,255,0.09);}
 
-    /* Camera section styling */
-    .mood-camera-container {
-        width: 100%;
-        height: 300px;
-        background: linear-gradient(145deg, #1e293b, #0f172a);
-        border-radius: 15px;
-        overflow: hidden;
-        position: relative;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid rgba(34, 197, 94, 0.3);
+    .mood-traits{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0;}
+    .mood-trait{font-size:.7rem;padding:.2rem .6rem;border-radius:999px;font-weight:600;letter-spacing:.04em;}
+    .mood-trait.purple{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.3);color:#c084fc;}
+    .mood-trait.green{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;}
+    .mood-trait.blue{background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:#38bdf8;}
+
+    /* ── GUESS WHO SECTION ── */
+    .guess-who-card{
+      position:relative;max-width:1300px;margin:0 auto;
+      display:grid;grid-template-columns:1.2fr 0.8fr;
+      background:linear-gradient(145deg,#06060f,#0d0a1e);
+      border:1px solid rgba(192,132,252,0.2);border-radius:28px;
+      overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.7),0 0 0 1px rgba(192,132,252,0.1);
     }
-
-    .mood-camera-feed {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: none;
-    }
-
-    .mood-camera-placeholder {
-        text-align: center;
-        color: var(--text-main);
-        padding: 20px;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .mood-camera-placeholder i {
-        font-size: 4rem;
-        margin-bottom: 15px;
-        color: var(--primary);
-        opacity: 0.7;
-    }
-
-    .mood-permission-request {
-        background: rgba(34, 197, 94, 0.1);
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 15px;
-        text-align: center;
-        max-width: 80%;
-        border: 1px solid rgba(34, 197, 94, 0.3);
-    }
-
-    .mood-camera-controls {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-
-    .mood-btn {
-        padding: 12px 24px;
-        border-radius: 999px;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .mood-btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-        color: #022c22;
-    }
-
-    .mood-btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
-    }
-
-    .mood-btn-secondary {
-        background: rgba(15, 23, 42, 0.8);
-        color: var(--text-main);
-        border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .mood-btn-secondary:hover {
-        background: rgba(30, 41, 59, 0.8);
-        border-color: var(--accent);
-    }
-
-    .mood-upload-area {
-        text-align: center;
-        padding: 25px;
-        border: 2px dashed rgba(56, 189, 248, 0.5);
-        border-radius: 15px;
-        margin-top: 20px;
-        background: rgba(56, 189, 248, 0.05);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .mood-upload-area:hover {
-        background: rgba(56, 189, 248, 0.1);
-        border-color: var(--accent);
-    }
-
-    .mood-upload-area i {
-        font-size: 2.5rem;
-        color: var(--accent);
-        margin-bottom: 10px;
-    }
-
-    /* Mood analysis display */
-    .mood-display {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 30px;
-        padding: 25px;
-        background: rgba(15, 23, 42, 0.6);
-        border-radius: 20px;
-        border: 1px solid rgba(34, 197, 94, 0.2);
-    }
-
-    .mood-icon {
-        font-size: 5rem;
-        margin-bottom: 15px;
-    }
-
-    .mood-text {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: var(--text-main);
-        text-align: center;
-    }
-
-    .mood-confidence {
-        font-size: 1.1rem;
-        color: var(--accent);
-        background: rgba(56, 189, 248, 0.1);
-        padding: 5px 15px;
-        border-radius: 20px;
-    }
-
-    /* Emotion chart */
-    .emotion-chart {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 25px;
-    }
-
-    .emotion-bar {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .emotion-label {
-        width: 100px;
-        font-size: 0.9rem;
-        color: var(--text-main);
-    }
-
-    .emotion-progress {
-        flex: 1;
-        height: 12px;
-        background: rgba(15, 23, 42, 0.8);
-        border-radius: 6px;
-        overflow: hidden;
-    }
-
-    .emotion-fill {
-        height: 100%;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
-        border-radius: 6px;
-        transition: width 0.8s ease;
-    }
-
-    .emotion-value {
-        width: 45px;
-        text-align: right;
-        font-size: 0.9rem;
-        color: var(--text-main);
-    }
-
-    /* Perfume recommendation card */
-    .mood-perfume-recommendation {
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(56, 189, 248, 0.1));
-        border-radius: 20px;
-        padding: 25px;
-        margin-top: 25px;
-        border: 1px solid rgba(34, 197, 94, 0.3);
-    }
-
-    .mood-perfume-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        gap: 15px;
-    }
-
-    .mood-perfume-image {
-        width: 80px;
-        height: 80px;
-        background: rgba(15, 23, 42, 0.8);
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        color: var(--primary);
-        border: 1px solid rgba(34, 197, 94, 0.5);
-    }
-
-    .mood-perfume-info h3 {
-        color: var(--text-main);
-        margin-bottom: 5px;
-        font-size: 1.4rem;
-    }
-
-    .mood-perfume-info p {
-        color: var(--text-muted);
-    }
-
-    .mood-perfume-notes {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .mood-note-tag {
-        background: rgba(15, 23, 42, 0.9);
-        padding: 6px 15px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        color: var(--text-main);
-        border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    /* Mood options */
-    .mood-simulation-controls {
-        margin-top: 25px;
-    }
-
-    .mood-options-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .mood-option-btn {
-        padding: 12px;
-        background: rgba(15, 23, 42, 0.7);
-        border-radius: 10px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-align: center;
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .mood-option-btn:hover {
-        background: rgba(34, 197, 94, 0.2);
-        border-color: var(--primary);
-        transform: translateY(-3px);
-    }
-
-    .mood-option-btn.active {
-        background: rgba(34, 197, 94, 0.3);
-        border-color: var(--primary);
-        box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2);
-    }
-
-    .mood-option-emoji {
-        font-size: 1.5rem;
-    }
-
-    .mood-option-text {
-        font-size: 0.8rem;
-        color: var(--text-main);
-    }
-
-    /* Mode selector */
-    .mood-mode-selector {
-        display: flex;
-        gap: 10px;
-        margin: 20px 0;
-        flex-wrap: wrap;
-    }
-
-    .mood-mode-btn {
-        padding: 10px 20px;
-        background: rgba(15, 23, 42, 0.7);
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        color: var(--text-muted);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.9rem;
-    }
-
-    .mood-mode-btn:hover {
-        background: rgba(56, 189, 248, 0.2);
-        color: var(--text-main);
-    }
-
-    .mood-mode-btn.active {
-        background: rgba(34, 197, 94, 0.3);
-        border-color: var(--primary);
-        color: var(--text-main);
-    }
-
-    /* Captured image */
-    .mood-captured-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: none;
-        border-radius: 10px;
-    }
-
-    /* Loading state */
-    .mood-loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 30px;
-        color: var(--accent);
-        font-size: 1.2rem;
-    }
-
-    .mood-loading i {
-        margin-right: 10px;
-        animation: rotate 1s linear infinite;
+    .guess-who-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(192,132,252,0.1) 0%,transparent 60%);pointer-events:none;}
+    .guess-who-left{padding:3.5rem;display:flex;flex-direction:column;gap:1.6rem;position:relative;z-index:2;}
+    .guess-who-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .9rem;border-radius:999px;background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.3);color:#c084fc;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;width:fit-content;}
+    .guess-who-title{font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#fff 30%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin:0;}
+    .guess-who-hint{color:rgba(241,245,255,0.6);font-size:1rem;line-height:1.75;max-width:480px;}
+    .guess-who-hint strong{color:rgba(241,245,255,0.9);}
+    .guess-who-clues{display:flex;flex-wrap:wrap;gap:.6rem;}
+    .guess-who-clue{display:flex;align-items:center;gap:.45rem;padding:.4rem .9rem;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(241,245,255,0.6);font-size:.8rem;}
+    .guess-who-clue i{color:#c084fc;font-size:.75rem;}
+    .guess-who-countdown{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;}
+    .gw-count-block{display:flex;flex-direction:column;align-items:center;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);border-radius:12px;padding:.6rem 1rem;min-width:60px;}
+    .gw-count-block span:first-child{font-size:1.8rem;font-weight:800;color:#c084fc;line-height:1;}
+    .gw-count-block span:last-child{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(241,245,255,0.35);margin-top:.2rem;}
+    .gw-count-sep{font-size:1.6rem;font-weight:700;color:rgba(192,132,252,0.4);margin-bottom:.4rem;}
+    .guess-who-right{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(192,132,252,0.05),rgba(99,102,241,0.08));border-left:1px solid rgba(192,132,252,0.1);position:relative;z-index:2;}
+    .guess-who-silhouette{display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:3rem 2rem;}
+    .gw-silhouette-img{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(99,102,241,0.2));border:2px solid rgba(192,132,252,0.25);display:flex;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(192,132,252,0.2);animation:gwPulse 3s ease-in-out infinite;}
+    .gw-silhouette-img i{font-size:5rem;color:rgba(192,132,252,0.4);}
+    @keyframes gwPulse{0%,100%{box-shadow:0 0 40px rgba(192,132,252,0.15);}50%{box-shadow:0 0 80px rgba(192,132,252,0.35);}}
+    .gw-org-pill{padding:.5rem 1.2rem;border-radius:999px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.3);color:#c084fc;font-size:.82rem;font-weight:600;letter-spacing:.04em;}
+    @media(max-width:768px){
+      .guess-who-card{grid-template-columns:1fr;}
+      .guess-who-right{border-left:none;border-top:1px solid rgba(192,132,252,0.1);}
     }
 
     @media(max-width:1024px){
@@ -3249,16 +2626,27 @@
             grid-template-columns:1fr;
         }
         .section{padding:3.5rem 2.2rem;}
-        .weather-container{
-            flex-direction:column;
-            padding:2rem;
-        }
         .mood-match-container {
             width: 98%;
-            height: 95vh;
+            max-height: 95vh;
+        }
+        .mood-match-content {
+            grid-template-columns: 1fr;
         }
         .mood-options-grid {
             grid-template-columns: repeat(2, 1fr);
+        }
+        .current-video-container {
+            grid-template-columns: 1fr;
+        }
+        .current-video-wrapper {
+            border-radius: 28px 28px 0 0;
+            min-height: 350px;
+        }
+        .current-video-info {
+            border-radius: 0 0 28px 28px;
+            border-left: none;
+            border-top: 1px solid rgba(192,132,252,0.12);
         }
     }
     
@@ -3268,48 +2656,13 @@
         .mobile-menu-toggle { display: block; }
         .hero-title{font-size:3rem;}
         .section{padding:3.2rem 1.5rem;}
-        .city-carousel-container {
-            height: 260px;
-        }
-        .city-carousel {
-            width: 180px;
-            height: 180px;
-        }
-        .carousel-item {
-            width: 120px;
-            height: 120px;
-        }
-        .carousel-item:nth-child(1) { transform: rotateY(0deg) translateZ(180px); }
-        .carousel-item:nth-child(2) { transform: rotateY(60deg) translateZ(180px); }
-        .carousel-item:nth-child(3) { transform: rotateY(120deg) translateZ(180px); }
-        .carousel-item:nth-child(4) { transform: rotateY(180deg) translateZ(180px); }
-        .carousel-item:nth-child(5) { transform: rotateY(240deg) translateZ(180px); }
-        .carousel-item:nth-child(6) { transform: rotateY(300deg) translateZ(180px); }
-        .weather-container {
-            flex-direction: column;
-        }
-        .metrics-row {
-            justify-content: center;
-        }
-        .weather-right {
-            width: 100%;
-        }
         .footer{padding:3rem 1.5rem 2rem;}
         .footer-content{
             grid-template-columns:1fr 1fr;
         }
-        .mood-match-content {
-            flex-direction: column;
-            overflow-y: auto;
-        }
-        .mood-left-panel, .mood-right-panel {
-            flex: none;
-            height: auto;
-            overflow: visible;
-        }
         .mood-left-panel {
             border-right: none;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+            border-bottom: 1px solid rgba(192,132,252,0.1);
         }
     }
     
@@ -3396,135 +2749,131 @@
 </div>
 </div>
 
-<!-- MOOD MATCH MODAL (title updated) -->
+<!-- MOOD MATCH MODAL (Premium Redesign) -->
 <div class="mood-match-modal" id="moodMatchModal">
     <div class="mood-match-container">
+
+        <!-- Header -->
         <div class="mood-match-header">
             <h2 class="mood-match-title">
-                <i class="fas fa-smile-beam"></i> TROY – Your Heart Mood Match
+                <i class="fas fa-smile-beam"></i>
+                TROY &mdash; Mood Match
+                <span class="mm-ai-badge">✦ AI Powered</span>
             </h2>
-            <button class="close-mood-match" id="closeMoodMatch">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="close-mood-match" id="closeMoodMatch" title="Close"><i class="fas fa-times"></i></button>
         </div>
+
+        <!-- Two-column body -->
         <div class="mood-match-content">
-            <!-- Left Panel: Camera & Controls -->
+
+            <!-- LEFT PANEL -->
             <div class="mood-left-panel">
-                <div class="mood-camera-container">
+
+                <!-- Camera / image area -->
+                <div class="mood-camera-container" id="moodCameraBox">
+                    <div class="mood-camera-scan" id="moodScanLine"></div>
+                    <span style="position:absolute;bottom:10px;right:10px;width:28px;height:28px;border-bottom:2px solid rgba(192,132,252,0.5);border-right:2px solid rgba(192,132,252,0.5);border-radius:0 0 2px 0;z-index:3;pointer-events:none;"></span>
                     <div class="mood-camera-placeholder" id="moodCameraPlaceholder">
-                        <i class="fas fa-user-circle"></i>
-                        <p>Camera access required for mood detection</p>
-                        <div class="mood-permission-request" id="moodPermissionRequest">
-                            <p>Allow camera access to analyze your mood and find your perfect TROY perfume</p>
-                            <button class="mood-btn mood-btn-primary" id="moodRequestPermissionBtn">
-                                <i class="fas fa-camera"></i> Allow Camera Access
-                            </button>
+                        <div style="width:70px;height:70px;border-radius:50%;border:2px dashed rgba(192,132,252,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:.5rem;">
+                            <i class="fas fa-user" style="font-size:1.8rem;color:rgba(192,132,252,0.4);"></i>
                         </div>
+                        <p style="font-weight:600;color:rgba(241,245,255,0.5);">Face Detection Ready</p>
+                        <p style="font-size:.72rem;margin-top:.2rem;">Start camera or upload a photo</p>
                     </div>
-                    <video id="moodCameraFeed" class="mood-camera-feed" autoplay></video>
+                    <video id="moodCameraFeed" class="mood-camera-feed" autoplay playsinline></video>
                     <canvas id="moodPhotoCanvas" style="display:none;"></canvas>
-                    <img id="moodCapturedImage" class="mood-captured-image" alt="Captured or uploaded image">
+                    <img id="moodCapturedImage" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt="Captured">
                 </div>
-                
+
+                <!-- Controls row -->
                 <div class="mood-camera-controls">
-                    <button class="mood-btn mood-btn-primary" id="moodStartCameraBtn">
-                        <i class="fas fa-video"></i> Start Camera
-                    </button>
-                    <button class="mood-btn mood-btn-secondary" id="moodCaptureBtn" disabled>
-                        <i class="fas fa-camera"></i> Capture Photo
-                    </button>
-                    <button class="mood-btn mood-btn-secondary" id="moodResetBtn">
-                        <i class="fas fa-redo"></i> Reset
-                    </button>
+                    <button class="mood-btn mood-btn-primary" id="moodStartCameraBtn"><i class="fas fa-video"></i> Camera</button>
+                    <button class="mood-btn mood-btn-secondary" id="moodCaptureBtn" disabled><i class="fas fa-camera"></i> Capture</button>
+                    <button class="mood-btn mood-btn-secondary" id="moodResetBtn"><i class="fas fa-redo"></i> Reset</button>
                 </div>
-                
+
+                <!-- Upload -->
                 <div class="mood-upload-area" id="moodUploadArea">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Click here or drag & drop to upload an image</p>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">
-                        <i class="fas fa-info-circle"></i> Alternative to camera capture
-                    </p>
+                    <i class="fas fa-cloud-upload-alt" style="font-size:1.5rem;display:block;margin-bottom:.35rem;color:rgba(192,132,252,0.5);"></i>
+                    <span style="font-weight:600;">Upload a photo</span>
+                    <span style="font-size:.72rem;display:block;margin-top:.15rem;color:rgba(241,245,255,0.3);">JPG, PNG or WEBP</span>
                     <input type="file" id="moodImageUpload" accept="image/*" style="display:none;">
                 </div>
-                
-                <div class="mood-camera-controls" style="margin-top: 20px;">
-                    <button class="mood-btn mood-btn-primary" id="moodAnalyzeBtn" disabled>
-                        <i class="fas fa-brain"></i> Analyze Mood with AI
-                    </button>
+
+                <!-- Analyze button -->
+                <button class="mood-btn mood-btn-primary mood-analyze-btn" id="moodAnalyzeBtn" disabled>
+                    <i class="fas fa-brain"></i> Analyze Mood with AI
+                </button>
+
+                <!-- Divider -->
+                <div style="display:flex;align-items:center;gap:.6rem;">
+                    <div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div>
+                    <span style="font-size:.68rem;color:rgba(241,245,255,0.25);text-transform:uppercase;letter-spacing:.1em;">or try a mood</span>
+                    <div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div>
                 </div>
-                
-                <div class="mood-simulation-controls">
-                    <p style="color: var(--text-main); margin-bottom: 10px; font-size: 0.9rem;">
-                        <i class="fas fa-flask"></i> Test with sample moods:
-                    </p>
-                    <div class="mood-options-grid" id="moodOptionsGrid">
-                        <!-- Mood options will be added by JavaScript -->
-                    </div>
-                </div>
+
+                <!-- Sample moods grid -->
+                <div class="mood-options-grid" id="moodOptionsGrid"></div>
+
             </div>
-            
-            <!-- Right Panel: Analysis & Recommendation -->
+
+            <!-- RIGHT PANEL -->
             <div class="mood-right-panel">
+
+                <!-- Mode selector -->
                 <div class="mood-mode-selector">
-                    <div class="mood-mode-btn active" data-mode="simulation">
-                        <i class="fas fa-robot"></i> AI Simulation
-                    </div>
-                    <div class="mood-mode-btn" data-mode="mood-match">
-                        <i class="fas fa-heart"></i> Mood Match
-                    </div>
-                    <div class="mood-mode-btn" data-mode="azure">
-                        <i class="fab fa-microsoft"></i> Azure AI
-                    </div>
+                    <div class="mood-mode-btn active" data-mode="simulation"><i class="fas fa-robot"></i> AI Simulation</div>
+                    <div class="mood-mode-btn" data-mode="mood-match"><i class="fas fa-heart"></i> Mood Match</div>
                 </div>
-                
-                <div class="mood-display">
-                    <div class="mood-icon" id="moodDisplayIcon">😊</div>
+
+                <!-- Aura / mood result -->
+                <div class="mood-aura-display" id="moodAuraDisplay">
+                    <div class="mood-aura-ring"></div>
+                    <div class="mood-aura-ring"></div>
+                    <div class="mood-aura-ring"></div>
+                    <span class="mood-icon" id="moodDisplayIcon" style="transition:transform .3s;">😊</span>
                     <div class="mood-text" id="moodDisplayText">Ready for Mood Analysis</div>
-                    <div class="mood-confidence" id="moodDisplayConfidence">Awaiting your photo</div>
+                    <div class="mood-confidence" id="moodDisplayConfidence">Take a photo or pick a mood below</div>
                 </div>
-                
+
+                <!-- Personality traits -->
+                <div class="mood-traits" id="moodTraits" style="display:none;">
+                    <i class="fas fa-sparkles" style="font-size:.7rem;color:rgba(192,132,252,0.5);margin-right:.2rem;"></i>
+                    <span class="mood-trait purple" id="trait1"></span>
+                    <span class="mood-trait green"  id="trait2"></span>
+                    <span class="mood-trait blue"   id="trait3"></span>
+                </div>
+
+                <!-- Emotion bars -->
                 <div class="emotion-chart" id="moodEmotionChart">
-                    <!-- Emotion bars will be inserted here -->
+                    <div class="emotion-chart-title">Emotion Analysis</div>
                 </div>
-                
+
+                <!-- Perfume recommendation card -->
                 <div class="mood-perfume-recommendation" id="moodPerfumeRecommendation">
                     <div class="mood-perfume-header">
-                        <div class="mood-perfume-image">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <div class="mood-perfume-info">
+                        <div class="mood-perfume-image" id="moodPerfumeIcon"><i class="fas fa-wind"></i></div>
+                        <div class="mood-perfume-info" style="flex:1;">
                             <h3 id="recommendedPerfumeName">Royal Oud</h3>
-                            <p id="recommendedPerfumeMatch">Perfect for your confident mood</p>
+                            <p id="recommendedPerfumeMatch">Your perfect scent match</p>
                         </div>
                     </div>
-                    <div class="mood-perfume-details">
-                        <p id="moodPerfumeDescription">Deep oud, sandalwood and amber with a citrus opening. Perfect for confident and sophisticated occasions.</p>
-                        <div class="mood-perfume-notes" id="moodPerfumeNotes">
-                            <div class="mood-note-tag">Oud</div>
-                            <div class="mood-note-tag">Sandalwood</div>
-                            <div class="mood-note-tag">Amber</div>
-                            <div class="mood-note-tag">Citrus</div>
-                        </div>
+                    <p class="mood-perfume-desc" id="moodPerfumeDescription">Deep oud, sandalwood and amber. Made for those who command the room.</p>
+                    <div class="mood-perfume-notes" id="moodPerfumeNotes">
+                        <div class="mood-note-tag">Oud</div>
+                        <div class="mood-note-tag">Sandalwood</div>
+                        <div class="mood-note-tag">Amber</div>
                     </div>
-                    <div style="margin-top: 20px; display: flex; gap: 10px;">
-                        <button class="mood-btn mood-btn-primary" id="moodAddToCartBtn" style="flex:1;">
-                            <i class="fas fa-shopping-bag"></i> Add to Cart (Rs 4,949)
+                    <div style="margin-top:1.1rem;display:flex;gap:.6rem;align-items:center;">
+                        <button class="mood-btn mood-btn-primary" id="moodAddToCart" style="flex:1;justify-content:center;">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
                         </button>
-                        <button class="mood-btn mood-btn-secondary" id="moodViewDetailsBtn" style="flex:1;">
-                            <i class="fas fa-info-circle"></i> View Details
+                        <button class="mood-btn mood-btn-secondary" onclick="closeMoodMatch()">
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
                 </div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: rgba(15, 23, 42, 0.5); border-radius: 15px;">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">
-                        <i class="fas fa-lightbulb"></i> How Mood Matching Works
-                    </h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-                        Our AI analyzes facial expressions to detect emotions, then matches your mood with the perfect TROY perfume. 
-                        Each mood corresponds to specific scent profiles that enhance your emotional state.
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>
@@ -3605,83 +2954,111 @@
 <div class="promotions-layout">
 <!-- LEFT: Weather + perfumes -->
 <div class="promotions-main">
-<!-- Weather Section – redesigned to match image -->
+<!-- Weather Section – GAPSY redesign -->
 <section class="weather-section" id="weather">
-<h2 class="section-title">Live Weather-Matched Fragrances</h2>
-<div class="weather-container">
-    <!-- Left column: description, metrics, match message -->
-    <div class="weather-left">
-        <h3 class="weather-title">Find Your Perfect Scent</h3>
-        <p class="weather-desc" id="weatherRecommendation">Fetching live weather data...</p>
 
-        <!-- Horizontal metrics row -->
-        <div class="metrics-row">
-            <div class="metric-card">
-                <div class="metric-value" id="metricHumidity">--%</div>
-                <div class="metric-label">HUMIDITY</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value" id="metricFeelsLike">--°C</div>
-                <div class="metric-label">FEELS LIKE</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value" id="metricTemp">--°C</div>
-                <div class="metric-label">TEMPERATURE</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value" id="metricWind">-- km/h</div>
-                <div class="metric-label">WIND</div>
-            </div>
-        </div>
-
-        <!-- Match message (updates based on perfume found) -->
-        <div class="match-message" id="matchMessage">Perfume match found for the city</div>
+    <!-- Section heading outside the card -->
+    <div style="text-align:center;margin-bottom:1.8rem;padding-top:2.2rem;position:relative;">
+        <h2 class="section-title" style="font-size:4.4rem;line-height:1.15;background:linear-gradient(135deg,#fff 40%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem;">Live Weather<br>Matched Fragrances</h2>
+        <p style="color:rgba(241,245,255,0.42);font-size:.9rem;">Real-time conditions. Curated scents. Your city, your vibe.</p>
+        <button class="w-refresh-btn" id="refreshWeather" style="position:absolute;right:0;top:50%;transform:translateY(-50%);"><i class="fas fa-sync-alt"></i> Refresh</button>
     </div>
 
-    <!-- Right column: large temperature, city, condition -->
-    <div class="weather-right">
-        <div class="large-temp" id="largeTempDisplay">--°C</div>
-        <div class="city-name-lg" id="cityNameLarge">Lahore</div>
-        <div class="condition-lg" id="conditionLarge">
-            <i class="fas fa-sun" id="conditionIcon"></i>
-            <span id="conditionText">Clear</span>
-        </div>
-    </div>
+    <div class="weather-scene" id="weatherScene">
+        <div class="weather-scene-bg clear-day" id="weatherBg"></div>
+        <div class="weather-fx" id="weatherFx"></div>
 
-    <!-- Carousel and other elements (unchanged) placed after the two columns -->
-    <div class="carousel-wrapper">
-        <!-- 3D City Carousel -->
-        <div class="city-carousel-container">
-            <div class="city-carousel" id="cityCarousel">
-                <!-- Cities will be inserted by JavaScript -->
+        <div class="weather-panel">
+
+            <!-- COL A: Live data -->
+            <div class="weather-col-a">
+                <div class="w-temp-hero">
+                    <span class="w-tod-badge morning" id="wTodBadge"><i class="fas fa-sun"></i>&nbsp;Morning</span>
+                    <div class="w-temp-big" id="largeTempDisplay">--°</div>
+                    <div class="w-city-name" id="cityNameLarge">Lahore</div>
+                    <div class="w-local-time" id="wLocalTime">LOCAL TIME —</div>
+                    <div class="w-condition-row">
+                        <i class="fas fa-sun w-cond-icon" id="conditionIcon"></i>
+                        <span class="w-cond-text" id="conditionText">Clear skies</span>
+                    </div>
+
+                    <div style="margin-top:4.5rem;padding:1.1rem 1.3rem;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);border-radius:12px;line-height:1.7;max-width:80%;">
+                        <p style="color:rgba(255,255,255,0.85);font-size:1.76rem;font-weight:700;letter-spacing:.01em;">Are you travelling abroad?</p>
+                        <p style="color:rgba(255,255,255,0.45);font-size:1.64rem;margin-top:.25rem;">Enter city &amp; click search — we will find the right match for you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-divider"></div>
+
+            <!-- COL B: 3D Carousel -->
+            <div class="weather-col-b">
+                <div class="w-carousel-label" id="carouselLabel">🌍 &nbsp;Explore Cities &mdash; Hover to Match</div>
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <div class="city-carousel-container">
+                        <div class="city-carousel" id="cityCarousel"></div>
+                    </div>
+                </div>
+                <!-- Searched city display -->
+                <div id="searchedCityCard" style="display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1.2rem;padding:2rem 1rem;text-align:center;">
+                    <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:var(--w-muted);margin-bottom:.5rem;">📍 Searched City</div>
+                    <div id="searchedCityImg" style="width:256px;height:256px;border-radius:0;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.7);border:1.5px solid var(--primary);flex-shrink:0;position:relative;transition:all .3s;">
+                        <img id="searchedCityPhoto" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+                        <div class="city-label" id="searchedCityLabel" style="opacity:1;transform:translateY(0);"></div>
+                    </div>
+                    <div id="searchedCityName" style="font-size:1.8rem;font-weight:800;color:var(--w-text);letter-spacing:-.01em;"></div>
+                    <button onclick="document.getElementById('searchedCityCard').style.display='none';document.getElementById('carouselWrapper').style.display='block';document.getElementById('carouselLabel').style.display='block';this.style.display='none';" style="font-size:.75rem;padding:.4rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);cursor:pointer;transition:.2s;">↩ Back to cities</button>
+                </div>
+            </div>
+
+            <div class="w-divider"></div>
+
+            <!-- COL C: Recommendation -->
+            <div class="weather-col-c">
+                <div class="w-rec-label">Recommended Perfume</div>
+
+                <div class="w-perfume-hero" id="wPerfumeCard">
+                    <img class="w-perfume-hero-img" id="wPerfumeImg"
+                        src="https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=400"
+                        alt="Recommended Perfume">
+                    <div class="w-perfume-hero-bg"></div>
+                    <div class="w-perfume-hero-body">
+                        <div id="wPerfumeCategory" style="font-size:.72rem;font-weight:400;text-transform:uppercase;letter-spacing:2px;color:#4ade80;margin-bottom:.4rem;opacity:.9;">Oud &amp; Amber</div>
+                        <div class="w-perfume-hero-name" id="wPerfumeName">Royal Oud</div>
+                        <div class="w-perfume-hero-reason" id="wPerfumeReason">Deep and warming for cold nights</div>
+                        <div class="w-perfume-hero-tags" id="wPerfumeTags">
+                            <span class="w-perfume-hero-tag">Oud</span>
+                            <span class="w-perfume-hero-tag">Amber</span>
+                            <span class="w-perfume-hero-tag">Sandalwood</span>
+                        </div>
+                        <div class="w-perfume-hero-footer">
+                            <span class="w-perfume-hero-price" id="wPerfumePrice">Rs 4,949</span>
+                            <button class="w-perfume-hero-add" id="wAddToCart">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- City search input -->
-        <div class="city-search-container">
-            <input type="text" class="city-search-input" id="citySearchInput" placeholder="Enter any city name (e.g., New York, Tokyo)">
-            <button class="city-search-btn" id="citySearchBtn"><i class="fas fa-search"></i> Get Recommendation</button>
-        </div>
-
-        <p class="section-subtitle" style="margin-top:0; margin-bottom:1rem;">
-            Our intelligent engine recommends perfumes based on your local live weather. Switch cities or search to see real-time weather-based suggestions.
-        </p>
-        <!-- Refresh button -->
-        <button class="btn-ghost" id="refreshWeather" style="margin-bottom: 1.8rem; padding: 0.5rem 1rem;">
-            <i class="fas fa-sync-alt"></i> Refresh Weather
-        </button>
-
-        <!-- Weather-based perfume recommendation card -->
-        <div id="weatherPerfumeRecommendation" class="weather-perfume-card">
-            <img src="https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Perfume" class="weather-perfume-img" id="weatherPerfumeImg">
-            <div class="weather-perfume-info">
-                <div class="weather-perfume-name" id="weatherPerfumeName">Royal Oud</div>
-                <div class="weather-perfume-price" id="weatherPerfumePrice">Rs 4,949</div>
-                <span class="weather-perfume-badge" id="weatherPerfumeBadge">Recommended for today</span>
+        <!-- Bottom search bar -->
+        <div class="weather-bottom-bar">
+            <div class="w-search-wrap">
+                <input type="text" class="w-search-input" id="citySearchInput" placeholder="Search any city worldwide…">
+                <button class="w-search-btn" id="citySearchBtn"><i class="fas fa-search"></i>&nbsp;Search</button>
             </div>
+            <span class="w-last-updated" id="wUpdatedAt"></span>
         </div>
     </div>
-</div>
+
+    <!-- hidden legacy IDs -->
+    <span id="matchMessage" style="display:none;"></span>
+    <div id="weatherPerfumeRecommendation" style="display:none;"></div>
+    <span id="weatherPerfumeName" style="display:none;"></span>
+    <span id="weatherPerfumePrice" style="display:none;"></span>
+    <span id="weatherPerfumeBadge" style="display:none;"></span>
+    <img id="weatherPerfumeImg" style="display:none;" alt="">
 </section>
 <!-- Featured Perfumes -->
 <section class="section featured" id="featured" style="padding-left:0;padding-right:0;padding-bottom:0;">
@@ -3711,7 +3088,6 @@
         
         <div class="this-week-content">
             <div class="current-video-container">
-                <div class="video-upcoming-row">
                 <div class="current-video-wrapper">
                     <video class="current-video" autoplay loop preload="metadata">
                         <source src="Autonomous.mp4" type="video/mp4">
@@ -3732,19 +3108,10 @@
                     </div>
                 </div>
 
-                <!-- UPCOMING CUSTOMER BOX (parallel to video) -->
-                <div class="upcoming-customer-box">
-                    <h3 class="upcoming-customer-heading"><i class="fas fa-user-secret" style="margin-right:8px;"></i>Up Coming Customer</h3>
-                    <div class="upcoming-customer-inner">
-                        <span class="upcoming-guess-text">Guess who?</span>
-                    </div>
-                </div>
-                </div><!-- END video-upcoming-row -->
-                
                 <div class="current-video-info">
                     <h3 class="current-video-title">
-                        <span id="customer-name">Mark Chen</span> - <span id="customer-company">TechNova Solutions</span>
                         <span class="badge">Featured This Week</span>
+                        <span id="customer-name">Mark Chen</span> — <span id="customer-company">TechNova Solutions</span>
                     </h3>
                     <p class="current-video-description" id="current-video-description">
                         Exclusive interview with Mark Chen, CTO of TechNova Solutions, sharing how our Midnight Elixir 
@@ -3775,11 +3142,8 @@
                         </div>
                     </div>
                     
-                    <!-- Share Buttons for All Users -->
+                    <!-- Share Buttons -->
                     <div class="share-container">
-                        <p style="color: var(--text-main); margin-bottom: 10px; font-size: 0.9rem;">
-                            <i class="fas fa-share"></i> Share this video:
-                        </p>
                         <div class="share-buttons">
                             <button class="share-btn facebook" data-platform="facebook">
                                 <i class="fab fa-facebook-f"></i> Facebook
@@ -3798,6 +3162,42 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- GUESS WHO SECTION -->
+    <div class="guess-who-card">
+        <div class="guess-who-glow"></div>
+
+        <div class="guess-who-left">
+            <div class="guess-who-badge">🎬 Coming Next</div>
+            <h3 class="guess-who-title">Guess Who?</h3>
+            <p class="guess-who-hint">A visionary leader from one of Pakistan's fastest-growing <strong>technology organisations</strong> sits down with TROY to reveal the scent behind their success story.</p>
+            <div class="guess-who-clues">
+                <div class="guess-who-clue"><i class="fas fa-building"></i> Tech industry</div>
+                <div class="guess-who-clue"><i class="fas fa-map-marker-alt"></i> Lahore-based HQ</div>
+                <div class="guess-who-clue"><i class="fas fa-users"></i> 500+ employees</div>
+                <div class="guess-who-clue"><i class="fas fa-trophy"></i> Award-winning CEO</div>
+            </div>
+            <div class="guess-who-countdown" id="guessCountdown">
+                <div class="gw-count-block"><span id="gwDays">00</span><span>Days</span></div>
+                <div class="gw-count-sep">:</div>
+                <div class="gw-count-block"><span id="gwHours">00</span><span>Hours</span></div>
+                <div class="gw-count-sep">:</div>
+                <div class="gw-count-block"><span id="gwMins">00</span><span>Mins</span></div>
+                <div class="gw-count-sep">:</div>
+                <div class="gw-count-block"><span id="gwSecs">00</span><span>Secs</span></div>
+            </div>
+        </div>
+
+        <div class="guess-who-right">
+            <div class="guess-who-silhouette">
+                <div class="gw-silhouette-img">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <div class="gw-org-pill"><i class="fas fa-landmark"></i> &nbsp;Tech Organisation — Lahore</div>
+                <p style="color:rgba(241,245,255,0.35);font-size:.78rem;margin-top:.75rem;letter-spacing:.05em;">Identity revealed on launch day</p>
+            </div>
         </div>
     </div>
 
@@ -4385,299 +3785,352 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
 </script>
 
 <script>
-/* === SIMPLIFIED WORKING WEATHER SYSTEM === */
-(function() {
-    const cityWeatherData = {
-        "Lahore": { 
-            temp: 24, 
-            condition: "mild", 
-            recommendation: "Balanced scents with citrus + woods or light oud work best.",
-            humidity: 45,
-            wind: 12,
-            feelsLike: 25
-        },
-        "Karachi": { 
-            temp: 30, 
-            condition: "warm", 
-            recommendation: "Fresh, aquatic and citrus scents that feel cooling in humidity.",
-            humidity: 65,
-            wind: 18,
-            feelsLike: 32
-        },
-        "Islamabad": { 
-            temp: 20, 
-            condition: "cool", 
-            recommendation: "Warm, spicy and amber scents feel very cozy in this weather.",
-            humidity: 40,
-            wind: 10,
-            feelsLike: 19
-        },
-        "Dubai": { 
-            temp: 34, 
-            condition: "hot", 
-            recommendation: "Light but strong projecting fresh scents that survive heat.",
-            humidity: 50,
-            wind: 15,
-            feelsLike: 36
-        },
-        "London": { 
-            temp: 15, 
-            condition: "cool", 
-            recommendation: "Rich woods, ambers and sweet gourmands for cooler climate.",
-            humidity: 70,
-            wind: 20,
-            feelsLike: 14
-        }
+/* === SMART WEATHER ENGINE === */
+(function(){
+    const cityCoords={
+        'Lahore':{lat:31.5497,lon:74.3436},'Karachi':{lat:24.8607,lon:67.0011},
+        'Islamabad':{lat:33.6844,lon:73.0479},'Dubai':{lat:25.2048,lon:55.2708},
+        'London':{lat:51.5074,lon:-0.1278},'New York':{lat:40.7128,lon:-74.006},
+        'Tokyo':{lat:35.6762,lon:139.6503},'Paris':{lat:48.8566,lon:2.3522}
     };
 
-    const cityCoords = {
-        "Lahore": { lat: 31.5497, lon: 74.3436 },
-        "Karachi": { lat: 24.8607, lon: 67.0011 },
-        "Islamabad": { lat: 33.6844, lon: 73.0479 },
-        "Dubai": { lat: 25.2048, lon: 55.2708 },
-        "London": { lat: 51.5074, lon: -0.1278 }
-    };
-
-    // New elements
-    let weatherRecommendation, cityNameLarge, largeTempDisplay, conditionText, conditionIcon;
-    let metricHumidity, metricFeelsLike, metricTemp, metricWind;
-    let refreshButton, citySearchBtn, citySearchInput;
-    let matchMessage;
-
-    function initWeather() {
-        weatherRecommendation = document.getElementById('weatherRecommendation');
-        cityNameLarge = document.getElementById('cityNameLarge');
-        largeTempDisplay = document.getElementById('largeTempDisplay');
-        conditionText = document.getElementById('conditionText');
-        conditionIcon = document.getElementById('conditionIcon');
-        metricHumidity = document.getElementById('metricHumidity');
-        metricFeelsLike = document.getElementById('metricFeelsLike');
-        metricTemp = document.getElementById('metricTemp');
-        metricWind = document.getElementById('metricWind');
-        refreshButton = document.getElementById('refreshWeather');
-        citySearchBtn = document.getElementById('citySearchBtn');
-        citySearchInput = document.getElementById('citySearchInput');
-        matchMessage = document.getElementById('matchMessage');
-
-        const defaultCity = "Lahore";
-        updateCityWeather(defaultCity);
-        setupEventListeners();
-        fetchLiveWeather(defaultCity);
+    function getCondition(code){
+        if(code===0)return'Clear';if(code<=3)return'Partly cloudy';
+        if(code<=48)return'Foggy';if(code<=57)return'Drizzle';
+        if(code<=67)return'Rain';if(code<=77)return'Snow';
+        if(code<=82)return'Rain showers';if(code<=86)return'Snow showers';
+        if(code<=99)return'Thunderstorm';return'Clear';
     }
 
-    function setupEventListeners() {
-        if (refreshButton) {
-            refreshButton.addEventListener('click', function() {
-                const activeCity = document.querySelector('.city-btn.active')?.dataset.city || 'Lahore';
-                fetchLiveWeather(activeCity);
-                if (largeTempDisplay) largeTempDisplay.textContent = "Loading...";
-                if (weatherRecommendation) weatherRecommendation.textContent = "Fetching live weather data...";
-                refreshButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-                setTimeout(() => { if (refreshButton) refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Weather'; }, 2000);
-            });
-        }
-        if (citySearchBtn) {
-            citySearchBtn.addEventListener('click', function() {
-                const cityName = citySearchInput.value.trim();
-                if (!cityName) { alert('Please enter a city name'); return; }
-                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.length > 0) {
-                            const lat = parseFloat(data[0].lat);
-                            const lon = parseFloat(data[0].lon);
-                            const displayName = data[0].display_name.split(',')[0];
-                            if (cityNameLarge) cityNameLarge.textContent = displayName;
-                            fetchLiveWeather(displayName, lat, lon);
-                        } else alert('City not found. Please try another name.');
-                    })
-                    .catch(err => { console.error('Geocoding error:', err); alert('Could not fetch city data. Please try again.'); });
-            });
-        }
+    function getIcon(cond,isNight){
+        const c=cond.toLowerCase();
+        if(c.includes('thunder'))return'fa-bolt';
+        if(c.includes('snow'))return'fa-snowflake';
+        if(c.includes('rain')||c.includes('drizzle'))return'fa-cloud-rain';
+        if(c.includes('fog'))return'fa-smog';
+        if(c.includes('cloud'))return'fa-cloud-sun';
+        return isNight?'fa-moon':'fa-sun';
     }
 
-    function updateCityWeather(city) {
-        const weather = cityWeatherData[city];
-        if (!weather) return;
+    function getTimeOfDay(hour){
+        if(hour>=5&&hour<12)return'morning';
+        if(hour>=12&&hour<17)return'afternoon';
+        if(hour>=17&&hour<21)return'evening';
+        return'night';
+    }
+    function todLabel(tod){return{morning:'🌅 Morning',afternoon:'☀️ Afternoon',evening:'🌆 Evening',night:'🌙 Night'}[tod]||'🌙 Night';}
+    function todIcon(tod){return{morning:'fa-sun',afternoon:'fa-sun',evening:'fa-cloud-sun',night:'fa-moon'}[tod]||'fa-moon';}
 
-        if (largeTempDisplay) largeTempDisplay.textContent = weather.temp + '°C';
-        if (cityNameLarge) cityNameLarge.textContent = city;
-        if (weatherRecommendation) weatherRecommendation.textContent = `In ${city}'s ${weather.condition.toLowerCase()} ${weather.temp}°C, ${weather.recommendation}`;
-
-        // Update metrics
-        if (metricTemp) metricTemp.textContent = weather.temp + '°C';
-        if (metricWind) metricWind.textContent = weather.wind + ' km/h';
-        if (metricHumidity) metricHumidity.textContent = weather.humidity + '%';
-        if (metricFeelsLike) metricFeelsLike.textContent = weather.feelsLike + '°C';
-
-        // Update condition
-        if (conditionText) conditionText.textContent = weather.condition;
-        if (conditionIcon) {
-            let icon = "fa-sun";
-            if (weather.condition.includes("cloud")) icon = "fa-cloud";
-            else if (weather.condition.includes("Rain")) icon = "fa-cloud-rain";
-            else if (weather.condition.includes("Snow")) icon = "fa-snowflake";
-            else if (weather.condition.includes("Thunderstorm")) icon = "fa-bolt";
-            else if (weather.condition.includes("Fog")) icon = "fa-smog";
-            conditionIcon.className = `fas ${icon}`;
-        }
-
-        // Update match message (based on perfume recommendation later)
-        if (window.updateWeatherPerfumeRecommendation) {
-            window.updateWeatherPerfumeRecommendation(weather.temp);
-        }
+    function getSceneClass(cond,isNight){
+        const c=cond.toLowerCase();
+        if(c.includes('thunder'))return'storm';
+        if(c.includes('snow'))return'snowy';
+        if(c.includes('rain')||c.includes('drizzle'))return'rainy';
+        if(c.includes('fog'))return'foggy';
+        if(c.includes('cloud'))return'cloudy';
+        return isNight?'clear-night':'clear-day';
     }
 
-    async function fetchLiveWeather(city, customLat, customLon) {
-        let lat, lon;
-        if (customLat && customLon) {
-            lat = customLat;
-            lon = customLon;
-        } else {
-            const coords = cityCoords[city];
-            if (!coords) { console.log(`No coordinates found for ${city}`); return; }
-            lat = coords.lat;
-            lon = coords.lon;
-        }
-        try {
-            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=auto`;
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            const data = await response.json();
-            if (data.current) {
-                const liveTemp = Math.round(data.current.temperature_2m);
-                const liveHumidity = data.current.relative_humidity_2m;
-                const liveWind = Math.round(data.current.wind_speed_10m);
-                const feelsLike = calculateFeelsLike(liveTemp, liveHumidity, liveWind);
-                const condition = getWeatherCondition(data.current.weather_code);
+    function buildFX(scene,cond,isNight){
+        const fx=document.getElementById('weatherFx');
+        if(!fx)return;
+        fx.innerHTML='';
+        const c=cond.toLowerCase();
 
-                if (largeTempDisplay) largeTempDisplay.textContent = liveTemp + '°C';
-                if (cityNameLarge) cityNameLarge.textContent = city;
-                if (weatherRecommendation) {
-                    const recommendation = getRecommendation(condition, liveTemp);
-                    weatherRecommendation.textContent = `In ${city}'s ${condition.toLowerCase()} ${liveTemp}°C, ${recommendation}`;
-                }
-
-                // Update metrics
-                if (metricTemp) metricTemp.textContent = liveTemp + '°C';
-                if (metricWind) metricWind.textContent = liveWind + ' km/h';
-                if (metricHumidity) metricHumidity.textContent = liveHumidity + '%';
-                if (metricFeelsLike) metricFeelsLike.textContent = feelsLike + '°C';
-
-                // Update condition
-                if (conditionText) conditionText.textContent = condition;
-                if (conditionIcon) {
-                    let icon = "fa-sun";
-                    if (condition.includes("cloud")) icon = "fa-cloud";
-                    else if (condition.includes("Rain")) icon = "fa-cloud-rain";
-                    else if (condition.includes("Snow")) icon = "fa-snowflake";
-                    else if (condition.includes("Thunderstorm")) icon = "fa-bolt";
-                    else if (condition.includes("Fog")) icon = "fa-smog";
-                    conditionIcon.className = `fas ${icon}`;
-                }
-
-                if (window.updateWeatherPerfumeRecommendation) window.updateWeatherPerfumeRecommendation(liveTemp);
+        if(scene==='clear-day'){
+            for(let i=0;i<8;i++){
+                const r=document.createElement('div');r.className='sun-ray';
+                r.style.cssText=`--r:${i*45}deg;animation-delay:${i*0.4}s;left:50%;top:-30px;`;
+                fx.appendChild(r);
             }
-        } catch (error) {
-            console.log(`Using fallback data for ${city}:`, error.message);
-            updateCityWeather(city);
+        }
+        if(scene==='clear-night'){
+            for(let i=0;i<40;i++){
+                const s=document.createElement('div');s.className='star-dot';
+                s.style.cssText=`--td:${1.5+Math.random()*3}s;width:${1+Math.random()*3}px;height:${1+Math.random()*3}px;left:${Math.random()*100}%;top:${Math.random()*70}%;animation-delay:${Math.random()*4}s;`;
+                fx.appendChild(s);
+            }
+        }
+        if(c.includes('rain')||c.includes('drizzle')){
+            for(let i=0;i<60;i++){
+                const d=document.createElement('div');d.className='rain-drop';
+                d.style.cssText=`--rd:${0.5+Math.random()*0.8}s;height:${12+Math.random()*14}px;left:${Math.random()*100}%;animation-delay:${Math.random()*1}s;`;
+                fx.appendChild(d);
+            }
+        }
+        if(c.includes('snow')){
+            for(let i=0;i<35;i++){
+                const s=document.createElement('div');s.className='snow-flake';
+                s.style.cssText=`--sd:${3+Math.random()*4}s;--sf:${8+Math.random()*10}px;--sx:${-40+Math.random()*80}px;left:${Math.random()*100}%;animation-delay:${Math.random()*4}s;`;
+                s.textContent='❄';
+                fx.appendChild(s);
+            }
+        }
+        if(c.includes('thunder')){
+            const l=document.createElement('div');l.className='lightning';fx.appendChild(l);
+        }
+        if(c.includes('cloud')){
+            const cl=document.createElement('div');cl.className='cloud-layer';
+            cl.style.cssText='--cd:40s;';
+            for(let i=0;i<6;i++){
+                const b=document.createElement('div');b.className='cloud-blob';
+                b.style.cssText=`--cop:0.08;width:${180+Math.random()*120}px;margin-top:${Math.random()*30}px;`;
+                cl.appendChild(b);
+            }
+            fx.appendChild(cl);
         }
     }
 
-    function calculateFeelsLike(temp, humidity, wind) {
-        if (temp >= 27) { return Math.round(temp + 0.05 * humidity); }
-        else if (temp <= 10 && wind > 15) { return Math.round(13.12 + 0.6215 * temp - 11.37 * Math.pow(wind, 0.16) + 0.3965 * temp * Math.pow(wind, 0.16)); }
+    function getInsight(cond,temp,humidity,wind){
+        const c=cond.toLowerCase();
+        if(temp>=35)return`Extreme heat at ${temp}°C — opt for ultra-light citrus or aquatic sprays that won't overpower.`;
+        if(temp>=28&&humidity>70)return`Hot and humid conditions (${temp}°C, ${humidity}% RH) — heavier base notes survive better than top notes here.`;
+        if(temp>=25)return`Warm and comfortable at ${temp}°C — fresh florals and light musks stay vibrant all day.`;
+        if(temp>=15&&c.includes('rain'))return`Rainy day at ${temp}°C — moisture amplifies fragrance. Apply half your usual amount.`;
+        if(temp>=15)return`Mild ${temp}°C weather — the ideal canvas for balanced, versatile everyday scents.`;
+        if(temp>=5&&wind>20)return`Cold and windy at ${temp}°C — rich ouds and resins cut through the wind and last longer.`;
+        if(temp>=5)return`Cool ${temp}°C — warm oriental bases project beautifully. Apply to inner wrists and neck.`;
+        return`Bracing cold at ${temp}°C — heavy, intense scents like oud and amber are your best friends today.`;
+    }
+
+    function getWhy(cond,temp,humidity){
+        const c=cond.toLowerCase();
+        if(humidity>75)return`High humidity (${humidity}%) boosts sillage — go lighter on application to avoid overpowering.`;
+        if(c.includes('rain'))return`Rain releases earthy petrichor notes — woody and green scents pair perfectly.`;
+        if(temp>30)return`Heat volatilises top notes quickly. Base-heavy fragrances give the best longevity.`;
+        if(temp<10)return`Cold slows evaporation — rich, dense base notes last hours longer than in summer.`;
+        return`Balanced conditions allow all fragrance layers to express themselves naturally.`;
+    }
+
+    function getOccasion(tod,cond){
+        const c=cond.toLowerCase();
+        if(tod==='morning')return'Great for a fresh office start or brisk morning commute.';
+        if(tod==='evening')return'Evening wear — confident and memorable for dinner or events.';
+        if(c.includes('rain'))return'Cosy indoor occasions — café meetings or work-from-home days.';
+        if(tod==='night')return'Late nights out, formal dinners, or a private evening in.';
+        return'Versatile for casual outings, meetings and afternoon socialising.';
+    }
+
+    function getApplyTip(temp,humidity){
+        if(humidity>70)return'Less is more today — 1–2 sprays on neck and wrist are plenty in humid air.';
+        if(temp<10)return'Layer up: apply to clothes and exposed pulse points to help the scent project in cold air.';
+        return'Classic pulse points — wrists, neck, behind ears — maximise warmth and longevity.';
+    }
+
+    function getIntensity(temp,humidity,cond){
+        const c=cond.toLowerCase();
+        if(c.includes('thunder')||c.includes('snow'))return 85;
+        if(c.includes('rain'))return 40;
+        if(temp>=32)return 25;
+        if(temp>=22)return 50;
+        if(temp>=12)return 70;
+        return 90;
+    }
+
+    function feelsLike(temp,humidity,wind){
+        if(temp>=27)return Math.round(temp+0.05*humidity);
+        if(temp<=10&&wind>15)return Math.round(13.12+0.6215*temp-11.37*Math.pow(wind,0.16)+0.3965*temp*Math.pow(wind,0.16));
         return temp;
     }
 
-    function getWeatherCondition(weatherCode) {
-        if (weatherCode === 0) return "Clear";
-        if (weatherCode <= 3) return "Partly cloudy";
-        if (weatherCode <= 48) return "Foggy";
-        if (weatherCode <= 57) return "Drizzle";
-        if (weatherCode <= 67) return "Rain";
-        if (weatherCode <= 77) return "Snow";
-        if (weatherCode <= 82) return "Rain showers";
-        if (weatherCode <= 86) return "Snow showers";
-        if (weatherCode <= 99) return "Thunderstorm";
-        return "Clear";
+    function applyWeather(city,temp,humidity,wind,condition,tzOffset,maxTemp){
+        const now=new Date();
+        const utcMs=now.getTime()+now.getTimezoneOffset()*60000;
+        const cityLocalMs=utcMs+(tzOffset||0)*1000;
+        const localDate=new Date(cityLocalMs);
+        const hour=localDate.getHours();
+        const tod=getTimeOfDay(hour);
+        const isNight=(hour>=21||hour<5);
+        const localTimeStr=localDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+        const scene=getSceneClass(condition,isNight);
+
+        const bg=document.getElementById('weatherBg');
+        if(bg){bg.className='weather-scene-bg '+scene;}
+        buildFX(scene,condition,isNight);
+
+        const weatherSec=document.getElementById('weather');
+        if(weatherSec){
+            weatherSec.classList.remove('is-day','is-night','is-morning','is-evening');
+            if(tod==='night')weatherSec.classList.add('is-night');
+            else if(tod==='morning')weatherSec.classList.add('is-morning');
+            else if(tod==='evening')weatherSec.classList.add('is-evening');
+            else weatherSec.classList.add('is-day');
+        }
+
+        const weatherSceneEl=document.getElementById('weatherScene');
+        if(weatherSceneEl){
+            weatherSceneEl.classList.remove('theme-day','theme-morning','theme-evening','theme-night');
+            const themeMap={morning:'theme-morning',afternoon:'theme-day',evening:'theme-evening',night:'theme-night'};
+            weatherSceneEl.classList.add(themeMap[tod]||'theme-night');
+        }
+
+        const todBadge=document.getElementById('wTodBadge');
+        if(todBadge){
+            todBadge.className='w-tod-badge '+tod;
+            todBadge.innerHTML=`<i class="fas ${todIcon(tod)}"></i> ${todLabel(tod).split(' ')[1]}`;
+        }
+
+        const tempEl=document.getElementById('largeTempDisplay');
+        if(tempEl){tempEl.textContent=temp+'°';}
+
+        const cityEl=document.getElementById('cityNameLarge');
+        if(cityEl)cityEl.textContent=city;
+        const timeEl=document.getElementById('wLocalTime');
+        if(timeEl)timeEl.textContent='Local time '+localTimeStr;
+
+        const condIcon=document.getElementById('conditionIcon');
+        if(condIcon)condIcon.className='fas '+getIcon(condition,isNight)+' w-cond-icon';
+        const condText=document.getElementById('conditionText');
+        if(condText)condText.textContent=condition;
+
+        const fl=feelsLike(temp,humidity,wind);
+        const g=id=>document.getElementById(id);
+        if(g('metricTemp'))g('metricTemp').textContent=temp+'°C';
+        if(g('metricWind'))g('metricWind').textContent=wind+' km/h';
+        if(g('metricHumidity'))g('metricHumidity').textContent=humidity+'%';
+        if(g('metricFeelsLike'))g('metricFeelsLike').textContent=fl+'°C';
+        if(g('metricMaxTemp'))g('metricMaxTemp').textContent=(maxTemp!=null?maxTemp:temp+4)+'°C';
+
+        if(g('weatherRecommendation'))g('weatherRecommendation').textContent=getInsight(condition,temp,humidity,wind);
+        if(g('wWhyText'))g('wWhyText').textContent=getWhy(condition,temp,humidity);
+        if(g('wOccasionText'))g('wOccasionText').textContent=getOccasion(tod,condition);
+        if(g('wApplyText'))g('wApplyText').textContent=getApplyTip(temp,humidity);
+
+        const intensity=getIntensity(temp,humidity,condition);
+        const fill=g('wIntensityFill');
+        if(fill)fill.style.width=intensity+'%';
+
+        if(g('wUpdatedAt'))g('wUpdatedAt').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+
+        if(window.updateWeatherPerfumeRecommendation)window.updateWeatherPerfumeRecommendation(temp,condition,tod);
     }
 
-    function getRecommendation(condition, temp) {
-        if (temp >= 30) return "Perfect for light, fresh fragrances that stay vibrant in the heat.";
-        else if (temp >= 20) return "Ideal for versatile scents that work from day to evening.";
-        else if (temp >= 10) return "Great for warm, cozy fragrances that embrace the cooler air.";
-        else return "Best for rich, intense scents that project well in cold weather.";
+    async function fetchLiveWeather(city,customLat,customLon){
+        let lat=customLat,lon=customLon;
+        if(!lat||!lon){const c=cityCoords[city];if(!c)return;lat=c.lat;lon=c.lon;}
+        try{
+            const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max&timezone=auto`);
+            if(!r.ok)throw new Error();
+            const d=await r.json();
+            if(d.current){
+                const tz=d.utc_offset_seconds||0;
+                const maxTemp=d.daily&&d.daily.temperature_2m_max?Math.round(d.daily.temperature_2m_max[0]):null;
+                applyWeather(city,Math.round(d.current.temperature_2m),d.current.relative_humidity_2m,Math.round(d.current.wind_speed_10m),getCondition(d.current.weather_code),tz,maxTemp);
+            }
+        }catch(e){applyWeather(city,28,60,12,'Clear',18000,34);}
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(initWeather, 1000);
-    });
+    function initWeather(){
+        fetchLiveWeather('Lahore');
+        const refresh=document.getElementById('refreshWeather');
+        if(refresh)refresh.addEventListener('click',()=>{
+            const city=document.getElementById('cityNameLarge').textContent||'Lahore';
+            fetchLiveWeather(city);
+        });
 
-    window.fetchLiveWeather = fetchLiveWeather;
+        const weatherSection=document.getElementById('weather');
+        if(weatherSection&&'IntersectionObserver' in window){
+            let lastRefresh=0;
+            new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        const now=Date.now();
+                        if(now-lastRefresh>60000){
+                            lastRefresh=now;
+                            const city=document.getElementById('cityNameLarge').textContent||'Lahore';
+                            fetchLiveWeather(city);
+                        }
+                    }
+                });
+            },{threshold:0.2}).observe(weatherSection);
+        }
+        const searchBtn=document.getElementById('citySearchBtn');
+        const searchInput=document.getElementById('citySearchInput');
+        if(searchBtn)searchBtn.addEventListener('click',()=>{
+            const val=searchInput.value.trim();if(!val)return;
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(val)}&format=json&limit=1`)
+                .then(r=>r.json())
+                .then(data=>{
+                    if(data&&data.length>0){
+                        const cityName=data[0].display_name.split(',')[0];
+                        const lat=parseFloat(data[0].lat);
+                        const lon=parseFloat(data[0].lon);
+                        fetchLiveWeather(cityName,lat,lon);
+
+                        const carouselWrapper=document.getElementById('carouselWrapper');
+                        const carouselLabel=document.getElementById('carouselLabel');
+                        const cityCard=document.getElementById('searchedCityCard');
+                        const cityNameEl=document.getElementById('searchedCityName');
+                        const cityPhoto=document.getElementById('searchedCityPhoto');
+
+                        if(carouselWrapper)carouselWrapper.style.display='none';
+                        if(carouselLabel)carouselLabel.style.display='none';
+                        if(cityNameEl)cityNameEl.textContent=cityName;
+
+                        if(cityPhoto){
+                            cityPhoto.alt=cityName;
+                            fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cityName)}`)
+                                .then(r=>r.json())
+                                .then(wiki=>{
+                                    if(wiki.thumbnail&&wiki.thumbnail.source){
+                                        cityPhoto.src=wiki.thumbnail.source.replace(/\/\d+px-/,'/400px-');
+                                    } else {
+                                        cityPhoto.src=`https://source.unsplash.com/256x256/?${encodeURIComponent(cityName)},city`;
+                                    }
+                                })
+                                .catch(()=>{
+                                    cityPhoto.src=`https://source.unsplash.com/256x256/?${encodeURIComponent(cityName)},city`;
+                                });
+                        }
+
+                        const labelEl=document.getElementById('searchedCityLabel');
+                        if(labelEl)labelEl.textContent=cityName;
+
+                        if(cityCard){cityCard.style.display='flex';}
+                    }else if(typeof showToast==='function'){showToast('City not found. Try another name.');}
+                }).catch(()=>{if(typeof showToast==='function')showToast('Could not fetch city data.');});
+        });
+        if(searchInput)searchInput.addEventListener('keydown',e=>{if(e.key==='Enter')searchBtn&&searchBtn.click();});
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(initWeather,800));
+    window.fetchLiveWeather=fetchLiveWeather;
 })();
 </script>
 
 <script>
 /* === 3D CITY CAROUSEL === */
-(function() {
-    const carouselCities = [
-        { name: 'Lahore', lat: 31.5497, lon: 74.3436, image: 'https://images.pexels.com/photos/4064436/pexels-photo-4064436.jpeg?auto=compress&cs=tinysrgb&w=600' },
-        { name: 'Karachi', lat: 24.8607, lon: 67.0011, image: 'https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=600' },
-        { name: 'Islamabad', lat: 33.6844, lon: 73.0479, image: 'https://images.pexels.com/photos/2179018/pexels-photo-2179018.jpeg?auto=compress&cs=tinysrgb&w=600' },
-        { name: 'Dubai', lat: 25.2048, lon: 55.2708, image: 'https://images.pexels.com/photos/290595/pexels-photo-290595.jpeg?auto=compress&cs=tinysrgb&w=600' },
-        { name: 'London', lat: 51.5074, lon: -0.1278, image: 'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=600' },
-        { name: 'New York', lat: 40.7128, lon: -74.0060, image: 'https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=600' }
+(function(){
+    const carouselCities=[
+        {name:'Lahore',lat:31.5497,lon:74.3436,image:'https://images.pexels.com/photos/4064436/pexels-photo-4064436.jpeg?auto=compress&cs=tinysrgb&w=400'},
+        {name:'Karachi',lat:24.8607,lon:67.0011,image:'https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=400'},
+        {name:'Islamabad',lat:33.6844,lon:73.0479,image:'https://images.pexels.com/photos/2179018/pexels-photo-2179018.jpeg?auto=compress&cs=tinysrgb&w=400'},
+        {name:'Dubai',lat:25.2048,lon:55.2708,image:'https://images.pexels.com/photos/290595/pexels-photo-290595.jpeg?auto=compress&cs=tinysrgb&w=400'},
+        {name:'London',lat:51.5074,lon:-0.1278,image:'https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=400'},
+        {name:'New York',lat:40.7128,lon:-74.006,image:'https://images.pexels.com/photos/802024/pexels-photo-802024.jpeg?auto=compress&cs=tinysrgb&w=400'}
     ];
-
-    const carousel = document.getElementById('cityCarousel');
-    if (!carousel) return;
-
-    carouselCities.forEach((city, index) => {
-        const item = document.createElement('div');
-        item.className = 'carousel-item';
-        item.dataset.city = city.name;
-        item.dataset.lat = city.lat;
-        item.dataset.lon = city.lon;
-
-        item.innerHTML = `
-            <img src="${city.image}" alt="${city.name}" loading="lazy">
-            <div class="city-label">${city.name}</div>
-        `;
-
-        item.addEventListener('mouseenter', function() {
-            const cityName = this.dataset.city;
-            const lat = parseFloat(this.dataset.lat);
-            const lon = parseFloat(this.dataset.lon);
-
-            const cityNameLarge = document.getElementById('cityNameLarge');
-            if (cityNameLarge) cityNameLarge.textContent = cityName;
-
-            if (typeof window.fetchLiveWeather === 'function') {
-                window.fetchLiveWeather(cityName, lat, lon);
-            } else {
-                console.warn('fetchLiveWeather not found');
-                const tempEl = document.getElementById('largeTempDisplay');
-                if (tempEl) {
-                    const tempText = tempEl.textContent;
-                    const temp = parseInt(tempText) || 24;
-                    if (window.updateWeatherPerfumeRecommendation) {
-                        window.updateWeatherPerfumeRecommendation(temp);
-                    }
-                }
-            }
-
-            document.querySelectorAll('.carousel-item').forEach(el => el.style.borderColor = 'transparent');
-            this.style.borderColor = 'var(--primary)';
+    const carousel=document.getElementById('cityCarousel');
+    if(!carousel)return;
+    carouselCities.forEach(city=>{
+        const item=document.createElement('div');
+        item.className='carousel-item';
+        item.dataset.city=city.name;
+        item.dataset.lat=city.lat;
+        item.dataset.lon=city.lon;
+        item.innerHTML=`<img src="${city.image}" alt="${city.name}" loading="lazy"><div class="city-label">${city.name}</div>`;
+        item.addEventListener('mouseenter',function(){
+            const cn=document.getElementById('cityNameLarge');
+            if(cn)cn.textContent=this.dataset.city;
+            if(typeof window.fetchLiveWeather==='function')window.fetchLiveWeather(this.dataset.city,parseFloat(this.dataset.lat),parseFloat(this.dataset.lon));
+            document.querySelectorAll('.carousel-item').forEach(el=>el.style.borderColor='transparent');
+            this.style.borderColor='var(--primary)';
         });
-
         carousel.appendChild(item);
     });
-
-    setTimeout(() => {
-        const firstItem = document.querySelector('.carousel-item');
-        if (firstItem) firstItem.dispatchEvent(new Event('mouseenter'));
-    }, 1000);
+    setTimeout(()=>{
+        const first=document.querySelector('.carousel-item');
+        if(first)first.dispatchEvent(new Event('mouseenter'));
+    },1500);
 })();
 </script>
 
@@ -4766,10 +4219,10 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         };
 
         // Weather perfume card elements
-        const weatherPerfumeImg = document.getElementById('weatherPerfumeImg');
-        const weatherPerfumeName = document.getElementById('weatherPerfumeName');
-        const weatherPerfumePrice = document.getElementById('weatherPerfumePrice');
-        const weatherPerfumeBadge = document.getElementById('weatherPerfumeBadge');
+        const weatherPerfumeImg = document.getElementById('wPerfumeImg');
+        const weatherPerfumeName = document.getElementById('wPerfumeName');
+        const weatherPerfumePrice = document.getElementById('wPerfumePrice');
+        const weatherPerfumeBadge = document.getElementById('wPerfumeCategory');
 
         // Helper function to get temperature display for a perfume
         function getTemperatureDisplay(p) {
@@ -4827,16 +4280,22 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         function updateWeatherPerfumeCard(temp) {
             if (!weatherPerfumeImg || !weatherPerfumeName || !weatherPerfumePrice || !weatherPerfumeBadge) return;
             const perfume = findPerfumeByTemperature(temp);
+            const reasonEl = document.getElementById('wPerfumeReason');
+            const tagsEl = document.getElementById('wPerfumeTags');
             if (perfume) {
                 weatherPerfumeImg.src = perfume.images && perfume.images[0] ? perfume.images[0] : 'https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800';
                 weatherPerfumeName.textContent = perfume.name;
                 weatherPerfumePrice.textContent = `Rs ${perfume.price.toLocaleString()}`;
                 weatherPerfumeBadge.textContent = `Recommended for ${temp}°C`;
+                if (reasonEl) reasonEl.textContent = perfume.description ? perfume.description.substring(0, 60) : `Perfect for ${temp}°C weather`;
+                if (tagsEl) tagsEl.innerHTML = (perfume.notes || []).map(n => `<span class="w-tag">${n}</span>`).join('');
             } else {
                 weatherPerfumeImg.src = 'https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800';
                 weatherPerfumeName.textContent = 'No match found';
                 weatherPerfumePrice.textContent = '';
                 weatherPerfumeBadge.textContent = 'Try a different city';
+                if (reasonEl) reasonEl.textContent = 'Search a city to get a recommendation';
+                if (tagsEl) tagsEl.innerHTML = '';
             }
         }
 
@@ -5529,9 +4988,6 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             // Set initial scroll state
             handleScroll();
             
-            // Initialize Mood Match system
-            initializeMoodMatch();
-            
             // Check for admin data updates periodically (every 5 seconds)
             setInterval(() => {
                 loadAdminData();
@@ -5946,455 +5402,317 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
 
 <!-- MOOD MATCH JAVASCRIPT (UPDATED) -->
 <script>
-        // Mood data for TROY Perfumes – now only provides display names and icons (no hardcoded perfume)
-        const moodData = {
-            happy:     { icon: "😊", name: "Happy & Joyful",      confidence: "94%" },
-            energetic: { icon: "⚡", name: "Energetic & Dynamic", confidence: "88%" },
-            calm:      { icon: "😌", name: "Calm & Serene",       confidence: "92%" },
-            romantic:  { icon: "😍", name: "Romantic & Dreamy",   confidence: "85%" },
-            confident: { icon: "😎", name: "Confident & Bold",    confidence: "90%" },
-            neutral:   { icon: "😐", name: "Neutral & Balanced",  confidence: "82%" },
-            surprised: { icon: "😲", name: "Surprised & Alert",   confidence: "79%" },
-            sad:       { icon: "😢", name: "Sad & Melancholic",   confidence: "76%" }
-        };
+(function(){
+/* ─────────────────────────────────────────────
+   MOOD & PERFUME DATA
+───────────────────────────────────────────── */
+const MOODS = [
+  { emoji:'😊', label:'Happy',     id:3, color:'#facc15', glow:'rgba(250,204,21,0.35)',
+    traits:['Radiant','Playful','Uplifting'], desc:'Your joyful energy calls for a burst of citrus and freshness.' },
+  { emoji:'😌', label:'Calm',      id:4, color:'#a78bfa', glow:'rgba(167,139,250,0.35)',
+    traits:['Serene','Balanced','Mindful'], desc:'Your peaceful state pairs beautifully with soft floral whispers.' },
+  { emoji:'💪', label:'Confident', id:1, color:'#f97316', glow:'rgba(249,115,22,0.4)',
+    traits:['Powerful','Decisive','Magnetic'], desc:'Your bold presence demands a scent as commanding as you are.' },
+  { emoji:'🌙', label:'Romantic',  id:2, color:'#ec4899', glow:'rgba(236,72,153,0.4)',
+    traits:['Passionate','Dreamy','Sensual'], desc:'Your romantic soul deserves a fragrance that lingers like a memory.' },
+  { emoji:'❄️', label:'Cool',      id:6, color:'#38bdf8', glow:'rgba(56,189,248,0.4)',
+    traits:['Effortless','Fresh','Modern'], desc:'Your cool composure is perfectly matched with clean aquatic clarity.' },
+  { emoji:'🔥', label:'Bold',      id:5, color:'#ef4444', glow:'rgba(239,68,68,0.4)',
+    traits:['Intense','Daring','Fearless'], desc:'Your fiery spirit needs a scent with serious depth and dark allure.' },
+  { emoji:'🌸', label:'Fresh',     id:3, color:'#4ade80', glow:'rgba(74,222,128,0.35)',
+    traits:['Light','Breezy','Natural'], desc:'Your vibrant freshness shines with crisp citrus and green notes.' },
+  { emoji:'🎩', label:'Formal',    id:1, color:'#c084fc', glow:'rgba(192,132,252,0.4)',
+    traits:['Refined','Elegant','Timeless'], desc:'Your sophisticated occasion deserves a scent of true prestige.' },
+];
 
-        // Mood Match System Variables
-        let moodCameraStream = null;
-        let moodHasImage = false;
-        let currentMoodMode = 'simulation';
-        let currentDetectedMood = 'confident';
-        let recommendedPerfume = null;
+const PERFUMES = {
+  1:{ name:'Royal Oud',      icon:'fas fa-crown',    notes:['Oud','Sandalwood','Amber','Vetiver'],
+      desc:'A majestic blend of rare Arabian oud and warm sandalwood — the scent of authority and luxury.',
+      price:'Rs 4,949' },
+  2:{ name:'Midnight Elixir',icon:'fas fa-moon',     notes:['Musk','Rose','Patchouli','Bergamot'],
+      desc:'Seductive oriental warmth wrapped in dark florals — made for nights that linger.',
+      price:'Rs 5,499' },
+  3:{ name:'Citrus Breeze',  icon:'fas fa-sun',      notes:['Lemon','Bergamot','Cedar','Neroli'],
+      desc:'A radiant burst of sun-kissed citrus and airy woods — instant energy in a bottle.',
+      price:'Rs 3,299' },
+  4:{ name:'Rose Royale',    icon:'fas fa-spa',      notes:['Rose','Jasmine','White Musk','Sandalwood'],
+      desc:'The timeless elegance of blooming roses elevated with silky musk and warmth.',
+      price:'Rs 4,199' },
+  5:{ name:'Dark Ember',     icon:'fas fa-fire',     notes:['Birch','Smoke','Amber','Leather'],
+      desc:'Smouldering woodsmoke and rich amber — a bold statement for those who dare.',
+      price:'Rs 5,799' },
+  6:{ name:'Aqua Sport',     icon:'fas fa-water',    notes:['Sea Salt','Aqua','White Musk','Mint'],
+      desc:'A cool ocean breeze distilled — effortless, clean, and endlessly refreshing.',
+      price:'Rs 2,899' },
+};
 
-        // DOM Elements for Mood Match
-        const moodStartCameraBtn = document.getElementById('moodStartCameraBtn');
-        const moodCaptureBtn = document.getElementById('moodCaptureBtn');
-        const moodResetBtn = document.getElementById('moodResetBtn');
-        const moodAnalyzeBtn = document.getElementById('moodAnalyzeBtn');
-        const moodRequestPermissionBtn = document.getElementById('moodRequestPermissionBtn');
-        const moodCameraFeed = document.getElementById('moodCameraFeed');
-        const moodCameraPlaceholder = document.getElementById('moodCameraPlaceholder');
-        const moodCapturedImage = document.getElementById('moodCapturedImage');
-        const moodImageUpload = document.getElementById('moodImageUpload');
-        const moodUploadArea = document.getElementById('moodUploadArea');
-        const moodDisplayIcon = document.getElementById('moodDisplayIcon');
-        const moodDisplayText = document.getElementById('moodDisplayText');
-        const moodDisplayConfidence = document.getElementById('moodDisplayConfidence');
-        const moodEmotionChart = document.getElementById('moodEmotionChart');
-        const moodPerfumeDescription = document.getElementById('moodPerfumeDescription');
-        const moodPerfumeNotes = document.getElementById('moodPerfumeNotes');
-        const recommendedPerfumeName = document.getElementById('recommendedPerfumeName');
-        const recommendedPerfumeMatch = document.getElementById('recommendedPerfumeMatch');
-        const moodAddToCartBtn = document.getElementById('moodAddToCartBtn');
-        const moodViewDetailsBtn = document.getElementById('moodViewDetailsBtn');
-        const moodOptionsGrid = document.getElementById('moodOptionsGrid');
-        const moodModeButtons = document.querySelectorAll('.mood-mode-btn');
+/* ─────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────── */
+const g = id => document.getElementById(id);
 
-        // Initialize Mood Match System
-        function initializeMoodMatch() {
-            setupMoodOptions();
-            setupMoodEventListeners();
-            setupModeButtons();
-            // Set default recommendation (if perfumes exist)
-            setTimeout(() => {
-                updateMoodDisplay('confident');
-                updateMoodPerfumeRecommendation('confident');
-            }, 100);
-        }
+window.openMoodMatch  = () => g('moodMatchModal').classList.add('active');
+window.closeMoodMatch = () => { g('moodMatchModal').classList.remove('active'); stopCamera(); };
+g('closeMoodMatch').addEventListener('click', closeMoodMatch);
 
-        // Build the sample mood buttons
-        function setupMoodOptions() {
-            moodOptionsGrid.innerHTML = '';
-            Object.keys(moodData).forEach(moodKey => {
-                const mood = moodData[moodKey];
-                const optionBtn = document.createElement('div');
-                optionBtn.className = 'mood-option-btn';
-                optionBtn.dataset.mood = moodKey;
-                optionBtn.innerHTML = `
-                    <div class="mood-option-emoji">${mood.icon}</div>
-                    <div class="mood-option-text">${mood.name.split(' ')[0]}</div>
-                `;
-                optionBtn.addEventListener('click', () => {
-                    document.querySelectorAll('.mood-option-btn').forEach(btn => btn.classList.remove('active'));
-                    optionBtn.classList.add('active');
-                    updateMoodDisplay(moodKey);
-                    updateMoodPerfumeRecommendation(moodKey);
-                    if (moodHasImage) moodAnalyzeBtn.disabled = false;
-                });
-                moodOptionsGrid.appendChild(optionBtn);
-            });
-            document.querySelector('.mood-option-btn[data-mood="confident"]').classList.add('active');
-        }
+/* Mode toggle */
+document.querySelectorAll('.mood-mode-btn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.mood-mode-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
 
-        // Update the displayed mood info (icon, name, confidence)
-        function updateMoodDisplay(moodKey) {
-            const mood = moodData[moodKey];
-            if (!mood) return;
-            moodDisplayIcon.textContent = mood.icon;
-            moodDisplayText.textContent = mood.name;
-            moodDisplayConfidence.textContent = `Confidence: ${mood.confidence}`;
-            document.querySelectorAll('.mood-option-btn').forEach(btn => {
-                if (btn.dataset.mood === moodKey) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-        }
+/* ─────────────────────────────────────────────
+   BUILD MOOD GRID
+───────────────────────────────────────────── */
+const grid = g('moodOptionsGrid');
+MOODS.forEach(m => {
+  const btn = document.createElement('button');
+  btn.className = 'mood-option-btn';
+  btn.innerHTML = `<span class="mood-emoji">${m.emoji}</span><span>${m.label}</span>`;
+  btn.style.setProperty('--mood-color', m.color);
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mood-option-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    runAnalysis(m);
+  });
+  grid.appendChild(btn);
+});
 
-        // Find a perfume that matches the given mood (using the `moods` array from admin data)
-        function findPerfumeByMood(moodKey) {
-            if (!window.perfumes || window.perfumes.length === 0) return null;
-            // Try to find a perfume that has this mood in its moods array
-            let matched = window.perfumes.find(p => p.moods && p.moods.includes(moodKey));
-            if (matched) return matched;
-            // Fallback: return the first perfume
-            return window.perfumes[0];
-        }
+/* ─────────────────────────────────────────────
+   ANALYSIS SEQUENCE
+───────────────────────────────────────────── */
+function runAnalysis(mood) {
+  const analyzeBtn = g('moodAnalyzeBtn');
+  const aura = g('moodAuraDisplay');
 
-        // Update the recommendation card with details from the matched perfume
-        function updateMoodPerfumeRecommendation(moodKey) {
-            const perfume = findPerfumeByMood(moodKey);
-            if (!perfume) {
-                // No perfumes at all – show placeholder
-                recommendedPerfumeName.textContent = "No perfumes available";
-                recommendedPerfumeMatch.textContent = "Please add perfumes in admin";
-                moodPerfumeDescription.textContent = "";
-                moodPerfumeNotes.innerHTML = "";
-                moodAddToCartBtn.innerHTML = `<i class="fas fa-shopping-bag"></i> Add to Cart (Rs 0)`;
-                return;
-            }
+  // Phase 1: Scanning state
+  g('moodDisplayIcon').textContent = '🔍';
+  g('moodDisplayText').textContent = 'Scanning your mood…';
+  g('moodDisplayConfidence').textContent = 'AI is reading your emotional signals';
+  g('moodTraits').style.display = 'none';
+  aura.style.setProperty('--aura-color', 'rgba(192,132,252,0.3)');
 
-            recommendedPerfume = perfume;
-            currentDetectedMood = moodKey;
+  // Scan line on camera box
+  const box = g('moodCameraBox');
+  if(box) box.classList.add('scanning');
 
-            // Populate the card
-            recommendedPerfumeName.textContent = perfume.name;
-            recommendedPerfumeMatch.textContent = `Perfect for your ${moodData[moodKey]?.name || moodKey} mood`;
+  // Phase 2: Counting up bars dramatically
+  const emotions = buildEmotions(mood);
+  renderBarsAnimated(emotions, mood.color);
 
-            const desc = perfume.description || "A premium fragrance that matches your mood.";
-            moodPerfumeDescription.textContent = desc;
+  // Phase 3: Reveal after 1.6s
+  setTimeout(() => {
+    if(box) box.classList.remove('scanning');
+    revealMood(mood);
+  }, 1600);
+}
 
-            // Fill notes
-            const notesContainer = document.getElementById('moodPerfumeNotes');
-            if (notesContainer) {
-                notesContainer.innerHTML = '';
-                (perfume.notes || []).forEach(note => {
-                    const tag = document.createElement('div');
-                    tag.className = 'mood-note-tag';
-                    tag.textContent = note;
-                    notesContainer.appendChild(tag);
-                });
-            }
+function buildEmotions(mood) {
+  const keys = ['Happy','Calm','Bold','Romantic','Fresh','Confident'];
+  const dominated = mood.label;
+  return keys.map(k => ({
+    label: k,
+    pct: k === dominated ? Math.floor(Math.random()*12)+82
+       : k === 'Calm'    ? Math.floor(Math.random()*25)+30
+       : Math.floor(Math.random()*40)+8,
+    color: k === dominated ? mood.color : null,
+  }));
+}
 
-            // Update Add to Cart button with correct price
-            moodAddToCartBtn.innerHTML = `<i class="fas fa-shopping-bag"></i> Add to Cart (Rs ${perfume.price.toLocaleString()})`;
+function renderBarsAnimated(emotions, accent) {
+  const chart = g('moodEmotionChart');
+  chart.innerHTML = '<div class="emotion-chart-title">Emotion Scan</div>';
+  emotions.forEach(e => {
+    const row = document.createElement('div');
+    row.className = 'emotion-bar-row';
+    const barColor = e.color || 'rgba(255,255,255,0.25)';
+    row.innerHTML = `
+      <span class="emotion-label">${e.label}</span>
+      <div class="emotion-track">
+        <div class="emotion-fill" style="width:0%;background:${barColor};"></div>
+      </div>
+      <span class="emotion-pct">${e.pct}%</span>`;
+    chart.appendChild(row);
+    // Animate width in after a tick
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        row.querySelector('.emotion-fill').style.width = e.pct + '%';
+      });
+    });
+  });
+}
 
-            // Create an emotion chart (simulated)
-            createMoodEmotionChart(moodKey);
-        }
+function revealMood(mood) {
+  const p = PERFUMES[mood.id];
+  const aura = g('moodAuraDisplay');
 
-        // (Keep all other functions exactly as they were: camera, upload, analysis, reset, etc.)
-        function setupMoodEventListeners() {
-            // Camera controls
-            moodStartCameraBtn.addEventListener('click', startMoodCamera);
-            moodCaptureBtn.addEventListener('click', captureMoodPhoto);
-            moodResetBtn.addEventListener('click', resetMoodSystem);
-            moodAnalyzeBtn.addEventListener('click', analyzeMood);
-            moodRequestPermissionBtn.addEventListener('click', requestMoodCameraPermission);
-            
-            // Image upload
-            moodUploadArea.addEventListener('click', () => {
-                moodImageUpload.click();
-            });
-            
-            moodImageUpload.addEventListener('change', handleMoodImageUpload);
-            
-            // Drag and drop
-            moodUploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                moodUploadArea.style.backgroundColor = 'rgba(56, 189, 248, 0.15)';
-                moodUploadArea.style.borderColor = 'var(--accent)';
-            });
-            
-            moodUploadArea.addEventListener('dragleave', () => {
-                moodUploadArea.style.backgroundColor = 'rgba(56, 189, 248, 0.05)';
-                moodUploadArea.style.borderColor = 'rgba(56, 189, 248, 0.5)';
-            });
-            
-            moodUploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                moodUploadArea.style.backgroundColor = 'rgba(56, 189, 248, 0.05)';
-                moodUploadArea.style.borderColor = 'rgba(56, 189, 248, 0.5)';
-                
-                if (e.dataTransfer.files.length) {
-                    moodImageUpload.files = e.dataTransfer.files;
-                    handleMoodImageUpload({ target: { files: e.dataTransfer.files } });
-                }
-            });
-            
-            // Add to cart button
-            moodAddToCartBtn.addEventListener('click', () => {
-                if (recommendedPerfume) {
-                    if (recommendedPerfume && typeof window.addToCart === 'function') {
-                        window.addToCart(recommendedPerfume, moodAddToCartBtn);
-                        showToast(`${recommendedPerfume.name} added to cart from mood match!`);
-                    }
-                }
-            });
-            
-            // View details button
-            moodViewDetailsBtn.addEventListener('click', () => {
-                if (recommendedPerfume) {
-                    closeMoodMatchModal();
-                    const perfumeElement = document.querySelector(`[data-id="${recommendedPerfume.id}"]`);
-                    if (perfumeElement) {
-                        perfumeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        perfumeElement.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.5)';
-                        setTimeout(() => {
-                            perfumeElement.style.boxShadow = '';
-                        }, 3000);
-                    }
-                }
-            });
-        }
+  // Pulse aura to mood colour
+  aura.style.setProperty('--aura-color', mood.glow);
+  aura.style.background = `radial-gradient(ellipse 80% 80% at 50% 50%,${mood.glow} 0%,transparent 70%)`;
 
-        function setupModeButtons() {
-            moodModeButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    moodModeButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentMoodMode = this.dataset.mode;
-                    if (currentMoodMode === 'simulation') {
-                        moodAnalyzeBtn.innerHTML = '<i class="fas fa-robot"></i> Analyze Mood (Simulation)';
-                    } else if (currentMoodMode === 'mood-match') {
-                        moodAnalyzeBtn.innerHTML = '<i class="fas fa-heart"></i> Match My Mood';
-                    } else if (currentMoodMode === 'azure') {
-                        moodAnalyzeBtn.innerHTML = '<i class="fab fa-microsoft"></i> Analyze with Azure AI';
-                    }
-                });
-            });
-        }
+  // Update icon & text with pop animation
+  const icon = g('moodDisplayIcon');
+  icon.style.transform = 'scale(1.4)';
+  icon.textContent = mood.emoji;
+  setTimeout(()=>icon.style.transform='scale(1)', 300);
 
-        async function requestMoodCameraPermission() {
-            try {
-                moodCameraStream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        facingMode: 'user',
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    } 
-                });
-                showMoodCameraPreview();
-            } catch (err) {
-                console.error("Error accessing camera:", err);
-                if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                    alert("Camera permission denied. You can still upload images for mood analysis.");
-                } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-                    alert("No camera found on your device. Please upload an image instead.");
-                } else {
-                    alert("Could not access camera. Please check your device permissions or upload an image.");
-                }
-            }
-        }
+  g('moodDisplayText').textContent = mood.label + ' Mood Detected';
+  g('moodDisplayConfidence').textContent = '✦ ' + mood.desc;
 
-        function startMoodCamera() {
-            if (moodCameraStream) {
-                return;
-            }
-            requestMoodCameraPermission();
-        }
+  // Traits
+  const traitsEl = g('moodTraits');
+  traitsEl.style.display = 'flex';
+  const colors = ['purple','green','blue'];
+  mood.traits.forEach((t,i) => {
+    const el = g('trait'+(i+1));
+    if(el){ el.textContent = t; el.className = 'mood-trait '+colors[i]; }
+  });
 
-        function showMoodCameraPreview() {
-            if (!moodCameraStream) return;
-            moodCameraFeed.srcObject = moodCameraStream;
-            moodCameraFeed.style.display = 'block';
-            moodCameraPlaceholder.style.display = 'none';
-            moodCapturedImage.style.display = 'none';
-            moodCaptureBtn.disabled = false;
-            moodStartCameraBtn.innerHTML = '<i class="fas fa-video"></i> Camera Active';
-            moodStartCameraBtn.classList.add('mood-btn-primary');
-            moodHasImage = false;
-            moodAnalyzeBtn.disabled = true;
-        }
+  // Perfume card update
+  g('recommendedPerfumeName').textContent = p.name;
+  g('recommendedPerfumeMatch').textContent = mood.desc;
+  g('moodPerfumeDescription').textContent = p.desc;
+  g('moodPerfumeNotes').innerHTML = p.notes.map(n=>`<div class="mood-note-tag">${n}</div>`).join('');
 
-        function captureMoodPhoto() {
-            if (!moodCameraStream) return;
-            const canvas = document.getElementById('moodPhotoCanvas');
-            canvas.width = moodCameraFeed.videoWidth;
-            canvas.height = moodCameraFeed.videoHeight;
-            const context = canvas.getContext('2d');
-            context.drawImage(moodCameraFeed, 0, 0, canvas.width, canvas.height);
-            const imageData = canvas.toDataURL('image/png');
-            moodCapturedImage.src = imageData;
-            moodCapturedImage.style.display = 'block';
-            moodCameraFeed.style.display = 'none';
-            moodCameraPlaceholder.style.display = 'none';
-            stopMoodCamera();
-            moodHasImage = true;
-            moodAnalyzeBtn.disabled = false;
-        }
+  // Update perfume icon colour to mood colour
+  const perfImg = document.querySelector('.mood-perfume-image');
+  if(perfImg){
+    perfImg.style.background = `linear-gradient(135deg,${mood.glow},rgba(34,197,94,0.08))`;
+    perfImg.style.borderColor = mood.color;
+    perfImg.style.color = mood.color;
+    perfImg.innerHTML = `<i class="${p.icon}"></i>`;
+  }
 
-        function stopMoodCamera() {
-            if (moodCameraStream) {
-                moodCameraStream.getTracks().forEach(track => track.stop());
-                moodCameraStream = null;
-            }
-            moodCameraFeed.style.display = 'none';
-            moodStartCameraBtn.innerHTML = '<i class="fas fa-video"></i> Start Camera';
-        }
+  // Price badge
+  let priceBadge = g('moodPerfumePrice');
+  if(!priceBadge){
+    priceBadge = document.createElement('span');
+    priceBadge.id = 'moodPerfumePrice';
+    priceBadge.style.cssText='font-size:.8rem;font-weight:700;color:#4ade80;margin-left:auto;';
+    document.querySelector('.mood-perfume-header').appendChild(priceBadge);
+  }
+  priceBadge.textContent = p.price;
 
-        function handleMoodImageUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            stopMoodCamera();
-            if (!file.type.match('image.*')) {
-                alert('Please select an image file (JPEG, PNG, etc.)');
-                return;
-            }
-            if (file.size > 5 * 1024 * 1024) {
-                alert('Please select an image smaller than 5MB');
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                moodCapturedImage.src = e.target.result;
-                moodCapturedImage.style.display = 'block';
-                moodCameraFeed.style.display = 'none';
-                moodCameraPlaceholder.style.display = 'none';
-                moodHasImage = true;
-                moodAnalyzeBtn.disabled = false;
-            };
-            reader.onerror = function() {
-                alert('Error reading file. Please try another image.');
-            };
-            reader.readAsDataURL(file);
-        }
+  if(typeof showToast==='function') showToast(`${mood.emoji} ${mood.label} mood detected — ${p.name} is your perfect match!`);
+}
 
-        async function analyzeMood() {
-            if (!moodHasImage) {
-                alert('Please capture or upload an image first');
-                return;
-            }
-            moodAnalyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
-            moodAnalyzeBtn.disabled = true;
-            moodStartCameraBtn.disabled = true;
-            moodCaptureBtn.disabled = true;
-            
-            setTimeout(async () => {
-                let detectedMood;
-                if (currentMoodMode === 'azure' || currentMoodMode === 'mood-match') {
-                    detectedMood = simulateMoodDetection();
-                } else if (currentMoodMode === 'simulation') {
-                    const activeMoodOption = document.querySelector('.mood-option-btn.active');
-                    detectedMood = activeMoodOption ? activeMoodOption.dataset.mood : 'confident';
-                }
-                currentDetectedMood = detectedMood;
-                updateMoodDisplay(detectedMood);
-                updateMoodPerfumeRecommendation(detectedMood);
-                createMoodEmotionChart(detectedMood);
-                moodAnalyzeBtn.innerHTML = '<i class="fas fa-brain"></i> Analyze Mood';
-                moodAnalyzeBtn.disabled = false;
-                moodStartCameraBtn.disabled = false;
-            }, 1500);
-        }
+/* ─────────────────────────────────────────────
+   CAMERA
+───────────────────────────────────────────── */
+let stream = null;
 
-        function simulateMoodDetection() {
-            const moods = ['happy', 'calm', 'neutral', 'confident', 'energetic', 'romantic', 'surprised', 'sad'];
-            const weights = [0.25, 0.20, 0.15, 0.15, 0.10, 0.08, 0.05, 0.02];
-            let random = Math.random();
-            let cumulativeWeight = 0;
-            for (let i = 0; i < moods.length; i++) {
-                cumulativeWeight += weights[i];
-                if (random <= cumulativeWeight) {
-                    return moods[i];
-                }
-            }
-            return 'confident';
-        }
+g('moodStartCameraBtn').addEventListener('click', startCamera);
+g('moodCaptureBtn').addEventListener('click', capturePhoto);
+g('moodResetBtn').addEventListener('click', resetMood);
+g('moodAnalyzeBtn').addEventListener('click', () => {
+  const random = MOODS[Math.floor(Math.random()*MOODS.length)];
+  runAnalysis(random);
+});
+g('moodUploadArea').addEventListener('click', () => g('moodImageUpload').click());
+g('moodImageUpload').addEventListener('change', function(){
+  if(this.files && this.files[0]){
+    const reader = new FileReader();
+    reader.onload = e => {
+      g('moodCapturedImage').src = e.target.result;
+      g('moodCapturedImage').style.display = 'block';
+      g('moodCameraFeed').style.display = 'none';
+      g('moodCameraPlaceholder').style.display = 'none';
+      g('moodAnalyzeBtn').disabled = false;
+    };
+    reader.readAsDataURL(this.files[0]);
+  }
+});
 
-        function createMoodEmotionChart(moodKey) {
-            moodEmotionChart.innerHTML = '<h4 style="color: var(--text-main); margin-bottom: 15px;">Emotion Analysis</h4>';
-            const emotions = ['happiness', 'calmness', 'energy', 'surprise', 'neutral', 'sadness'];
-            const scores = {};
-            emotions.forEach(emotion => { scores[emotion] = Math.random() * 0.3; });
-            if (moodKey === 'happy') {
-                scores['happiness'] = 0.7 + Math.random() * 0.2;
-            } else if (moodKey === 'calm') {
-                scores['calmness'] = 0.7 + Math.random() * 0.2;
-            } else if (moodKey === 'energetic') {
-                scores['energy'] = 0.7 + Math.random() * 0.2;
-            } else if (moodKey === 'surprised') {
-                scores['surprise'] = 0.7 + Math.random() * 0.2;
-            } else if (moodKey === 'sad') {
-                scores['sadness'] = 0.6 + Math.random() * 0.2;
-            } else if (moodKey === 'neutral') {
-                scores['neutral'] = 0.7 + Math.random() * 0.2;
-            } else if (moodKey === 'confident') {
-                scores['happiness'] = 0.4 + Math.random() * 0.2;
-                scores['calmness'] = 0.4 + Math.random() * 0.2;
-            } else if (moodKey === 'romantic') {
-                scores['happiness'] = 0.5 + Math.random() * 0.2;
-                scores['calmness'] = 0.5 + Math.random() * 0.2;
-            }
-            let sum = Object.values(scores).reduce((a, b) => a + b, 0);
-            emotions.forEach(emotion => {
-                scores[emotion] = scores[emotion] / sum;
-            });
-            emotions.forEach(emotion => {
-                const percentage = Math.round(scores[emotion] * 100);
-                const emotionBar = document.createElement('div');
-                emotionBar.className = 'emotion-bar';
-                const emotionLabel = document.createElement('div');
-                emotionLabel.className = 'emotion-label';
-                emotionLabel.textContent = emotion.charAt(0).toUpperCase() + emotion.slice(1);
-                const emotionProgress = document.createElement('div');
-                emotionProgress.className = 'emotion-progress';
-                const emotionFill = document.createElement('div');
-                emotionFill.className = 'emotion-fill';
-                emotionFill.style.width = `${percentage}%`;
-                if (emotion === 'happiness') emotionFill.style.background = 'var(--primary)';
-                else if (emotion === 'calmness') emotionFill.style.background = 'var(--accent)';
-                else if (emotion === 'energy') emotionFill.style.background = '#eab308';
-                else if (emotion === 'surprise') emotionFill.style.background = '#f97316';
-                else if (emotion === 'sadness') emotionFill.style.background = '#8b5cf6';
-                else emotionFill.style.background = '#6b7280';
-                const emotionValue = document.createElement('div');
-                emotionValue.className = 'emotion-value';
-                emotionValue.textContent = `${percentage}%`;
-                emotionProgress.appendChild(emotionFill);
-                emotionBar.appendChild(emotionLabel);
-                emotionBar.appendChild(emotionProgress);
-                emotionBar.appendChild(emotionValue);
-                moodEmotionChart.appendChild(emotionBar);
-            });
-        }
+async function startCamera(){
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({video:true});
+    const feed = g('moodCameraFeed');
+    feed.srcObject = stream;
+    feed.style.display = 'block';
+    g('moodCameraPlaceholder').style.display = 'none';
+    g('moodCaptureBtn').disabled = false;
+    // Show scan line hint
+    const box = g('moodCameraBox');
+    if(box) box.classList.add('scanning');
+    setTimeout(()=>{ if(box) box.classList.remove('scanning'); }, 3000);
+  } catch(e){
+    if(typeof showToast==='function') showToast('Camera access denied or unavailable');
+  }
+}
 
-        function resetMoodSystem() {
-            stopMoodCamera();
-            moodCameraFeed.style.display = 'none';
-            moodCapturedImage.style.display = 'none';
-            moodCameraPlaceholder.style.display = 'block';
-            moodStartCameraBtn.innerHTML = '<i class="fas fa-video"></i> Start Camera';
-            moodStartCameraBtn.disabled = false;
-            moodCaptureBtn.disabled = true;
-            moodAnalyzeBtn.disabled = true;
-            moodAnalyzeBtn.innerHTML = '<i class="fas fa-brain"></i> Analyze Mood';
-            moodDisplayIcon.textContent = "😊";
-            moodDisplayText.textContent = "Ready for Mood Analysis";
-            moodDisplayConfidence.textContent = "Awaiting your photo";
-            moodEmotionChart.innerHTML = '';
-            moodImageUpload.value = '';
-            moodHasImage = false;
-            currentDetectedMood = 'confident';
-            recommendedPerfume = null;
-            document.querySelectorAll('.mood-option-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.mood-option-btn[data-mood="confident"]').classList.add('active');
-            updateMoodDisplay('confident');
-            updateMoodPerfumeRecommendation('confident');
-        }
+function capturePhoto(){
+  const feed = g('moodCameraFeed');
+  const canvas = g('moodPhotoCanvas');
+  canvas.width = feed.videoWidth; canvas.height = feed.videoHeight;
+  canvas.getContext('2d').drawImage(feed, 0, 0);
+  g('moodCapturedImage').src = canvas.toDataURL('image/jpeg');
+  g('moodCapturedImage').style.display = 'block';
+  g('moodAnalyzeBtn').disabled = false;
+  stopCamera();
+}
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeMoodMatch();
-        });
-    </script>
+function stopCamera(){
+  if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+  const box = g('moodCameraBox');
+  if(box) box.classList.remove('scanning');
+}
+
+function resetMood(){
+  stopCamera();
+  g('moodCameraFeed').style.display = 'none';
+  g('moodCapturedImage').style.display = 'none';
+  g('moodCameraPlaceholder').style.display = 'flex';
+  g('moodCaptureBtn').disabled = true;
+  g('moodAnalyzeBtn').disabled = true;
+  g('moodDisplayIcon').textContent = '😊';
+  g('moodDisplayText').textContent = 'Ready for Mood Analysis';
+  g('moodDisplayConfidence').textContent = 'Take a photo or pick a mood below';
+  g('moodTraits').style.display = 'none';
+  g('moodEmotionChart').innerHTML = '<div class="emotion-chart-title">Emotion Analysis</div>';
+  const aura = g('moodAuraDisplay');
+  if(aura) aura.style.background = '';
+  document.querySelectorAll('.mood-option-btn').forEach(b=>b.classList.remove('active'));
+}
+
+g('moodAddToCart').addEventListener('click', () => {
+  const name = g('recommendedPerfumeName').textContent;
+  if(typeof showToast==='function') showToast('🛒 ' + name + ' added to your cart!');
+  closeMoodMatch();
+});
+
+// Kick off with default state
+resetMood();
+})();
+</script>
+
+<script>
+// Guess Who countdown — set your target reveal date here
+(function(){
+  const target=new Date('2025-04-01T12:00:00');
+  function tick(){
+    const now=new Date();
+    const diff=target-now;
+    if(diff<=0){
+      document.getElementById('gwDays').textContent='00';
+      document.getElementById('gwHours').textContent='00';
+      document.getElementById('gwMins').textContent='00';
+      document.getElementById('gwSecs').textContent='00';
+      return;
+    }
+    const d=Math.floor(diff/86400000);
+    const h=Math.floor((diff%86400000)/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    document.getElementById('gwDays').textContent=String(d).padStart(2,'0');
+    document.getElementById('gwHours').textContent=String(h).padStart(2,'0');
+    document.getElementById('gwMins').textContent=String(m).padStart(2,'0');
+    document.getElementById('gwSecs').textContent=String(s).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
 
 <script>
 /* === Weather Smart Enhancements (JS-only, no layout/CSS changes) === */
