@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>TROY Perfumes – About Us</title>
+<script>window.BASE_URL = '{{ rtrim(url("/"), "/") }}';</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('troy-theme') || 'light');</script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -999,7 +1000,7 @@ section{padding:6rem 4.5rem;}
 <footer class="footer">
 <div class="footer-content">
 <div class="footer-column">
-<img alt="TROY Perfumes Logo" class="footer-logo" id="footerLogo" src="/troy.png"/>
+<img alt="TROY Perfumes Logo" class="footer-logo" id="footerLogo" src="{{ asset('troy.png') }}"/>
 <h3>TROY Perfumes</h3>
 <p style="color:var(--text-muted);margin-bottom:1.2rem;">
                     Luxury impressions crafted with precision and passion. Designed for Pakistani weather and routines.

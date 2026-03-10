@@ -236,7 +236,7 @@
 </head>
 <body>
     <div class="profile-container">
-        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="{{ url('/') }}" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
         
         <div class="logo">
             <div class="logo-text">TROY<span>PERFUMES</span></div>

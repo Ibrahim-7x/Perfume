@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TROY Perfumes - Admin Control Panel (Nuclear Edition)</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>window.BASE_URL = '{{ rtrim(url("/"), "/") }}';</script>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -467,6 +468,62 @@
             gap: 0.5rem;
         }
 
+        /* Active/Inactive Toggle Switch */
+        .status-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .status-toggle input {
+            display: none;
+        }
+
+        .status-slider {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            background: var(--danger);
+            border-radius: 11px;
+            transition: background 0.3s ease;
+        }
+
+        .status-slider::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .status-toggle input:checked + .status-slider {
+            background: var(--success);
+        }
+
+        .status-toggle input:checked + .status-slider::before {
+            transform: translateX(18px);
+        }
+
+        .status-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            min-width: 50px;
+        }
+
+        .status-toggle input:checked ~ .status-label {
+            color: var(--success);
+        }
+
+        .status-toggle input:not(:checked) ~ .status-label {
+            color: var(--danger);
+        }
+
         /* Tabs */
         .tab-container {
             margin-bottom: 2rem;
@@ -697,10 +754,10 @@
             <button class="btn btn-primary" onclick="saveAllChanges()">
                 <i class="fas fa-save"></i> Save All Changes
             </button>
-            <a href="/" class="btn btn-secondary" style="text-decoration:none;">
+            <a href="{{ url('/') }}" class="btn btn-secondary" style="text-decoration:none;">
                 <i class="fas fa-home"></i> Go to Website
             </a>
-            <form action="/logout" method="POST" style="display:inline;">
+            <form action="{{ url('/logout') }}" method="POST" style="display:inline;">
                 @csrf
                 <button type="submit" class="btn btn-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -1801,7 +1858,7 @@
         function loadAdminData() {
             try {
                 // First try to fetch from database API (including inactive for admin)
-                fetch('/api/perfumes?include_inactive=1')
+                fetch(BASE_URL + '/api/perfumes?include_inactive=1')
                     .then(response => response.json())
                     .then(data => {
                         console.log('API Response:', data);
@@ -1906,7 +1963,7 @@
 
         // Load stats from database
         function loadStats() {
-            fetch('/api/admin/stats')
+            fetch(BASE_URL + '/api/admin/stats')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.stats) {
@@ -2102,24 +2159,39 @@
             
             // Video Settings
             if (adminData.videos) {
-                document.getElementById('videoTitle').value = adminData.videos.title || '';
-                document.getElementById('customerName').value = adminData.videos.customerName || '';
-                document.getElementById('customerCompany').value = adminData.videos.company || '';
-                document.getElementById('videoDescription').value = adminData.videos.description || '';
-                document.getElementById('videoURL').value = adminData.videos.url || '';
+                const vTitle = document.getElementById('videoTitle');
+                const vCustName = document.getElementById('customerName');
+                const vCustComp = document.getElementById('customerCompany');
+                const vDesc = document.getElementById('videoDescription');
+                const vUrl = document.getElementById('videoURL');
+                if (vTitle) vTitle.value = adminData.videos.title || '';
+                if (vCustName) vCustName.value = adminData.videos.customerName || '';
+                if (vCustComp) vCustComp.value = adminData.videos.company || '';
+                if (vDesc) vDesc.value = adminData.videos.description || '';
+                if (vUrl) vUrl.value = adminData.videos.url || '';
                 if (adminData.videos.stats) {
-                    document.getElementById('viewCount').value = adminData.videos.stats.views || 0;
-                    document.getElementById('likeCount').value = adminData.videos.stats.likes || 0;
-                    document.getElementById('shareCount').value = adminData.videos.stats.shares || 0;
+                    const vViews = document.getElementById('viewCount');
+                    const vLikes = document.getElementById('likeCount');
+                    const vShares = document.getElementById('shareCount');
+                    if (vViews) vViews.value = adminData.videos.stats.views || 0;
+                    if (vLikes) vLikes.value = adminData.videos.stats.likes || 0;
+                    if (vShares) vShares.value = adminData.videos.stats.shares || 0;
                 }
-                document.getElementById('autoIncrement').checked = adminData.videos.autoIncrement || false;
-                document.getElementById('incrementRate').value = adminData.videos.incrementRate || 'medium';
+                const vAutoInc = document.getElementById('autoIncrement');
+                const vIncRate = document.getElementById('incrementRate');
+                if (vAutoInc) vAutoInc.checked = adminData.videos.autoIncrement || false;
+                if (vIncRate) vIncRate.value = adminData.videos.incrementRate || 'medium';
                 if (adminData.videos.socialSharing) {
-                    document.getElementById('enableFacebook').checked = adminData.videos.socialSharing.facebook || false;
-                    document.getElementById('enableTwitter').checked = adminData.videos.socialSharing.twitter || false;
-                    document.getElementById('enableWhatsApp').checked = adminData.videos.socialSharing.whatsapp || false;
-                    document.getElementById('enableCopyLink').checked = adminData.videos.socialSharing.copyLink || false;
-                    document.getElementById('enableLikes').checked = adminData.videos.socialSharing.likes || false;
+                    const vFb = document.getElementById('enableFacebook');
+                    const vTw = document.getElementById('enableTwitter');
+                    const vWa = document.getElementById('enableWhatsApp');
+                    const vCopy = document.getElementById('enableCopyLink');
+                    const vLikesEl = document.getElementById('enableLikes');
+                    if (vFb) vFb.checked = adminData.videos.socialSharing.facebook || false;
+                    if (vTw) vTw.checked = adminData.videos.socialSharing.twitter || false;
+                    if (vWa) vWa.checked = adminData.videos.socialSharing.whatsapp || false;
+                    if (vCopy) vCopy.checked = adminData.videos.socialSharing.copyLink || false;
+                    if (vLikesEl) vLikesEl.checked = adminData.videos.socialSharing.likes || false;
                 }
             }
             
@@ -2229,19 +2301,25 @@
             adminData.perfumes.forEach((perfume, index) => {
                 const item = document.createElement('div');
                 item.className = 'perfume-item';
+                const isActive = perfume.active !== false && perfume.is_active !== false;
                 item.innerHTML = `
                     <img src="${perfume.images && perfume.images[0] ? perfume.images[0] : 'https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'}" 
-                         alt="${perfume.name}" class="perfume-image">
+                         alt="${perfume.name}" class="perfume-image" style="${!isActive ? 'opacity: 0.5;' : ''}">
                     <div class="perfume-info">
                         <div class="perfume-name">${perfume.name || 'Unnamed Perfume'}</div>
                         <div class="perfume-price">Rs ${perfume.price ? perfume.price.toLocaleString() : '0'}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
-                            ${perfume.recommendedTemperature ? '🌡️ ' + perfume.recommendedTemperature : ''}
+                            ${perfume.temperature ? '🌡️ ' + perfume.temperature : ''}
                             ${perfume.weather && perfume.weather.length ? ' ⛅ ' + perfume.weather.join(', ') : ''}
                             ${perfume.moods && perfume.moods.length ? ' 😊 ' + perfume.moods.join(', ') : ''}
                         </div>
                     </div>
-                    <div class="item-actions">
+                    <div class="item-actions" style="display: flex; align-items: center; gap: 0.75rem;">
+                        <label class="status-toggle" title="${isActive ? 'Active - visible to customers' : 'Inactive - hidden from customers'}">
+                            <input type="checkbox" ${isActive ? 'checked' : ''} onchange="togglePerfumeActive(${index}, this.checked)">
+                            <span class="status-slider"></span>
+                            <span class="status-label">${isActive ? 'Active' : 'Inactive'}</span>
+                        </label>
                         <button class="btn btn-secondary" onclick="editPerfume(${index})">
                             <i class="fas fa-edit"></i>
                         </button>
@@ -2441,21 +2519,21 @@
                     city: city,
                     recommended_temperature: recommendedTemperature,
                     rating: rating,
-                    rating_count: 0,
-                    is_featured: false,
-                    is_bestseller: false,
-                    is_active: true,
+                    rating_count: existing ? (existing.reviews || 0) : 0,
+                    is_featured: existing ? (existing.featured || false) : false,
+                    is_bestseller: existing ? (existing.bestseller || false) : false,
+                    is_active: existing ? (existing.active !== false) : true,
                     notes: notes,
                     images: images
                 };
 
                 // Save to database via API
-                const isUpdate = existing && existing.id && existing.id > 100000;
+                const isUpdate = existing && existing.id;
                 
                 let response;
                 if (isUpdate) {
                     // Update existing perfume
-                    response = await fetch(`/admin/perfumes/${existing.id}`, {
+                    response = await fetch(BASE_URL + `/admin/perfumes/${existing.id}`, {
                         method: 'POST',
                         credentials: 'same-origin',
                         headers: {
@@ -2467,7 +2545,7 @@
                     });
                 } else {
                     // Create new perfume
-                    response = await fetch('/admin/perfumes', {
+                    response = await fetch(BASE_URL + '/admin/perfumes', {
                         method: 'POST',
                         credentials: 'same-origin',
                         headers: {
@@ -2532,6 +2610,40 @@
             openPerfumeModal(index);
         }
 
+        function togglePerfumeActive(index, isActive) {
+            const perfume = adminData.perfumes[index];
+            if (!perfume || !perfume.id) {
+                showAlert('Perfume not found', 'error');
+                return;
+            }
+
+            fetch(BASE_URL + `/admin/perfumes/${perfume.id}/toggle-active`, {
+                method: 'PATCH',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ is_active: isActive })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    adminData.perfumes[index].active = isActive;
+                    adminData.perfumes[index].is_active = isActive;
+                    updatePerfumeList();
+                    showAlert(`Perfume ${isActive ? 'activated' : 'deactivated'} successfully!`, 'success');
+                } else {
+                    throw new Error(data.error || 'Failed to toggle status');
+                }
+            })
+            .catch(error => {
+                console.error('Error toggling perfume status:', error);
+                showAlert('Error toggling perfume status', 'error');
+                updatePerfumeList(); // revert UI
+            });
+        }
+
         function deletePerfume(index) {
             const perfume = adminData.perfumes[index];
             if (!perfume) {
@@ -2543,9 +2655,9 @@
                 return;
             }
             
-            // Check if it's a database perfume (has valid ID > 100000)
-            if (perfume.id && perfume.id > 100000) {
-                fetch(`/admin/perfumes/${perfume.id}`, {
+            // Check if it's a database perfume (has valid ID)
+            if (perfume.id) {
+                fetch(BASE_URL + `/admin/perfumes/${perfume.id}`, {
                     method: 'DELETE',
                     credentials: 'same-origin',
                     headers: {
@@ -2859,7 +2971,7 @@
         // ===== TV VIDEO MANAGEMENT =====
         function loadTvVideos() {
             // Load active video
-            fetch('/api/tv-video/active')
+            fetch(BASE_URL + '/api/tv-video/active')
                 .then(r => r.json())
                 .then(data => {
                     const container = document.getElementById('activeVideoPreview');
@@ -2877,7 +2989,7 @@
                 });
 
             // Load all videos
-            fetch('/api/tv-videos')
+            fetch(BASE_URL + '/api/tv-videos')
                 .then(r => r.json())
                 .then(data => {
                     const list = document.getElementById('allVideosList');
@@ -3035,7 +3147,7 @@
         }
 
         function activateTvVideo(id) {
-            fetch(`/admin/tv-videos/${id}/activate`, {
+            fetch(BASE_URL + `/admin/tv-videos/${id}/activate`, {
                 method: 'PUT',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
@@ -3052,7 +3164,7 @@
 
         function deleteTvVideo(id) {
             if (!confirm('Are you sure you want to delete this video?')) return;
-            fetch(`/admin/tv-videos/${id}`, {
+            fetch(BASE_URL + `/admin/tv-videos/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content

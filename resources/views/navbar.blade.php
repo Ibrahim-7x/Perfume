@@ -475,30 +475,30 @@
 
 <!-- Header -->
 <header class="header" id="header">
-<a class="logo" href="/">
-<img alt="TROY Perfumes Logo" class="logo-img" src="/troy.png"/>
+<a class="logo" href="{{ url('/') }}">
+<img alt="TROY Perfumes Logo" class="logo-img" src="{{ asset('troy.png') }}"/>
 <div class="logo-text">TROY</div>
 </a>
 <button class="mobile-menu-toggle" id="mobileMenuToggle">
 <i class="fas fa-bars"></i>
 </button>
 <nav class="nav-links">
-<a class="nav-link" href="/customer#featured">Perfumes</a>
-<a class="nav-link" href="/customer#weather">Weather Match</a>
-<a class="nav-link" href="/customer#customer-experience">Customer Experience</a>
-<a class="nav-link" href="/customer#partner-brands">Partner Brands</a>
-<a class="nav-link" href="/about">About Us</a>
+<a class="nav-link" href="{{ url('/customer#featured') }}">Perfumes</a>
+<a class="nav-link" href="{{ url('/customer#weather') }}">Weather Match</a>
+<a class="nav-link" href="{{ url('/customer#customer-experience') }}">Customer Experience</a>
+<a class="nav-link" href="{{ url('/customer#partner-brands') }}">Partner Brands</a>
+<a class="nav-link" href="{{ url('/about') }}">About Us</a>
 <a class="nav-link" href="#" id="moodMatchLink">
     <i class="fas fa-smile-beam"></i> Mood Match
 </a>
 </nav>
 <div class="mobile-nav" id="mobileNav">
 <div class="mobile-nav-links">
-<a class="mobile-nav-link" href="/customer#featured">Perfumes</a>
-<a class="mobile-nav-link" href="/customer#weather">Weather Match</a>
-<a class="mobile-nav-link" href="/customer#customer-experience">Customer Experience</a>
-<a class="mobile-nav-link" href="/customer#partner-brands">Partner Brands</a>
-<a class="mobile-nav-link" href="/about">About Us</a>
+<a class="mobile-nav-link" href="{{ url('/customer#featured') }}">Perfumes</a>
+<a class="mobile-nav-link" href="{{ url('/customer#weather') }}">Weather Match</a>
+<a class="mobile-nav-link" href="{{ url('/customer#customer-experience') }}">Customer Experience</a>
+<a class="mobile-nav-link" href="{{ url('/customer#partner-brands') }}">Partner Brands</a>
+<a class="mobile-nav-link" href="{{ url('/about') }}">About Us</a>
 <a class="mobile-nav-link" href="#" id="mobileMoodMatchLink">
     <i class="fas fa-smile-beam"></i> Mood Match
 </a>
@@ -512,21 +512,21 @@
 <i class="fas fa-sun" id="themeIcon"></i>
 </button>
 <span id="authButtons" style="display:none;">
-    <a href="/login" class="btn-login" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px;">
+    <a href="{{ url('/login') }}" class="btn-login" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px;">
         <i class="fas fa-sign-in-alt"></i> Sign In
     </a>
-    <a href="/register" class="btn-register" style="background: var(--primary); color: #022c22; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600;">
+    <a href="{{ url('/register') }}" class="btn-register" style="background: var(--primary); color: #022c22; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600;">
         Register
     </a>
 </span>
 <span id="userMenu" style="display:none;">
-    <a href="/profile" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;">
+    <a href="{{ url('/profile') }}" style="color: var(--text-main); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;">
         <i class="fas fa-user-circle"></i> <span id="userName"></span>
     </a>
-    <a href="/admin-panel" id="adminLink" style="color: var(--accent); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: none;">
+    <a href="{{ url('/admin-panel') }}" id="adminLink" style="color: var(--accent); text-decoration: none; padding: 8px 16px; margin-right: 10px; display: none;">
         <i class="fas fa-cog"></i> Admin Panel
     </a>
-    <form action="/logout" method="POST" style="display: inline;">
+    <form action="{{ url('/logout') }}" method="POST" style="display: inline;">
         @csrf
         <button type="submit" style="background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 16px; border-radius: 20px; cursor: pointer;">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -544,7 +544,7 @@
 <script>
 // Check authentication status on page load
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/check-admin')
+    fetch((window.BASE_URL || '') + '/api/check-admin')
         .then(response => response.json())
         .then(data => {
             const authButtons = document.getElementById('authButtons');
@@ -570,6 +570,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error checking auth:', error);
+            // On error, show auth buttons so users can still log in
+            const authButtons = document.getElementById('authButtons');
+            if (authButtons) authButtons.style.display = 'flex';
         });
 });
 

@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
 // Admin API routes - no additional auth needed since page requires login
 Route::post('/admin/perfumes', [AdminPerfumeController::class, 'apiStore']);
 Route::put('/admin/perfumes/{perfume}', [AdminPerfumeController::class, 'apiUpdate']);
+Route::patch('/admin/perfumes/{perfume}/toggle-active', [AdminPerfumeController::class, 'toggleActive']);
 Route::delete('/admin/perfumes/{perfume}', [AdminPerfumeController::class, 'apiDestroy']);
 
 // Home route

@@ -187,7 +187,7 @@
             <div class="logo-text">TROY<span>PERFUMES</span></div>
         </div>
         
-        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="{{ url('/') }}" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
         
         <h2 class="form-title">Create Account</h2>
         

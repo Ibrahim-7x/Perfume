@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>TROY Perfumes – Customer View</title>
+<script>window.BASE_URL = '{{ rtrim(url("/"), "/") }}';</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -2612,11 +2613,11 @@
 </div>
 
 <!-- LADIES STAMP -->
-<img alt="Ladies Collection - Coming Soon" class="ladies-stamp" id="ladiesStamp" src="/Ladies.png" title="Ladies Collection - Coming Soon"/>
+<img alt="Ladies Collection - Coming Soon" class="ladies-stamp" id="ladiesStamp" src="{{ asset('ladies.png') }}" title="Ladies Collection - Coming Soon"/>
 <!-- COMING SOON MODAL -->
 <div class="coming-soon-modal" id="comingSoonModal">
 <div class="coming-soon-content">
-<img alt="Ladies Collection" src="/Ladies.png"/>
+<img alt="Ladies Collection" src="{{ asset('ladies.png') }}"/>
 <h2>Coming Soon</h2>
 <p>Our exclusive Ladies Collection is on its way. Stay tuned for something truly special!</p>
 <button class="coming-soon-close" id="closeComingSoon">Close</button>
@@ -2624,7 +2625,7 @@
 </div>
 
 <!-- NABI PAK SAW STAMP -->
-<img alt="Nabi Pak SAW Stamp - TROY Perfumes Contribution" class="nabipak-stamp" id="nabiStamp" src="/PBUH.png" title="Nabi Pak SAW Stamp - Click for contribution details"/>
+<img alt="Nabi Pak SAW Stamp - TROY Perfumes Contribution" class="nabipak-stamp" id="nabiStamp" src="{{ asset('PBUH.png') }}" title="Nabi Pak SAW Stamp - Click for contribution details"/>
 <!-- CONTRIBUTION POPUP -->
 <div class="contribution-modal" id="contributionModal">
 <div class="contribution-content">
@@ -2633,7 +2634,7 @@
                 As part of our commitment, 2% of your order amount will be contributed in the name of Allah. 
                 Please press the stamp of Nabi Pak SAW to confirm your contribution and proceed with checkout.
             </p>
-<img alt="Nabi Pak SAW Stamp - Confirm Contribution" class="contribution-stamp" id="confirmContribution" src="/PBUH.png" title="Click to confirm contribution"/>
+<img alt="Nabi Pak SAW Stamp - Confirm Contribution" class="contribution-stamp" id="confirmContribution" src="{{ asset('PBUH.png') }}" title="Click to confirm contribution"/>
 <p class="contribution-note">May Allah accept your contribution and bless you</p>
 </div>
 </div>
@@ -2996,7 +2997,7 @@
             <div class="current-video-container">
                 <div class="current-video-wrapper">
                     <video class="current-video" autoplay loop preload="metadata">
-                        <source src="Autonomous.mp4" type="video/mp4">
+                        <source src="{{ asset('Autonomous.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     
@@ -4165,7 +4166,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         })();
 
         // Page type detection - set to true for /perfumes page, false for /customer
-        const isAllPerfumesPage = window.location.pathname === '/perfumes' || window.location.pathname === '/all-perfumes';
+        const isAllPerfumesPage = window.location.pathname.endsWith('/perfumes') || window.location.pathname.endsWith('/all-perfumes');
 
         // PERFUME DATA (Loaded from admin display data)
         let perfumes = [];
@@ -4317,7 +4318,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             try {
                 // Fetch perfumes from database API
                 console.log('Fetching perfumes from API...');
-                fetch('/api/perfumes')
+                fetch(BASE_URL + '/api/perfumes')
                     .then(response => {
                         console.log('API Response status:', response.status);
                         return response.json();
@@ -4702,7 +4703,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             if (showViewAll) {
                 const viewAllDiv = document.createElement('div');
                 viewAllDiv.className = 'view-all-container';
-                viewAllDiv.innerHTML = `<a href="/perfumes" class="view-all-btn">View All Perfumes <i class="fas fa-arrow-right"></i></a>`;
+                viewAllDiv.innerHTML = `<a href="${BASE_URL}/perfumes" class="view-all-btn">View All Perfumes <i class="fas fa-arrow-right"></i></a>`;
                 perfumeGrid.parentNode.insertBefore(viewAllDiv, perfumeGrid.nextSibling);
             }
         }
@@ -4860,7 +4861,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
 
         // Check authentication status
         function checkAuthStatus() {
-            fetch('/api/user')
+            fetch(BASE_URL + '/api/user')
                 .then(response => response.json())
                 .then(data => {
                     if (data.authenticated) {
@@ -4900,7 +4901,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
         }
 
         function logout() {
-            fetch('/logout', {
+            fetch(BASE_URL + '/logout', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -5175,7 +5176,7 @@ ${locationText}🎥 *Video Link:* ${currentUrl}
             const loading = document.getElementById('reviews-loading');
             if (!grid) return;
 
-            fetch('/api/reviews')
+            fetch(BASE_URL + '/api/reviews')
                 .then(res => res.json())
                 .then(data => {
                     if (loading) loading.remove();
@@ -5730,9 +5731,9 @@ resetMood();
     window.perfumes.forEach(p=>p._weatherTag = tag);
   };
 })();
+</script>
 
 <script>
-
 function loadPerfumes(){
    // existing code
 }
@@ -5743,14 +5744,13 @@ window.addEventListener("storage", function(event) {
         loadPerfumes();
     }
 });
-
 </script>
 
 <script>
 // ===== LOAD ACTIVE TV VIDEO FROM DATABASE =====
 (function() {
     document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/tv-video/active')
+        fetch(BASE_URL + '/api/tv-video/active')
             .then(r => r.json())
             .then(data => {
                 if (data.video && data.video.url) {

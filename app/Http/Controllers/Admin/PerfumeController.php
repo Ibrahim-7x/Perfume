@@ -131,6 +131,26 @@ class PerfumeController extends Controller
             'message' => 'Perfume updated successfully'
         ]);
     }
+
+    // Toggle active status for admin panel
+    public function toggleActive(Request $request, Perfume $perfume)
+    {
+        if (!Auth::check()) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $validated = $request->validate([
+            'is_active' => 'required|boolean',
+        ]);
+
+        $perfume->update(['is_active' => $validated['is_active']]);
+
+        return response()->json([
+            'success' => true,
+            'is_active' => $perfume->is_active,
+            'message' => 'Perfume status updated successfully'
+        ]);
+    }
     
     // API-style delete for admin panel
     public function apiDestroy(Perfume $perfume)
@@ -407,19 +427,6 @@ class PerfumeController extends Controller
         return response()->json([
             'success' => true,
             'is_bestseller' => $perfume->is_bestseller
-        ]);
-    }
-
-    /**
-     * Toggle active status.
-     */
-    public function toggleActive(Perfume $perfume)
-    {
-        $perfume->update(['is_active' => !$perfume->is_active]);
-        
-        return response()->json([
-            'success' => true,
-            'is_active' => $perfume->is_active
         ]);
     }
 

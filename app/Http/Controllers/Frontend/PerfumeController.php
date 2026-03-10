@@ -88,7 +88,7 @@ class PerfumeController extends Controller
                     'stock_quantity' => (int) $perfume->stock_quantity,
                     'images' => count($perfume->images) > 0 
                         ? $perfume->images->map(function($img) {
-                            return 'storage/' . $img->image_path;
+                            return asset('storage/' . $img->image_path);
                         })->toArray() 
                         : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note')->toArray(),
@@ -119,7 +119,7 @@ class PerfumeController extends Controller
                     'city' => $perfume->city,
                     'recommended_temperature' => $perfume->recommended_temperature,
                     'images' => count($perfume->images) > 0
-                        ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                        ? $perfume->images->map(fn($img) => asset('storage/' . $img->image_path))->toArray()
                         : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note'),
                 ];
@@ -149,7 +149,7 @@ class PerfumeController extends Controller
                     'city' => $perfume->city,
                     'recommended_temperature' => $perfume->recommended_temperature,
                     'images' => count($perfume->images) > 0
-                        ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                        ? $perfume->images->map(fn($img) => asset('storage/' . $img->image_path))->toArray()
                         : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                     'notes' => $perfume->notes->pluck('note'),
                 ];
@@ -182,7 +182,7 @@ class PerfumeController extends Controller
                 'is_featured' => $perfume->is_featured,
                 'is_bestseller' => $perfume->is_bestseller,
                 'images' => count($perfume->images) > 0
-                    ? $perfume->images->map(fn($img) => 'storage/' . $img->image_path)->toArray()
+                    ? $perfume->images->map(fn($img) => asset('storage/' . $img->image_path))->toArray()
                     : ['https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg?auto=compress&cs=tinysrgb&w=800'],
                 'notes' => $perfume->notes->pluck('note'),
             ]
